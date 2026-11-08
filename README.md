@@ -22,6 +22,7 @@ Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
 ```
 cpbot/cards.py    card database (data/cards.json)
 cpbot/deck.py     deck rules (3 Legends, 40-50 cards, max 3 copies, RAM limits) and random legal decks
+cpbot/decklist.py deck list import and export in the standard text format (// Legends, // Units, ..., // Sideboard)
 cpbot/engine.py   game engine: plain-data state, explicit task stack, cloneable for search
 cpbot/effects.py  effect framework: triggers, pending effects, steps, statics, abilities
 cpbot/scripts/    one script per card: legends.py, units.py, programs.py, gear.py
@@ -34,6 +35,8 @@ scripts/soak.py   plays many random games and checks invariants after every deci
 scripts/learn_value.py  plays self-play games and refits the position score
 scripts/arena.py  pits two agents against each other over many games and reports the win rate
 scripts/watch.py  plays one game and writes games/<name>.txt, .json and .html
+scripts/deck.py   checks deck list files and rewrites them in the standard format
+decks/            deck lists
 scripts/coverage.py  shows which card scripts actually ran in random games
 scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
 tests/            rules tests
@@ -47,7 +50,16 @@ python -m pytest -q tests
 python scripts/soak.py 100000
 python scripts/watch.py --seed 7      # then open games/seed7.html
 python scripts/arena.py --a ismcts:200 --b eager --pairs 20
+python scripts/deck.py decks/bbg-proactive.txt   # check a deck list
+python scripts/arena.py --a ismcts:200 --b ismcts:200 --deck-a decks/bbg-proactive.txt --deck-b other.txt
 ```
+
+Deck lists use the common text format: a `# Deck name` line, `// Legends (3)`,
+`// Units`, `// Gear`, `// Programs` and `// Sideboard` headers, then `3 Card Name`
+lines. Names are matched forgivingly (case, accents, `:` or ` - ` before the
+subtitle, small typos), unknown cards are listed with suggestions, and the
+sideboard is kept out of the played deck. `cpbot.decklist.parse(text)` gives a
+`DeckList` with `.deck`, `.sideboard`, `.errors()` and `.to_text()`.
 
 ```python
 import random
