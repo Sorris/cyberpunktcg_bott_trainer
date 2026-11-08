@@ -1,0 +1,31 @@
+# BBG Proactive
+
+// Legends (3)
+1 Alt Cunningham: Soulkiller Architect
+1 Hanako Arasaka: Daughter of the Emperor
+1 Jackie Welles: Pour One Out For Me
+
+// Units (14)
+3 Jacked-In Voodoo Boy
+2 Lizzy Wizzy: Delicate Weapon
+3 Maman Brigitte: Spirit of Death
+3 Pepe Najarro: Working Doubles
+1 Psycho Squad
+2 Valentino Street Racer
+
+// Programs (26)
+3 Chrome Reverie
+1 Floor It
+3 Les Élémens
+3 Nocturne OP55 N1
+3 Peace Offering
+3 Pyramid Song
+1 Synapse Burnout
+3 Three Mouths, One Desire
+3 Towerfall
+3 Trust No One
+
+// Sideboard (7)
+2 Modded Kusanagi
+2 Placide: Voodoo Sentinel
+3 Riot Shield

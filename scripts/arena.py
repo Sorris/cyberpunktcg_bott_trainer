@@ -4,6 +4,9 @@
 
 Each pair of games uses the same two random decks with the seats swapped, so
 neither agent is helped by a lucky deck or by going first more often.
+With --deck-a/--deck-b (deck list files, see cpbot/decklist.py) each agent keeps
+its own deck in both seats, so `--a ismcts:200 --b ismcts:200 --deck-a x.txt
+--deck-b y.txt` compares two decks. A side with no deck file gets a random deck.
 Agent specs: random, eager, ismcts[:iterations[:rollout_depth]][:key=value,...],
 for example ismcts:s=0.5,d=10,v=learned (see make()).
 """
@@ -18,6 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
+from cpbot.decklist import parse_file, report  # noqa: E402
 from cpbot.agents import EagerRandomAgent, RandomAgent  # noqa: E402
 from cpbot.search import ISMCTSAgent  # noqa: E402
 
@@ -59,13 +63,17 @@ def make(spec, seed):
 
 
 def play_pair(job):
-    spec_a, spec_b, seed = job
+    spec_a, spec_b, seed, deck_a, deck_b = job
     db = default_db()
     rng = random.Random(seed)
     decks = [random_deck(rng, db), random_deck(rng, db)]
+    own_decks = deck_a is not None or deck_b is not None
+    if own_decks:  # decks belong to agents: [A's deck, B's deck]
+        decks = [deck_a or decks[0], deck_b or decks[1]]
     out = []
     for a_seat in (0, 1):
-        g = Game(decks[0], decks[1], seed=seed * 2 + a_seat, db=db)
+        seats = decks if not own_decks or a_seat == 0 else decks[::-1]
+        g = Game(seats[0], seats[1], seed=seed * 2 + a_seat, db=db)
         agents = [None, None]
         agents[a_seat] = make(spec_a, seed * 7 + 1)
         agents[1 - a_seat] = make(spec_b, seed * 7 + 2)
@@ -82,8 +90,20 @@ def main():
     ap.add_argument("--pairs", type=int, default=20)
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--deck-a", default=None, help="deck list file for agent A")
+    ap.add_argument("--deck-b", default=None, help="deck list file for agent B")
     a = ap.parse_args()
-    jobs = [(a.a, a.b, a.seed + i) for i in range(a.pairs)]
+    decks = []
+    for path in (a.deck_a, a.deck_b):
+        if path is None:
+            decks.append(None)
+            continue
+        dl = parse_file(path)
+        print(report(dl))
+        if dl.errors():
+            sys.exit(f"{path} is not a legal deck")
+        decks.append(dl.deck)
+    jobs = [(a.a, a.b, a.seed + i, *decks) for i in range(a.pairs)]
     t = time.time()
     with Pool(a.procs) as pool:
         res = [x for pair in pool.map(play_pair, jobs) for x in pair]
