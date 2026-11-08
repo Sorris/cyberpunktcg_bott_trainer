@@ -103,6 +103,11 @@ slow, polite pass. `--no-images` plays with text-only cards. Card art belongs to
 CD PROJEKT RED and WeirdCo; this is for personal play only, so don't publish the
 pictures.
 
+Face-down cards (hands, face-down Legends, Eddies) use a card-back picture if you
+save one as `.card_art/card-back.png` (or `.jpg` / `.webp`), or pass
+`--card-back path\to\back.png`. Without one they show the Cyberpunk TCG logo,
+downloaded once from cyberpunktcg.com.
+
 ## Engine interface
 
 - `g.decision` is the pending decision: `player`, `kind` and `options`. Core kinds are

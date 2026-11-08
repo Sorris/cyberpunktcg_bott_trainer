@@ -53,9 +53,28 @@ _art_lock = threading.Lock()
 
 
 # --------------------------------------------------------------- pictures
+# The game's logo, shown on face-down cards when you haven't supplied a card back.
+LOGO_URL = "https://cyberpunktcg.com/images/logos/cyberpunk-tcg-logo-yellow.webp"
+EXTRA = {"_logo": {"url": LOGO_URL}}
+
+
+def back_path() -> Path | None:
+    """Your own card-back picture: --card-back, or .card_art/card-back.png (.jpg, .webp)."""
+    if state.get("back"):
+        p = Path(state["back"])
+        return p if p.exists() else None
+    for ext in (".png", ".jpg", ".jpeg", ".webp"):
+        p = ART_DIR / f"card-back{ext}"
+        if p.exists():
+            return p
+    return None
+
+
 def art_path(card_id: str) -> Path | None:
     """The local copy of a card picture, downloading it the first time."""
-    info = IMAGES.get(card_id)
+    if card_id == "_back":
+        return back_path()
+    info = IMAGES.get(card_id) or EXTRA.get(card_id)
     if not info:
         return None
     url = info["url"]
@@ -95,6 +114,10 @@ def prefetch():
         if i % 20 == 0:
             print(f"  {i}/{len(todo)}")
         time.sleep(0.5)                                  # be polite to the host
+    try:
+        art_path("_logo")
+    except Exception as e:  # noqa: BLE001
+        print(f"  logo: {e}")
     print("done")
 
 
@@ -159,13 +182,14 @@ def start_bot(m: Match):
 def view():
     m = state["match"]
     if m is None:
-        return {"match": None, "images": state["images"]}
+        return {"match": None, "images": state["images"], "card_back": back_path() is not None}
     v = m.view()
     v["match"] = True
     v["seed"] = m.seed
     v["level"] = m.level_name
     v["decks"] = m.deck_lists
     v["images"] = state["images"] and bool(IMAGES)
+    v["card_back"] = back_path() is not None
     return v
 
 
@@ -203,7 +227,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(502, str(e).encode(), "text/plain")
             if p is None:
                 return self._send(404, b"", "text/plain")
-            ctype = {".webp": "image/webp", ".png": "image/png", ".jpg": "image/jpeg"}.get(p.suffix, "application/octet-stream")
+            ctype = {".webp": "image/webp", ".png": "image/png", ".jpg": "image/jpeg",
+                     ".jpeg": "image/jpeg"}.get(p.suffix.lower(), "application/octet-stream")
             self._send(200, p.read_bytes(), ctype, cache=True)
         else:
             self._send(404, b"not found", "text/plain")
@@ -250,12 +275,14 @@ def main():
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--no-browser", action="store_true")
     ap.add_argument("--no-images", action="store_true", help="text-only cards; nothing is downloaded")
+    ap.add_argument("--card-back", default=None, help="a picture to use for face-down cards")
     ap.add_argument("--art-dir", default=None, help="where card pictures are kept (default .card_art/)")
     ap.add_argument("--prefetch-images", action="store_true", help="download every card picture, then exit")
     a = ap.parse_args()
     global ART_DIR
     if a.art_dir:
         ART_DIR = Path(a.art_dir)
+    state["back"] = a.card_back
     if a.prefetch_images:
         prefetch()
         return

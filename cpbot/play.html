@@ -98,6 +98,13 @@ textarea { width: 100%; min-height: 160px; font-family: var(--f-mono); font-size
 button.danger { border-color: var(--c-red); color: var(--c-red); }
 .card.spent { transform: rotate(-8deg) scale(.94); filter: saturate(.4) brightness(.8); }
 .card.back { background: repeating-linear-gradient(135deg, var(--back) 0 7px, #2f3844 7px 14px); border-color: #000; cursor: default; }
+.card.imgback { background: #000; }
+.card.imgback img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card.logoback { background: radial-gradient(circle at 50% 35%, #2a2f12 0, #0d0f12 70%); border: 1px solid #000;
+  box-shadow: inset 0 0 0 3px #0d0f12, inset 0 0 0 4px #f3e600; }
+.card.logoback .logo { position: absolute; inset: 0; display: grid; place-items: center; padding: 14%; }
+.card.logoback .logo img { width: 100%; height: auto; filter: drop-shadow(0 0 6px rgba(243,230,0,.35)); }
+.card.back.logoback .q { align-items: end; padding-bottom: 6px; font-size: 9px; color: #f3e600; opacity: .8; }
 .card.back .q { position: absolute; inset: 0; display: grid; place-items: center; font: 700 12px var(--f-display); color: #9aa6b2; text-align: center; padding: 4px; }
 .card.pick { border: 2px solid var(--pick); box-shadow: 0 0 0 3px var(--pick-soft); }
 .card.pick:hover { transform: translateY(-3px); }
@@ -238,7 +245,15 @@ function cardEl(c, extra = {}) {
   el.className = "card";
   if (c.hidden) {
     el.classList.add("back");
-    el.innerHTML = `<div class="q">${esc(extra.backLabel || "")}</div>`;
+    if (S && S.images && S.card_back) {
+      el.classList.add("imgback");
+      el.innerHTML = `<img src="/art/_back" alt="card back">`;
+    } else if (S && S.images) {
+      el.classList.add("logoback");
+      el.innerHTML = `<div class="logo"><img src="/art/_logo" alt="Cyberpunk TCG" onerror="this.remove()"></div><div class="q">${esc(extra.backLabel || "")}</div>`;
+    } else {
+      el.innerHTML = `<div class="q">${esc(extra.backLabel || "")}</div>`;
+    }
     if (c.spent) { el.classList.add("spent"); el.insertAdjacentHTML("beforeend", `<div class="flags"><span class="flag">spent</span></div>`); }
     else if (extra.readyFlag) el.insertAdjacentHTML("beforeend", `<div class="flags"><span class="flag ready">ready</span></div>`);
     return el;
