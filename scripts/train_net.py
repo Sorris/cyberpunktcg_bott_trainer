@@ -36,7 +36,7 @@ def load(folders, cols, max_files=None):
             rows += len(z["y"])
     d = len(cols) + 16                                 # chosen features_v2 columns + Gig patterns
     V = np.empty((rows, d), np.float16)
-    X, y, seed, src, P = [], [], [], [], []
+    X, y, seed, src, P, Q = [], [], [], [], [], []
     i = 0
     for k, f in files:
         z = np.load(f)
@@ -49,10 +49,11 @@ def load(folders, cols, max_files=None):
         i += n
         X.append(z["X"].astype(np.float32))
         y.append(z["y"].astype(np.float32))
+        Q.append(z["q"].astype(np.float32) if "q" in z.files else np.full(n, np.nan, np.float32))
         seed.append(np.full(n, int(z["seed"])))
         src.append(np.full(n, k))
     return (V, np.concatenate(X), np.concatenate(y), np.concatenate(seed), np.concatenate(src),
-            np.concatenate(P))
+            np.concatenate(P), np.concatenate(Q))
 
 
 def logloss(p, y):
@@ -77,6 +78,8 @@ def main():
     ap.add_argument("--blocks", default="board,rival_board,hand,my_deck,rival_shown",
                     help="which card blocks of features_v2 to use (comma list, or 'none' for counts only); "
                          "my_deck makes games easy to tell apart, so it can overfit")
+    ap.add_argument("--q-weight", type=float, default=0.0,
+                    help="weight of the search's win estimate (q) in the training target; 0 = results only")
     ap.add_argument("--max-files", type=int, default=None, help="games to read per folder")
     a = ap.parse_args()
     t = time.time()
@@ -87,7 +90,9 @@ def main():
     keep = [] if a.blocks == "none" else a.blocks.split(",")
     cols = list(range(head)) + [head + order.index(b) * n + j for b in keep for j in range(n)]
     cols = np.array(cols, dtype=np.int32)
-    V, X, y, seed, src, Pat = load(a.data, cols, a.max_files)
+    V, X, y, seed, src, Pat, Q = load(a.data, cols, a.max_files)
+    # Training target: the game result, mixed with the search's estimate where there is one.
+    target = np.where(np.isnan(Q), y, a.q_weight * np.nan_to_num(Q) + (1 - a.q_weight) * y).astype(np.float32)
     test = (seed % 10 == 0) & (src == 0)        # judge on held-out games from the first folder
     s1 = np.zeros(V.shape[1], np.float64)
     s2 = np.zeros(V.shape[1], np.float64)
@@ -124,7 +129,7 @@ def main():
         rng.shuffle(tr)
         for i in range(0, len(tr), a.batch):
             idx = tr[i:i + a.batch]
-            Zb, yb = Z[idx].astype(np.float32), y[idx]
+            Zb, yb = Z[idx].astype(np.float32), target[idx]
             H, z = forward(Zb)
             g = (sigmoid(z) - yb) / len(idx)                    # dLoss/dz
             G = {"W2": H.T @ g + a.l2 * P["W2"], "b2": g.sum()}

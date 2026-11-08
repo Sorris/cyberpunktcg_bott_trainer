@@ -21,17 +21,28 @@ from cpbot.decksearch import (SearchState, breed, deck_from_key, describe, new_s
                               schedule)
 from cpbot.search import ISMCTSAgent  # noqa: E402
 
-AGENT = {"iterations": 30}
+AGENT = {"iterations": 30, "value": None, "vf": None}
+
+
+def _value_fn():
+    v = AGENT["value"]
+    if not v:
+        return "learned"
+    if AGENT["vf"] is None:
+        from cpbot.features import LearnedValue, NetValue
+        AGENT["vf"] = NetValue(path=v) if v.endswith(".npz") else LearnedValue(path=v)
+    return AGENT["vf"]
 
 
 def _agent(seed):
     if AGENT["iterations"] == 0:
         return EagerRandomAgent(seed)
-    return ISMCTSAgent(iterations=AGENT["iterations"], rollout_depth=20, seed=seed)
+    return ISMCTSAgent(iterations=AGENT["iterations"], rollout_depth=20, seed=seed, value_fn=_value_fn())
 
 
-def _init(iterations):
+def _init(iterations, value=None):
     AGENT["iterations"] = iterations
+    AGENT["value"] = value
 
 
 def play_pair(job):
@@ -61,6 +72,7 @@ def main():
     ap.add_argument("--children", type=int, default=8)
     ap.add_argument("--pairs", type=int, default=3, help="pairs of games per deck per generation")
     ap.add_argument("--iterations", type=int, default=30, help="search budget per move (0 = eager random)")
+    ap.add_argument("--value", default=None, help="position score for the bot (.json linear or .npz network)")
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--seed", type=int, default=1)
     a = ap.parse_args()
@@ -73,7 +85,7 @@ def main():
     rng = random.Random(a.seed * 1000 + s.generation)
     log = open(run / "log.txt", "a")
 
-    with Pool(a.procs, initializer=_init, initargs=(a.iterations,)) as pool:
+    with Pool(a.procs, initializer=_init, initargs=(a.iterations, a.value)) as pool:
         while s.generation < a.generations:
             t = time.time()
             kids = breed(s, db, rng, a.children) if s.generation > 0 else []
