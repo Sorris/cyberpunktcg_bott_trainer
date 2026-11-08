@@ -80,9 +80,9 @@ def test_search_agent_beats_random():
 
 
 def test_learned_value_is_symmetric_and_in_range():
-    from cpbot.features import NAMES, LearnedValue, features
+    from cpbot.features import NAMES, PATTERN_NAMES, LearnedValue, features
     lv = LearnedValue()
-    assert len(lv.w) == len(NAMES)
+    assert lv.pairs and len(lv.w) == len(NAMES) + len(PATTERN_NAMES)
     for seed in range(10):
         g = _midgame(seed, steps=40)
         assert len(features(g, 0)) == len(NAMES)
