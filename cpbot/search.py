@@ -1,0 +1,191 @@
+"""Information Set Monte Carlo Tree Search (single-observer ISMCTS).
+
+Each iteration samples one way the hidden cards could be (a "determinization"),
+walks a shared tree of the searching player's and the rival's choices, plays a
+short rollout and scores the position. Choices are keyed by the option itself,
+so the same tree node collects statistics across all the sampled worlds.
+
+What the agent is allowed to know:
+- its own hand, its own known Legends and everything face-up;
+- the rival's decklist (as a player who has seen the deck would), but not which
+  of those cards are in the rival's hand or where they are in the deck;
+- not the order of either deck and not future dice rolls (the random number
+  generator is reseeded for every sample).
+
+Simplification: the rival's face-down Legends keep their real identities in the
+samples. Calling flips a random face-down Legend, so this only matters for the
+few effects that look at a particular face-down Legend.
+"""
+from __future__ import annotations
+
+import math
+import random
+import time
+
+from .engine import Game
+
+WIN_GIGS = 7
+
+
+# --------------------------------------------------------------- evaluation
+def heuristic(g: Game, p: int) -> float:
+    """A rough score of how well player p is doing, positive = better."""
+    me, op = g.players[p], g.players[1 - p]
+
+    def side(pl, q):
+        gigs = len(pl.gigs)
+        cred = g.street_cred(q) or 0
+        power = sum(g.power(u) for u in pl.field)
+        ready_units = sum(1 for u in pl.field if not g.cards[u].spent)
+        legends_up = sum(1 for u in pl.legends if g.cards[u].face_up)
+        return (3.0 * gigs + 0.08 * cred + 0.25 * power + 0.3 * ready_units
+                + 0.35 * len(pl.hand) + 0.3 * len(pl.eddies) + 0.4 * legends_up
+                + (0.5 * gigs * gigs if gigs >= 5 else 0.0))
+
+    return side(me, p) - side(op, 1 - p)
+
+
+def value(g: Game, p: int, scale=0.35) -> float:
+    """Win chance estimate for player p in [0, 1]."""
+    if g.over:
+        if g.winner == p:
+            return 1.0
+        if g.winner == "draw":
+            return 0.5
+        return 0.0
+    return 1.0 / (1.0 + math.exp(-scale * heuristic(g, p)))
+
+
+# ---------------------------------------------------------- determinization
+def determinize(g: Game, p: int, rng: random.Random) -> Game:
+    """A copy of g in which everything p can't see is resampled."""
+    d = g.clone()
+    d.rng = random.Random(rng.getrandbits(64))
+    o = 1 - p
+    op = d.players[o]
+    pool = op.hand + op.deck
+    rng.shuffle(pool)
+    n = len(op.hand)
+    op.hand[:] = pool[:n]
+    op.deck[:] = pool[n:]
+    for u in op.hand:
+        d.cards[u].zone = "hand"
+    for u in op.deck:
+        d.cards[u].zone = "deck"
+    rng.shuffle(d.players[p].deck)
+    return d
+
+
+# ------------------------------------------------------------- tree search
+class Node:
+    __slots__ = ("parent", "move", "player", "children", "n", "w", "avail")
+
+    def __init__(self, parent=None, move=None, player=None):
+        self.parent = parent
+        self.move = move          # the option that led here
+        self.player = player      # who chose that option
+        self.children = {}
+        self.n = 0
+        self.w = 0.0              # summed reward from `player`'s point of view
+        self.avail = 0
+
+
+def rollout_move(g: Game, rng: random.Random):
+    """Cheap playout policy: random, but rarely pass while there's something to do."""
+    d = g.decision
+    opts = d.options
+    if d.kind == "main":
+        acts = [o for o in opts if o[0] != "pass"]
+        attacks = [o for o in acts if o[0] == "attack"]
+        if attacks and rng.random() < 0.6:
+            return rng.choice(attacks)
+        if acts and rng.random() < 0.85:
+            return rng.choice(acts)
+    if d.kind == "react" and rng.random() < 0.6:
+        return ("end",)
+    if d.kind == "mulligan":
+        return False
+    return rng.choice(opts)
+
+
+class ISMCTSAgent:
+    """Search for `iterations` samples (or `seconds`, if given) per decision."""
+
+    def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=60, seed=None,
+                 scale=0.35):
+        self.iterations = iterations
+        self.seconds = seconds
+        self.c = c
+        self.rollout_depth = rollout_depth
+        self.scale = scale
+        self.rng = random.Random(seed)
+        self.last_stats = None
+
+    def act(self, game: Game):
+        d = game.decision
+        if len(d.options) == 1:
+            return d.options[0]
+        if d.kind == "go_first":
+            return True
+        root_player = d.player
+        root = Node()
+        deadline = time.time() + self.seconds if self.seconds else None
+        it = 0
+        while True:
+            if deadline is not None:
+                if time.time() >= deadline:
+                    break
+            elif it >= self.iterations:
+                break
+            self._iterate(game, root, root_player)
+            it += 1
+        legal = set(d.options)
+        best = max((ch for m, ch in root.children.items() if m in legal),
+                   key=lambda ch: (ch.n, ch.w))
+        self.last_stats = {"iterations": it, "kind": d.kind,
+                           "moves": sorted(((ch.n, round(ch.w / max(ch.n, 1), 3), m)
+                                            for m, ch in root.children.items()), reverse=True)}
+        return best.move
+
+    def _iterate(self, game, root, root_player):
+        rng = self.rng
+        g = determinize(game, root_player, rng)
+        node = root
+        # Selection and expansion
+        while not g.over:
+            dec = g.decision
+            opts = dec.options
+            who = dec.player
+            for o in opts:
+                ch = node.children.get(o)
+                if ch is not None:
+                    ch.avail += 1
+            untried = [o for o in opts if o not in node.children]
+            if untried:
+                move = rng.choice(untried)
+                child = Node(node, move, who)
+                child.avail = 1
+                node.children[move] = child
+                g.step(move)
+                node = child
+                break
+            best, best_s = None, -1.0
+            for o in opts:
+                ch = node.children[o]
+                s = ch.w / ch.n + self.c * math.sqrt(math.log(ch.avail) / ch.n)
+                if s > best_s:
+                    best, best_s = ch, s
+            g.step(best.move)
+            node = best
+        # Rollout
+        k = 0
+        while not g.over and k < self.rollout_depth:
+            g.step(rollout_move(g, rng))
+            k += 1
+        v0 = value(g, 0, self.scale)
+        # Backpropagation
+        while node is not None and node.player is not None:
+            node.n += 1
+            node.w += v0 if node.player == 0 else 1.0 - v0
+            node = node.parent
+        root.n += 1

@@ -1,7 +1,7 @@
 """Play one game and write it out so a person can follow it.
 
     python scripts/watch.py                 # random decks, random agents, seed 0
-    python scripts/watch.py --seed 7 --agents eager random --out games/
+    python scripts/watch.py --seed 7 --agents ismcts eager --out games/
     python scripts/watch.py --replay games/seed7.json   # rebuild a recorded game
 
 Writes <name>.txt (play-by-play), <name>.json (seed, decks and every choice, enough
@@ -17,9 +17,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
 from cpbot.agents import EagerRandomAgent, RandomAgent  # noqa: E402
+from cpbot.search import ISMCTSAgent  # noqa: E402
 from cpbot.watch import replay, watch_game  # noqa: E402
 
-AGENTS = {"random": RandomAgent, "eager": EagerRandomAgent}
+AGENTS = {"random": RandomAgent, "eager": EagerRandomAgent,
+          "ismcts": lambda seed: ISMCTSAgent(iterations=300, seed=seed)}
 
 
 def main():
