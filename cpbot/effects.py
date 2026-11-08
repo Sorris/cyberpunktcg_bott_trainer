@@ -38,6 +38,7 @@ TRIGGERS = defaultdict(list)       # (event, slug) -> [fn(g, me, ev)]
 GLOBAL = defaultdict(list)         # event -> [fn(g, ev)] for lasting effects from Programs
 STATICS = defaultdict(list)        # (kind, slug) -> [fn]
 LASTING = defaultdict(list)        # (kind, lasting kind) -> [fn(g, L, *args)]
+STATIC_KINDS = defaultdict(set)    # kind -> slugs with a static of that kind (fast skip)
 ABILITIES = defaultdict(list)      # slug -> [Ability]
 PROGRAMS = {}                      # slug -> steps for the Program's own text
 SCRIPTED: set = set()
@@ -85,6 +86,7 @@ def static(kind, *slugs):
     def deco(fn):
         for s in slugs:
             STATICS[(kind, s)].append(fn)
+            STATIC_KINDS[kind].add(s)
             SCRIPTED.add(s)
         return fn
     return deco
@@ -144,6 +146,9 @@ class Registry:
     def active_cards(self, g):
         """Cards whose text is currently active: field cards, face-up Legends in
         the Legends area, and Gear equipped to either (3.4.1, 10.22.3)."""
+        cached = g.__dict__.get("_active")
+        if cached is not None:
+            return cached
         out = []
         for pl in g.players:
             for u in pl.field:
@@ -181,11 +186,17 @@ class Registry:
 
     # ---- statics
     def _statics(self, g, kind):
+        slugs = STATIC_KINDS.get(kind)
+        if not slugs:
+            return ()
+        out = []
+        db, cards = g.db, g.cards
         for u in self.active_cards(g):
-            fns = STATICS.get((kind, g.db[g.cards[u].cid].slug))
-            if fns:
-                for fn in fns:
-                    yield u, fn
+            s = db[cards[u].cid].slug
+            if s in slugs:
+                for fn in STATICS[(kind, s)]:
+                    out.append((u, fn))
+        return out
 
     def _lasting(self, g, kind):
         for L in g.lasting:

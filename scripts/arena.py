@@ -4,7 +4,8 @@
 
 Each pair of games uses the same two random decks with the seats swapped, so
 neither agent is helped by a lucky deck or by going first more often.
-Agent specs: random, eager, ismcts[:iterations[:rollout_depth]].
+Agent specs: random, eager, ismcts[:iterations[:rollout_depth]][:key=value,...],
+for example ismcts:s=0.5,d=10,v=learned (see make()).
 """
 import argparse
 import math
@@ -22,6 +23,9 @@ from cpbot.search import ISMCTSAgent  # noqa: E402
 
 
 def make(spec, seed):
+    """random | eager | ismcts[:iterations[:rollout_depth]][:key=value,...]
+    ismcts keys: it (iterations), d (rollout depth), s (seconds per move, overrides it),
+    v (learned, the default, or hand), c (exploration)."""
     name, *args = spec.split(":")
     if name == "random":
         return RandomAgent(seed)
@@ -29,10 +33,27 @@ def make(spec, seed):
         return EagerRandomAgent(seed)
     if name == "ismcts":
         kw = {}
-        if args:
-            kw["iterations"] = int(args[0])
-        if len(args) > 1:
-            kw["rollout_depth"] = int(args[1])
+        pos = [x for x in args if "=" not in x]
+        if pos:
+            kw["iterations"] = int(pos[0])
+        if len(pos) > 1:
+            kw["rollout_depth"] = int(pos[1])
+        for tok in ",".join(x for x in args if "=" in x).split(","):
+            if not tok:
+                continue
+            k, v = tok.split("=")
+            if k == "it":
+                kw["iterations"] = int(v)
+            elif k == "d":
+                kw["rollout_depth"] = int(v)
+            elif k == "s":
+                kw["seconds"] = float(v)
+            elif k == "c":
+                kw["c"] = float(v)
+            elif k == "v" and v in ("learned", "hand"):
+                kw["value_fn"] = v
+            else:
+                raise ValueError(tok)
         return ISMCTSAgent(seed=seed, **kw)
     raise ValueError(spec)
 
