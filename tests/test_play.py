@@ -76,3 +76,54 @@ def test_labels_cover_engine_options():
     pv = player_view(g, HUMAN)
     assert pv["you"]["me"] and not pv["rival"]["me"]
     assert BOT == 1
+
+
+def _match(seed):
+    rng = random.Random(seed)
+    return Match(random_deck(rng, db), random_deck(rng, db), bot=EagerRandomAgent(seed), seed=seed, db=db)
+
+
+def _advance(m, me, n):
+    for _ in range(n):
+        m.run_bot()
+        if m.g.over:
+            return
+        m.choose(me.randrange(len(m.g.decision.options)))
+
+
+@pytest.mark.parametrize("seed", range(6))
+def test_undo_returns_to_the_same_position(seed):
+    m = _match(seed)
+    me = random.Random(seed)
+    _advance(m, me, 25)
+    m.run_bot()
+    if m.g.over:
+        return
+    before = json.dumps(m.view(), sort_keys=True)
+    log_len = len(m.lines)
+    m.choose(0)
+    m.run_bot()
+    m.undo()
+    assert json.dumps(m.view(), sort_keys=True) == before
+    assert len(m.lines) == log_len
+    # undo again and again back to the start
+    while m.can_undo():
+        m.undo()
+    assert m.choices == [] or all(i not in m.mine for i in range(len(m.choices)))
+
+
+def test_resign_ends_the_game():
+    m = _match(1)
+    _advance(m, random.Random(1), 5)
+    m.resign()
+    v = m.view()
+    assert m.g.winner == BOT and "resigned" in v["result"]
+    assert v["decision"] is None and not v["can_undo"]
+
+
+def test_eddies_stay_face_down():
+    m = _match(2)
+    _advance(m, random.Random(2), 40)
+    for side in ("you", "rival"):
+        for c in m.view()[side]["eddie_cards"]:
+            assert c["hidden"] and "title" not in c

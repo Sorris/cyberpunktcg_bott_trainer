@@ -46,7 +46,7 @@ BOTS = {
 
 db = default_db()
 IMAGES = json.loads(IMAGES_FILE.read_text(encoding="utf-8")) if IMAGES_FILE.exists() else {}
-state = {"match": None, "images": True, "bot_thread": None}
+state = {"match": None, "images": True, "bot_thread": None, "server": None}
 _art_locks: dict = {}
 _art_failed: dict = {}                                   # card id -> time of the last failed download
 _art_lock = threading.Lock()
@@ -138,14 +138,17 @@ def start_bot(m: Match):
     if m.g.over or m.g.decision.player != 1 or m.thinking:
         return
 
+    gen = m.gen
+
     def run():
         try:
-            m.run_bot()
+            m.run_bot(gen=gen)
         except Exception:  # noqa: BLE001
             m.error = traceback.format_exc()
             traceback.print_exc()
         finally:
-            m.thinking = False
+            if m.gen == gen:                             # an undo may have moved on already
+                m.thinking = False
 
     m.thinking = True
     t = threading.Thread(target=run, daemon=True)
@@ -221,6 +224,16 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("no game running")
                 m.choose(int(body["i"]))
                 start_bot(m)
+            elif path == "/api/quit":
+                self._json({"ok": True})
+                print("Quit from the page.")
+                threading.Thread(target=state["server"].shutdown, daemon=True).start()
+                return
+            elif path in ("/api/undo", "/api/resign"):
+                m = state["match"]
+                if m is None:
+                    raise ValueError("no game running")
+                m.undo() if path == "/api/undo" else m.resign()
             elif path == "/api/check_deck":
                 d = parse_decklist(body.get("text", ""), db)
                 return self._json({"ok": True, "deck": deck_summary(d, db)})
@@ -252,10 +265,19 @@ def main():
     print(f"Playing at {url}  (Ctrl+C to stop)")
     if not a.no_browser:
         threading.Timer(0.5, lambda: webbrowser.open(url)).start()
+    # Serve from a worker thread and keep the main thread in short sleeps: on Windows,
+    # Ctrl+C isn't delivered while the main thread is blocked inside serve_forever().
+    state["server"] = srv
+    worker = threading.Thread(target=srv.serve_forever, daemon=True)
+    worker.start()
     try:
-        srv.serve_forever()
+        while worker.is_alive():
+            time.sleep(0.25)
     except KeyboardInterrupt:
-        print("\nbye")
+        pass
+    srv.shutdown()
+    srv.server_close()
+    print("\nStopped.")
 
 
 if __name__ == "__main__":

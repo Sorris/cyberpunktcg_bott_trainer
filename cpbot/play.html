@@ -88,6 +88,14 @@ textarea { width: 100%; min-height: 160px; font-family: var(--f-mono); font-size
 .card .pw.up { color: #7dffb0; } .card .pw.down { color: #ff8f88; }
 .card .flags { position: absolute; left: 4px; top: 4px; display: flex; gap: 3px; flex-wrap: wrap; }
 .card .flag { font: 700 9px var(--f-body); letter-spacing: .05em; text-transform: uppercase; background: rgba(0,0,0,.78); color: #fff; padding: 1px 4px; border-radius: 3px; }
+.card .flag.ready { background: var(--c-green); }
+.areas { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: flex-start; }
+.areas > div { min-width: 0; }
+.eddies .card { --cw: 62px; }
+.trashpile { display: grid; gap: 4px; justify-items: start; }
+.trashpile .card { --cw: 80px; }
+.trashpile .empty { width: 80px; aspect-ratio: 733 / 1024; border: 1px dashed var(--line); border-radius: 6px; display: grid; place-items: center; }
+button.danger { border-color: var(--c-red); color: var(--c-red); }
 .card.spent { transform: rotate(-8deg) scale(.94); filter: saturate(.4) brightness(.8); }
 .card.back { background: repeating-linear-gradient(135deg, var(--back) 0 7px, #2f3844 7px 14px); border-color: #000; cursor: default; }
 .card.back .q { position: absolute; inset: 0; display: grid; place-items: center; font: 700 12px var(--f-display); color: #9aa6b2; text-align: center; padding: 4px; }
@@ -143,8 +151,11 @@ dialog::backdrop { background: rgba(0,0,0,.45); }
     <h1>Play the bot</h1>
     <span class="status" id="status"></span>
     <span class="spacer"></span>
+    <button id="btnUndo" title="Take back your last move (and the bot's replies to it)">Undo</button>
+    <button id="btnEnd" class="danger" title="Concede this game">End game</button>
     <button id="btnDecks">Decklists</button>
     <button id="btnNew" class="primary">New game</button>
+    <button id="btnQuit" title="Stop the game server">Quit</button>
   </header>
 
   <section class="panel" id="setup" hidden>
@@ -228,6 +239,8 @@ function cardEl(c, extra = {}) {
   if (c.hidden) {
     el.classList.add("back");
     el.innerHTML = `<div class="q">${esc(extra.backLabel || "")}</div>`;
+    if (c.spent) { el.classList.add("spent"); el.insertAdjacentHTML("beforeend", `<div class="flags"><span class="flag">spent</span></div>`); }
+    else if (extra.readyFlag) el.insertAdjacentHTML("beforeend", `<div class="flags"><span class="flag ready">ready</span></div>`);
     return el;
   }
   const colour = c.color ? `<span class="bar ${c.color}"></span>` : "";
@@ -339,25 +352,49 @@ function side(sd, isYou) {
   el.append(head);
   const zones = document.createElement("div");
   zones.className = "zones";
-  zones.innerHTML = `<span>Eddies <b>${sd.eddies[0]}</b>/${sd.eddies[1]} ready</span><span>Hand <b>${handN}</b></span><span>Deck <b>${sd.deck}</b></span>`;
-  const tb = document.createElement("button"); tb.textContent = `Trash ${sd.trash.length}`; tb.onclick = () => pile(`${name}: trash`, sd.trash);
-  const eb = document.createElement("button"); eb.textContent = `Eddies`; eb.onclick = () => pile(`${name}: Eddies`, sd.eddie_cards);
-  zones.append(tb, eb);
-  if (sd.removed.length) { const rb = document.createElement("button"); rb.textContent = `Removed ${sd.removed.length}`; rb.onclick = () => pile(`${name}: removed from the game`, sd.removed); zones.append(rb); }
+  zones.innerHTML = `<span>Hand <b>${handN}</b></span><span>Deck <b>${sd.deck}</b></span>`;
+  if (sd.removed.length) { const rb = document.createElement("button"); rb.textContent = `Removed from game ${sd.removed.length}`; rb.onclick = () => pile(`${name}: removed from the game`, sd.removed); zones.append(rb); }
   el.append(zones);
 
-  const legends = row("Legends", sd.legends.map((c) => c.hidden ? cardEl(c, {backLabel: "face-down Legend"}) : withGear(c, {})));
+  // Legends, Eddies and trash side by side. Eddies are face-down: only ready or spent shows.
+  const areas = document.createElement("div");
+  areas.className = "areas";
+  areas.append(row("Legends", sd.legends.map((c) => c.hidden ? cardEl(c, {backLabel: "face-down Legend"}) : withGear(c, {}))));
+  const ed = row(`Eddies ${sd.eddies[0]}/${sd.eddies[1]} ready`, sd.eddie_cards.map((c) => cardEl(c, {backLabel: "€$", readyFlag: true})));
+  ed.classList.add("eddies");
+  areas.append(ed);
+  areas.append(trashPile(name, sd.trash));
   const field = row("Field", sd.field.map((c) => withGear(c, {onField: true})));
   if (isYou) {
-    el.append(field, legends);
+    el.append(field, areas);
     const hand = row("Your hand", sd.hand.map((c) => cardEl(c)));
     hand.classList.add("hand");
     el.append(hand);
   } else {
     const backs = [];
     for (let i = 0; i < Math.min(sd.hand, 10); i++) { const b = cardEl({hidden: true}); b.classList.add("small"); backs.push(b); }
-    el.append(row(`Hand (${sd.hand})`, backs), legends, field);
+    el.append(row(`Hand (${sd.hand})`, backs), areas, field);
   }
+}
+function trashPile(name, trash) {
+  const r = document.createElement("div");
+  r.innerHTML = `<div class="rowlbl"><span class="lbl">Trash ${trash.length}</span></div>`;
+  const box = document.createElement("div");
+  box.className = "trashpile";
+  if (trash.length) {
+    const top = cardEl(trash[trash.length - 1]);
+    top.title = "Click to see the whole trash";
+    top.onclick = () => pile(`${name}: trash (newest last)`, trash);
+    box.append(top);
+    const b = document.createElement("button");
+    b.textContent = `View all ${trash.length}`;
+    b.onclick = () => pile(`${name}: trash (newest last)`, trash);
+    box.append(b);
+  } else {
+    box.innerHTML = `<span class="empty">empty</span>`;
+  }
+  r.append(box);
+  return r;
 }
 function row(label, items) {
   const r = document.createElement("div");
@@ -449,8 +486,10 @@ function renderLog() {
 }
 
 function render() {
-  if (!S || !S.match) { $("setup").hidden = false; $("main").hidden = true; $("status").textContent = ""; return; }
+  if (!S || !S.match) { $("btnUndo").disabled = $("btnEnd").disabled = true; $("setup").hidden = false; $("main").hidden = true; $("status").textContent = ""; return; }
   $("main").hidden = false;
+  $("btnUndo").disabled = !S.can_undo;
+  $("btnEnd").disabled = !!S.result;
   const whose = S.result ? S.result : (S.decision && S.decision.mine ? "your move" : `${S.bot_name} is thinking`);
   $("status").innerHTML = `Turn <b>${S.turn}</b> · ${esc(whose)} · ${esc(S.level)} · seed ${S.seed}${S.overtime ? " · <b>Overtime</b>" : ""}`;
   $("result").innerHTML = S.result ? `<div class="banner">${esc(S.result)}</div>` : (S.error ? `<div class="err">${esc(S.error)}</div>` : "");
@@ -519,6 +558,23 @@ async function check(who) {
     return true;
   } catch (e) { msg.innerHTML = `<div class="err">${esc(e.message.replaceAll("; ", "\n"))}</div>`; return false; }
 }
+$("btnUndo").onclick = async () => {
+  if (busy) return;
+  busy = true;
+  try { S = await api("/api/undo", {}); } catch (e) { S = await api("/api/state"); }
+  busy = false; render(); poll();
+};
+$("btnEnd").onclick = async () => {
+  if (!S || !S.match || S.result) return;
+  if (!confirm("End this game? It counts as a loss.")) return;
+  S = await api("/api/resign", {}); render(); poll();
+};
+$("btnQuit").onclick = async () => {
+  if (!confirm("Stop the game server? You can start it again with python scripts\\play.py.")) return;
+  try { await api("/api/quit", {}); } catch (e) {}
+  clearTimeout(polling);
+  document.body.innerHTML = `<p style="padding:24px;font:600 16px var(--f-body)">The game server has stopped. You can close this tab.</p>`;
+};
 $("btnNew").onclick = () => { $("setup").hidden = !$("setup").hidden; };
 $("btnCancel").onclick = () => { if (S && S.match) $("setup").hidden = true; };
 $("btnStart").onclick = async () => {
