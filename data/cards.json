@@ -1,0 +1,6135 @@
+[
+ {
+  "id": "wtnc-006",
+  "name": "6th Street Recruits",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 6,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "6th Street",
+   "Ganger"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "When a friendly Unit steals a d6, increase a Gig by up to 6.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "006",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.239Z",
+  "base_card_id": "6th-street-recruits",
+  "slug": "6th-street-recruits",
+  "rulings": [
+   {
+    "q": "If a friendly Unit steals two d6 simultaneously, can you trigger this effect for each d6 that is stolen?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-001",
+  "name": "Adam Smasher - Ender of Legends",
+  "card_type": "legend",
+  "color": "red",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 9,
+  "power": 9,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Merc"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)\n{Play} Defeat a rival Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "001",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.222Z",
+  "base_card_id": "adam-smasher-ender-of-legends",
+  "slug": "adam-smasher-ender-of-legends",
+  "rulings": [
+   {
+    "q": "When Adam Smasher is called or flipped to the face-up position, will the [Play] effect trigger?",
+    "a": "No."
+   },
+   {
+    "q": "When you activate the [Go Solo] effect and play your Adam Smasher to the field area will the [Play] effect trigger?",
+    "a": "Yes."
+   },
+   {
+    "q": "If Adam Smasher is moved to an invalid area, will it be removed from the game?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-041",
+  "name": "Adam Smasher - Metal Over Meat",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 6,
+  "ram_provided": null,
+  "eddie_cost": 9,
+  "power": 15,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Merc"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Defeat all other Units.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "041",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.027Z",
+  "base_card_id": "adam-smasher-metal-over-meat",
+  "slug": "adam-smasher-metal-over-meat",
+  "rulings": [
+   {
+    "q": "If your Adam Smasher is played during your Rival's turn will the [Play] effect trigger?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-059",
+  "name": "Adrenaline Converter",
+  "card_type": "gear",
+  "color": "yellow",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 3,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware",
+   "Medtech"
+  ],
+  "keywords": [
+   "Adrenaline"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nIf a Rival controls at least 2 more Gigs than you, this Unit has {Adrenaline}. (This Unit can attack the turn it's played.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "059",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.477Z",
+  "base_card_id": "adrenaline-converter",
+  "slug": "adrenaline-converter",
+  "rulings": [
+   {
+    "q": "If your Rival controls exactly 2 more Gigs than you when you play Adrenaline Converter on a Unit you played earlier this turn, you then steal a Gig with another friendly Unit, and your Rival only controls 1 more Gig than you now. Can you now declare an attack with your Unit equipped with Adrenaline Converter?",
+    "a": "No."
+   },
+   {
+    "q": "If a Unit or Legend is equipped with a Gear, does that Unit or Legend gain the Gear's tags?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-065",
+  "name": "Afterparty at Lizzie's",
+  "card_type": "program",
+  "color": "yellow",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance",
+   "Mox"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Adjust a Gig by up to 1. If you control 2 or more Gigs with different values, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "065",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.055Z",
+  "base_card_id": "afterparty-at-lizzie-s",
+  "slug": "afterparty-at-lizzie-s",
+  "rulings": [
+   {
+    "q": "When resolving this Program's effect, if you choose 0 when adjusting a Gig and control 2 or more Gigs with different values, will you draw 1?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you play this Program if there are no Gigs to adjust?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-027",
+  "name": "All is Lost",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Zetatech"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Trash 3. Add a Unit from among them to your hand.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "027",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.178Z",
+  "base_card_id": "all-is-lost",
+  "slug": "all-is-lost",
+  "rulings": [
+   {
+    "q": "When resolving the Program's effect, after you Trash 3, do you have to add a Unit from among the trashed cards if a valid target exists?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving the Program's effect, after you Trash 3, if you trash no Units, can you still add a Unit from the trash area to your hand?",
+    "a": "No."
+   },
+   {
+    "q": "When resolving this Program's effect, if you have only two cards in your deck, do you still have to Trash 3?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-042",
+  "name": "Alt Cunningham - Mother of Daemons",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 7,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "When a friendly equipped Unit or Legend is spent, draw 1.\nWhen a rival Unit would steal a Gig, you may discard 1 with cost equal to that Gig's value. If you do, the Gig isn't stolen.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "042",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.390Z",
+  "base_card_id": "alt-cunningham-mother-of-daemons",
+  "slug": "alt-cunningham-mother-of-daemons",
+  "rulings": [
+   {
+    "q": "Will both effects of Alt Cunningham be able to trigger on both players' turns?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-106",
+  "name": "Alt Cunningham - Soulkiller Architect",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "{Spend} Your next Program this turn plays for -1 €$ for each friendly min Gig, to a minimum of 1 €$.\n1 €$, {Spend} Play a Program from your trash. Bottom-deck it after you play it. (You still pay its cost.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "106",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.127Z",
+  "base_card_id": "alt-cunningham-soulkiller-architect",
+  "slug": "alt-cunningham-soulkiller-architect",
+  "rulings": [
+   {
+    "q": "After you resolve the first [Spend Icon:] effect of Alt Cunningham, if you play your next Program from the trash, does it count as your next Program for this effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "After you resolve the first [Spend Icon:] effect of Alt Cunningham, you then ready Alt Cunningham and resolve the first [Spend Icon:] for a second time before you play your next Program this turn. Will both of the activated [Spend Icon:] effects reduce the amount of €$ played together to a minimum of 1 €$?",
+    "a": "Yes."
+   },
+   {
+    "q": "After you resolve the first [Spend] icon effect of Alt Cunningham, you will reduce the next Program you play this turn by -2 €$ to a minimum of 1€$. Before you play your next Program this turn, you now have 3 friendly Min Gigs when you play it. Will your Program now play for -3 €$ to a minimum of 1€$?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-007",
+  "name": "Animals Wrecker",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 10,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Animal",
+   "Ganger"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "[Flavour Text] Takes a lot of juice to break bones like they do.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "007",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.442Z",
+  "base_card_id": "animals-wrecker",
+  "slug": "animals-wrecker",
+  "rulings": []
+ },
+ {
+  "id": "wtnc-028",
+  "name": "Appetite for Destruction",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "The next time a friendly Unit wins a fight by 3+ power this turn, it also steals a Gig.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "028",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.339Z",
+  "base_card_id": "appetite-for-destruction",
+  "slug": "appetite-for-destruction",
+  "rulings": [
+   {
+    "q": "When resolving this Program's effect, do you need to choose a friendly Unit currently in the field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a Unit steals a Gig with the Appetite for Destruction effect, is that Unit the one stealing the Gig?",
+    "a": "Yes."
+   },
+   {
+    "q": "If your friendly Unit wins a fight by 3+ power against a Unit, but that opposing Unit cannot be defeated in a fight. Will your friendly Unit still be able to steal a Gig from the effect of Appetite For Destruction?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-023",
+  "name": "Arasaka Emergency Radioport",
+  "card_type": "gear",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 2,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Cyberware"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nWhen this Unit or Legend is spent, you may look at a friendly face-down Legend. If that Legend is ARASAKA or has {Go Solo}, you may Call it for free. (You may only Call a Legend once per turn.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "023",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.502Z",
+  "base_card_id": "arasaka-emergency-radioport",
+  "slug": "arasaka-emergency-radioport",
+  "rulings": [
+   {
+    "q": "A Unit's [Attack] trigger goes into pending at the same time as this Gear's \"When this Unit or Legend is spent\" effect. If you activate the pending Arasaka Emergency Radioport effect first, can you fully resolve it to call a Legend before resolving the pending [Attack] trigger?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a Unit or Legend is equipped with a Gear, does that Unit or Legend gain the Gear's tags?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-043",
+  "name": "Augmented Negotiators",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 2,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)\nWhen this Unit uses {Blocker}, a Rival discards 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "043",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.342Z",
+  "base_card_id": "augmented-negotiators",
+  "slug": "augmented-negotiators",
+  "rulings": [
+   {
+    "q": "Can you activate [Blocker] on this Unit if your Rival has no cards in their hand?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-029",
+  "name": "Bonnie and Clyde",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Defeat a rival Unit with power 4 or less. You may defeat 2 instead if a Rival controls at least 2 Gigs more than you.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "029",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.389Z",
+  "base_card_id": "bonnie-and-clyde",
+  "slug": "bonnie-and-clyde",
+  "rulings": [
+   {
+    "q": "If a Rival controls at least 2 more Gigs than you, can you still choose to defeat only one Unit when resolving this Program's effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you play this Program even if there are no rival Units?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-066",
+  "name": "Bootleg Black Sapphire Show",
+  "card_type": "program",
+  "color": "yellow",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Sell the top card of your deck.\nIf you control a Gig with an even value and a Gig with an odd value, draw 2.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "066",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.190Z",
+  "base_card_id": "bootleg-black-sapphire-show",
+  "slug": "bootleg-black-sapphire-show",
+  "rulings": [
+   {
+    "q": "When resolving this Program's effect, do you reveal the card being sold from the top of the deck?",
+    "a": "No."
+   },
+   {
+    "q": "When resolving this Program's effect, can you look at the card being sold to confirm it has the sell tag?",
+    "a": "No."
+   },
+   {
+    "q": "If you have already taken the \"Sell for Turn\" game action this turn, can you still sell a card when resolving this Program's effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "After resolving this Program's effect, can you still use your \"Sell for Turn\" game action on the same turn?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-044",
+  "name": "Caliber - Totentanz's Top Dog",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 5,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Maelstrom"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play",
+   "defeated"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Defeat a rival Unit with cost 2 or less.\n{Defeated} A Rival discards 1. If the card's cost equals the value of a friendly Gig, that Rival discards 1 more.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "044",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.011Z",
+  "base_card_id": "caliber-totentanz-s-top-dog",
+  "slug": "caliber-totentanz-s-top-dog",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect of Caliber, do you have to defeat a rival Unit with cost 2 or less if there is a valid target?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving the [Defeated] effect, if the Rival discards 1 more and that card's cost equals the value of a friendly Gig, will that Rival have to discard 1 more?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-030",
+  "name": "Carnage at the Colosseum",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance",
+   "Extreme"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Play this Program for -1 €$ for each friendly Gig with 8+ value, to a minimum of 1 €$.\nDefeat a rival Unit with less power than a friendly Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "030",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.975Z",
+  "base_card_id": "carnage-at-the-colosseum",
+  "slug": "carnage-at-the-colosseum",
+  "rulings": [
+   {
+    "q": "When you play this Program the effect only reduces the €$ required to play the card; it does not change its cost value.",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-008",
+  "name": "Chrome Fang",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 6,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Netrunner",
+   "Tyger Claws"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "008",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.496Z",
+  "base_card_id": "chrome-fang",
+  "slug": "chrome-fang",
+  "rulings": [
+   {
+    "q": "Last turn, your rival resolved the [Play] effect of a Chrome Fang. Then, on your turn, you play a friendly Unit with [Adrenaline] and successfully attack the rival's Gig area. Can you steal a rival Gig with a value higher than that Unit's power?",
+    "a": "No."
+   },
+   {
+    "q": "If you resolve the effect of a Chrome Fang's [Play] effect and it is then defeated on the same turn, will rival Units now be able to steal friendly Gigs with value higher than their power on the following rival's turn?",
+    "a": "No."
+   },
+   {
+    "q": "After resolving the [Play] effect, will rival Units be able to steal a friendly Gig with a value matching their power?",
+    "a": "Yes."
+   },
+   {
+    "q": "After you resolve Chrome Fang's [Play] effect, can your rival Units still declare an attack on your friendly Gig area, even if all friendly Gigs have a value higher than their power?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a rival Unit has an effect \"When this Unit steals a Gig, steal an additional Gig,\" can it steal a friendly Gig with a higher value than its power if you resolved the [Play] effect on Chrome Fang the previous turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-131",
+  "name": "Chrome Reverie",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "A rival Unit can't attack until your next turn. If you control a min Gig, you may Call a Legend for free. (You can only Call a Legend once per turn.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "131",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.223Z",
+  "base_card_id": "chrome-reverie",
+  "slug": "chrome-reverie",
+  "rulings": [
+   {
+    "q": "If a rival Unit under the effect of Chrome Reverie is given the effect \"Declare an attack on spent Units\", will that rival Unit now be able to declare an attack on spent Units?",
+    "a": "No."
+   },
+   {
+    "q": "What is a min Gig?",
+    "a": "A Gig that is showing its minimum value or a value of 1."
+   },
+   {
+    "q": "If you do not Call a Legend for free when resolving the Program's effect. If you use the Call a Legend game action later this turn, can you do it for free?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-076",
+  "name": "Corpo Security",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 2,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Corpo"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "This Unit can't attack.\n{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "076",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.083Z",
+  "base_card_id": "corpo-security",
+  "slug": "corpo-security",
+  "rulings": [
+   {
+    "q": "When you play this Unit with [Adrenaline], can it declare an attack this turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-097",
+  "name": "Corporate Surveillance",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Spend a rival Unit with cost 4 or less.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "097",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.117Z",
+  "base_card_id": "corporate-surveillance",
+  "slug": "corporate-surveillance",
+  "rulings": [
+   {
+    "q": "Can you play this Program without a rival Unit in the field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving this Program's effect can you choose a Unit that was already in the spent position before the Program was activated?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-067",
+  "name": "Cyberpsychosis",
+  "card_type": "program",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Quickhack"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Quick} Give an equipped Unit +3 power this turn for each of its equipped Gears. If that Unit steals or fights, defeat it at the end of this turn.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "067",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.061Z",
+  "base_card_id": "cyberpsychosis",
+  "slug": "cyberpsychosis",
+  "rulings": [
+   {
+    "q": "Can you choose an equipped rival Unit or an equipped friendly Unit when resolving this effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "You play this Program and choose an attacking rival Unit with the effect during the React step; that Unit then steals a Gig from that attack. Will it be defeated at the end of this turn?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a Unit with the effect of Cyberpsychosis attacks but does not manage to fight or steal. Will that Unit under Cyberpsychosis be defeated at the end of this turn?",
+    "a": "No."
+   },
+   {
+    "q": "If you've already stolen or fought with an equipped friendly Unit, then resolve Cyberpsychosis choosing that friendly Unit, and then end your turn. Will that friendly Unit be defeated by Cyberpsychosis at the end of the turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-024",
+  "name": "Deadman Transmitter",
+  "card_type": "gear",
+  "color": "red",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 1,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware",
+   "Trauma Team"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nIf this Unit would be defeated, defeat its \"DEADMAN TRANSMITTER\" instead.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "024",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.468Z",
+  "base_card_id": "deadman-transmitter",
+  "slug": "deadman-transmitter",
+  "rulings": [
+   {
+    "q": "When a Unit equipped with two Deadman Transmitters would be defeated, will only one Deadman Transmitter be defeated instead of the Unit?",
+    "a": "Yes."
+   },
+   {
+    "q": "When the Deadman Transmitter is defeated instead of the equipped Unit in a fight, does the equipped Unit still lose the fight?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a Unit or Legend is equipped with a Gear, does that Unit or Legend gain the Gear's tags?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-5b9cdefa-29f4-4a3a-a426-eea46302ef60",
+  "name": "Delamain Cab",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Vehicle"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "At the end of your turn, if this Unit stole a Gig this turn, ready 1 Eddie.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "112",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.474Z",
+  "base_card_id": "delamain-cab",
+  "slug": "delamain-cab",
+  "rulings": [
+   {
+    "q": "If this Unit steals a Gig and is then defeated before your turn ends, can you still ready 1 Eddie at the end of your turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-c7eba3a0-63cb-4311-988e-d487a7c0841a",
+  "name": "Delamain - Rideshare AI",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "AI"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Draw 2.\n(Units with power 0 don't steal Gigs.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "111",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:32.775Z",
+  "base_card_id": "delamain-rideshare-ai",
+  "slug": "delamain-rideshare-ai",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, do you have to draw 2?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-031",
+  "name": "Detonate",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Quickhack"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Quick} Defeat a rival Gear with power 2 or less.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "031",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.524Z",
+  "base_card_id": "detonate",
+  "slug": "detonate",
+  "rulings": [
+   {
+    "q": "When resolving Detonate, can you choose a Gear equipped to a face-up Legend in the legends area or field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you play Detonate if there are no rival Gears in the field or the legends area to defeat?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-002",
+  "name": "Dexter DeShawn - Off the Grid",
+  "card_type": "legend",
+  "color": "red",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Fixer"
+  ],
+  "keywords": [],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": true,
+  "ability_text": "{Call} Choose one effect.\nGive a friendly Unit +2 power this turn. // Draw 1.\n{Spend}: Increase a Gig by up to 2.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "002",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.514Z",
+  "base_card_id": "dexter-deshawn-off-the-grid",
+  "slug": "dexter-deshawn-off-the-grid",
+  "rulings": [
+   {
+    "q": "When you are resolving the [Call] effect of Dexter Deshawn, can you choose \"Give a friendly Unit +2 power this turn\" even if there are no friendly Units?",
+    "a": "Yes."
+   },
+   {
+    "q": "During the React step, you chose Draw 1 when resolving Dexter Deshawn's [Call]. If that card has the [Quick] Keyword, can you play it during the same React step?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving the [Spend Icon:] effect, can you increase a friendly or rival Gig by up to 2?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "ths-002",
+  "name": "Dexter DeShawn - One Last Chance",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Fixer"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play",
+   "attack",
+   "defeated"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} {Attack} Adjust a Gig by up to 1.\n{Defeated} If your ☆ (Street Cred) differs from a Rival's by 10+, draw 2.",
+  "flavor_text": null,
+  "set_code": "theheistretailstarterdeck",
+  "set_name": "The Heist — Retail Starter Deck",
+  "card_number": "002",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.925Z",
+  "base_card_id": "dexter-deshawn-one-last-chance",
+  "slug": "dexter-deshawn-one-last-chance",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] or [Attack] effect, if you choose 0 when adjusting a Gig, does that still count as adjusting the Gig?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-e96d3167-5115-4c82-9b35-546cba0aaead",
+  "name": "(Don't Fear) The Reaper",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 7,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Samurai"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Spend all rival Units. Then, defeat a spent Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "098",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:33.560Z",
+  "base_card_id": "don-t-fear-the-reaper",
+  "slug": "don-t-fear-the-reaper",
+  "rulings": [
+   {
+    "q": "Can you play this Program if all rival Units are spent?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving this Program's effect, can you defeat a Unit already in the spent position before the Program was played?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-036",
+  "name": "Dum Dum - Maelstrom Triggerman",
+  "card_type": "legend",
+  "color": "yellow",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Maelstrom"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": true,
+  "ability_text": "{Call} You may defeat a friendly Gear. If you do, draw 2. Otherwise, draw 1.\n{Quick} 1 €$, {Spend} Give a friendly Unit +1 power this turn for each of its equipped Gear.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "036",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.969Z",
+  "base_card_id": "dum-dum-maelstrom-triggerman",
+  "slug": "dum-dum-maelstrom-triggerman",
+  "rulings": [
+   {
+    "q": "When resolving the [Quick] 1 €$ [Spend Icon:] effect of Dum Dum, can you choose a friendly Unit that has no Gear equipped?",
+    "a": "Yes."
+   },
+   {
+    "q": "Once you have resolved the [Quick] 1 €$, [Spend] effect of Dum Dum on a friendly Unit equipped with one Gear. If that Gear is defeated during this turn, will the friendly Unit lose the +1 power?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-128",
+  "name": "Dying Night - V's Pistol",
+  "card_type": "gear",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 2,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Weapon"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\n{Attack} Decrease a Gig by up to 2. At the end of your turn, if this Unit is named \"V\", ready 2 Eddies.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "128",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.160Z",
+  "base_card_id": "dying-night-v-s-pistol",
+  "slug": "dying-night-v-s-pistol",
+  "rulings": [
+   {
+    "q": "Your [Attack] effect on a V equipped with Dying Night resolves, and then that V is defeated. You end your turn. Will you still get to ready 2 Eddies?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a Unit or Legend is equipped with a Gear, does that Unit or Legend gain the Gear's tags?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-009",
+  "name": "El Sombrerón - La Venganza Lenta",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Valentino"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Attack} You may pay 2 €$. If you do, this Unit gains power equal to a friendly max Gig this turn.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "009",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.937Z",
+  "base_card_id": "el-sombrer-n-la-venganza-lenta",
+  "slug": "el-sombrero-n-la-venganza-lenta",
+  "rulings": [
+   {
+    "q": "When you resolve El Sombrerón's [Attack] effect, can you choose any max Gig if there are multiple?",
+    "a": "Yes."
+   },
+   {
+    "q": "After you resolve El Sombrerón's [Attack] effect, if the chosen max Gig's value changes, will the power gained from the resolved [Attack] effect also change?",
+    "a": "No."
+   },
+   {
+    "q": "When resolving the [Attack] effect, can you choose not to pay 2 €$ even if you can?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-077",
+  "name": "Emergency Atlus",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Trauma Team",
+   "Vehicle",
+   "Zetatech"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "\"Grab the policyholder, leave the rest for the city meatwagon.\"",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "077",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.094Z",
+  "base_card_id": "emergency-atlus",
+  "slug": "emergency-atlus",
+  "rulings": []
+ },
+ {
+  "id": "wtnc-107",
+  "name": "Evelyn Parker - Beautiful Enigma",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Doll"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "When a friendly CORPO or GANGER Unit steals 1 or more Gigs, ready 1 Eddie.\n1 €$, {Spend} A rival Unit must attack next turn if it can.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "107",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.131Z",
+  "base_card_id": "evelyn-parker-beautiful-enigma",
+  "slug": "evelyn-parker-beautiful-enigma",
+  "rulings": [
+   {
+    "q": "If a Unit with Evelyn Parker's [Spend Icon:] effect makes an attack and is put into the ready position in the same turn, does it have to make another attack if it can?",
+    "a": "Yes."
+   },
+   {
+    "q": "If you have a Unit affected by Evelyn Parker's [Spend Icon:] effect, do you have to attack with that Unit at the start of the Main Phase?",
+    "a": "No. - You may do other actions before declaring an attack with the Unit; you will not be able to end your turn if it is still possible to declare an attack with the Unit."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-113",
+  "name": "Evelyn Parker - Scheming Siren",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Doll"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Attack} Draw 1. Then, if you have more ☆ (Street Cred) than a Rival, discard 1.\n(Units with power 0 don't steal Gigs.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "113",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.144Z",
+  "base_card_id": "evelyn-parker-scheming-siren",
+  "slug": "evelyn-parker-scheming-siren",
+  "rulings": [
+   {
+    "q": "When resolving the [Attack] effect, do you have to draw 1?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-078",
+  "name": "Field Operator",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 2,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo",
+   "Techie"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} If your ☆ (Street Cred) is an even number, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "078",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.326Z",
+  "base_card_id": "field-operator",
+  "slug": "field-operator",
+  "rulings": [
+   {
+    "q": "If your ☆ (Street Cred) is 0, is that considered an even number?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-132",
+  "name": "Floor It",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Quickhack"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Quick} Give a rival Unit -1 power this turn. Draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "132",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.168Z",
+  "base_card_id": "floor-it",
+  "slug": "floor-it",
+  "rulings": [
+   {
+    "q": "Can you play this with no rival Units in play?",
+    "a": "Yes"
+   },
+   {
+    "q": "Can you choose a rival Unit with 0 power with this Program's effect?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-7751b719-978b-44b1-a82f-b2881d3a416e",
+  "name": "Fool on the Hill",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Reveal the top 2 cards of your deck. A Rival chooses whether you add them to your hand or trash them. If you trash them, draw 2.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "099",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.881Z",
+  "base_card_id": "fool-on-the-hill",
+  "slug": "fool-on-the-hill",
+  "rulings": [
+   {
+    "q": "When you reveal the top 2 cards of the deck, are they still considered part of the deck before you add them to your hand or trash them?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-045",
+  "name": "Gilded Matón",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Valentino"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} You may defeat a friendly Gear. If you do, defeat a rival Unit with cost 3 or less.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "045",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.177Z",
+  "base_card_id": "gilded-mat-n",
+  "slug": "gilded-mato-n",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, can you still defeat a friendly Gear even if there is no rival Unit with cost 3 or less?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-060",
+  "name": "Gorilla Arms",
+  "card_type": "gear",
+  "color": "yellow",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 3,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nThe first time this Unit steals 1 or more Gigs each turn, steal a rival Gig with a value not shared by a friendly Gig.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "060",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.049Z",
+  "base_card_id": "gorilla-arms",
+  "slug": "gorilla-arms",
+  "rulings": [
+   {
+    "q": "When you resolve Gorilla Arms' effect, does the Unit equipped with Gorilla Arms trigger and resolve its effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "The first time a Unit steals 2 Gigs by attacking with 10 or more power while equipped with Gorilla Arms. Will you get two triggers from the Gorilla Arms effect?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "eps-012",
+  "name": "Goro Takemura - Hands Unclean",
+  "card_type": "legend",
+  "color": "green",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 5,
+  "power": 7,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [
+   "Blocker",
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)\n{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)",
+  "flavor_text": null,
+  "set_code": "embracingpowerretailstarterdeck",
+  "set_name": "Embracing Power — Retail Starter Deck",
+  "card_number": "012",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.841Z",
+  "base_card_id": "goro-takemura-hands-unclean",
+  "slug": "goro-takemura-hands-unclean",
+  "rulings": [
+   {
+    "q": "Can you activate [Blocker] on Goro Takemura during the React step in the legends area?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "eps-017",
+  "name": "Goro Takemura - Losing His Way",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Attack} If all friendly Legends are face-up, this Unit has +5 power this turn.",
+  "flavor_text": null,
+  "set_code": "embracingpowerretailstarterdeck",
+  "set_name": "Embracing Power — Retail Starter Deck",
+  "card_number": "017",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.913Z",
+  "base_card_id": "goro-takemura-losing-his-way",
+  "slug": "goro-takemura-losing-his-way",
+  "rulings": [
+   {
+    "q": "After you resolve Goro Takemura's [Attack] effect with none of your friendly Legends face-up, will Goro Takemura have +5 later during the same turn if all of your friendly Legends become face-up?",
+    "a": "No."
+   },
+   {
+    "q": "During the same turn after the [Attack] effect on Goro Takemura resolves, if at any point a friendly Legend that is face-up is turned face-down, or is otherwise not face-up but remains friendly, will your Goro Takemura no longer have the +5 power?",
+    "a": "No."
+   },
+   {
+    "q": "During the same turn, after the [Attack] effect on Goro Takemura resolves when there are no face-up friendly Legends, and later that turn all your friendly Legends are face-up, will Goro Takemura have +5 power?",
+    "a": "No."
+   },
+   {
+    "q": "When resolving Goro Takemura's [Attack] effect, if there are no friendly Legends in the field or the legends area, does Goro Takemura have +5 power?",
+    "a": "No. - If there are 0 friendly Legends, then there are no friendly Legends face-up."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-071",
+  "name": "Goro Takemura - Vengeful Bodyguard",
+  "card_type": "legend",
+  "color": "green",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [
+   "Blocker",
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "{Quick} 1 €$, {Spend} Give a friendly Unit with cost 4 or less {Blocker} this turn. If you control a value-pair of Gigs, also give it +1 power this turn.\nWhen a friendly Unit uses {Blocker}, you may discard 1. If you do, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "071",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.068Z",
+  "base_card_id": "goro-takemura-vengeful-bodyguard",
+  "slug": "goro-takemura-vengeful-bodyguard",
+  "rulings": [
+   {
+    "q": "If you play a Unit during the React step and then give it [Blocker] with Goro Takemura's [Spend Icon:] effect, will you be able to then activate [Blocker] on the Unit you played this turn?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving Goro Takemura's second effect, do you have to discard 1?",
+    "a": "No."
+   },
+   {
+    "q": "If you have no cards in your deck when resolving Goro Takemura's second effect, and you discard 1, do you have to draw 1 and lose the game?",
+    "a": "Yes."
+   },
+   {
+    "q": "Does a friendly Unit have to use [Blocker] given to it by the [Quick] 1 €$,[Spend icon:] effect from Goro Takemura to trigger Goro Takemura's second effect?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-032",
+  "name": "Gunpoint Diplomacy",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Plan"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Give a friendly Unit these effects. If you have less ☆ (Street Cred) than a Rival, they instead choose one effect for you.\nThe next time this Unit attacks this turn, it may attack ready Units. // Give this Unit +3 power this turn.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "032",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.464Z",
+  "base_card_id": "gunpoint-diplomacy",
+  "slug": "gunpoint-diplomacy",
+  "rulings": [
+   {
+    "q": "When giving a friendly Unit these effects, can you choose to \"Give this Unit +3 power this turn\" before \"The next time this Unit attacks this turn, it may attack ready Units\"?",
+    "a": "No."
+   },
+   {
+    "q": "When my Rival chooses the effect for Gunpoint Diplomacy, do they also choose the friendly Unit?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-7dc71978-0995-4b93-9ba3-83d1118c3c4b",
+  "name": "Hacked Corpo",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "AI",
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Trash 3. Add a Program from among them to your hand.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "114",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.978Z",
+  "base_card_id": "hacked-corpo",
+  "slug": "hacked-corpo",
+  "rulings": [
+   {
+    "q": "When you resolve the [Play] effect after you trash 3, do you have to add a Program from among the trashed cards to your hand?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-072",
+  "name": "Hanako Arasaka - Daughter of the Emperor",
+  "card_type": "legend",
+  "color": "green",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo",
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "{Spend} Swap a friendly Gig with a rival Gig.\nAt the start of your turn, draw 1 for each friendly value-pair of Gigs.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "072",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.353Z",
+  "base_card_id": "hanako-arasaka-daughter-of-the-emperor",
+  "slug": "hanako-arasaka-daughter-of-the-emperor",
+  "rulings": [
+   {
+    "q": "When resolving the [Spend Icon:] effect, if either you or a Rival controls 0 Gigs, can you swap?",
+    "a": "No."
+   },
+   {
+    "q": "When you swap a Gig, is it considered stealing a Gig?",
+    "a": "No."
+   },
+   {
+    "q": "When you resolve the [Spend Icon:] effect, will you choose which Gigs are swapped?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-046",
+  "name": "Hanako Arasaka - In a Gilded Cage",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 1,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo",
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Search the top 4 cards of your deck. Reveal any number of cards with cost equal to any friendly Gig values and add them to your hand. Bottom-deck the rest.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "046",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.034Z",
+  "base_card_id": "hanako-arasaka-in-a-gilded-cage",
+  "slug": "hanako-arasaka-in-a-gilded-cage",
+  "rulings": []
+ },
+ {
+  "id": "wtnc-047",
+  "name": "Heywood Ripperdoc",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ripperdoc"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} You may defeat a Gear. If its cost equals the value of a friendly Gig, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "047",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.508Z",
+  "base_card_id": "heywood-ripperdoc",
+  "slug": "heywood-ripperdoc",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, can you defeat a Gear even if the cost does not equal the value of a friendly Gig?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-033",
+  "name": "Industrial Assembly",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Increase a Gig by up to 4. If you control a Gig with 8+ value, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "033",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.298Z",
+  "base_card_id": "industrial-assembly",
+  "slug": "industrial-assembly",
+  "rulings": [
+   {
+    "q": "When resolving the Program's effect, can you choose 0 when attempting to increase the Gig value?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving the Program's effect, can you choose a rival's Gig?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you play this Program if there are no Gigs to increase?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-8e2f2d0c-0e92-4744-a510-a9c7ac371d81",
+  "name": "Jacked-In Voodoo Boy",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 2,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Netrunner",
+   "Voodoo Boys"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "This Unit can't attack unless you played a Program this turn.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "115",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:31.430Z",
+  "base_card_id": "jacked-in-voodoo-boy",
+  "slug": "jacked-in-voodoo-boy",
+  "rulings": [
+   {
+    "q": "If this Unit gains [Adrenaline] the turn it's played, but you have not played a Program yet. Can this Unit attack?",
+    "a": "No."
+   },
+   {
+    "q": "On the same turn after you resolved playing a Program, you play a Jacked-In Voodoo Boy with [Adrenaline]. Can you declare an attack with the Jacked-In Voodoo Boy?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-073",
+  "name": "Jackie Welles - Mama's Favorite",
+  "card_type": "legend",
+  "color": "green",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 6,
+  "power": 8,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)\nIf a friendly Unit would be defeated, you may pay 1 €$ to defeat this Legend instead. (Remove it from the game.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "073",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.417Z",
+  "base_card_id": "jackie-welles-mama-s-favorite",
+  "slug": "jackie-welles-mama-s-favorite",
+  "rulings": [
+   {
+    "q": "When Jackie Welles is defeated by his own effect instead of the friendly Unit, will that friendly Unit's [DEFEAT] effect still trigger?",
+    "a": "No."
+   },
+   {
+    "q": "Will you be able to defeat Jackie Welles instead of a friendly Unit if Jackie Welles is currently in the field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "Will you be able to defeat Jackie Welles instead of a friendly Unit if Jackie Welles is currently in the Legends area?",
+    "a": "Yes."
+   },
+   {
+    "q": "If Jackie Welles is the only friendly Unit in the field area and would be defeated by your rival's effect. Could you defeat Jackie Welles with his own effect instead of the rival's effect defeating it?",
+    "a": "Yes."
+   },
+   {
+    "q": "If your Jackie Welles is in the field Area with another friendly Unit, and your Rival resolves an effect that reads \"Defeat all Units,\" can you use Jackie Welles's second effect to keep the other friendly Unit from being defeated by the Rival's effect?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "ths-011",
+  "name": "Jackie Welles - Pour One Out For Me",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "The first time you play a Blue Unit or Blue Gear each turn, you may decrease a friendly Gig by up to 2. If it becomes a min Gig, draw 1.",
+  "flavor_text": null,
+  "set_code": "theheistretailstarterdeck",
+  "set_name": "The Heist — Retail Starter Deck",
+  "card_number": "011",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.863Z",
+  "base_card_id": "jackie-welles-pour-one-out-for-me",
+  "slug": "jackie-welles-pour-one-out-for-me",
+  "rulings": [
+   {
+    "q": "If you've played a Blue Unit this turn, then Call a Legend and flip Jackie Welles face up in your legends area. If you play another Blue Unit or Blue Gear this turn, will Jackie Welles's effect trigger?",
+    "a": "No."
+   },
+   {
+    "q": "When you play a Blue Legend from the legends area, does it trigger Jackie Welles' effect if it's the first Blue Unit you've played this turn?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving Jackie Welles's effect, if you choose a Gig already at its minimum value, you can't decrease it. Because it is a min Gig, will you still get the draw 1 even if you don't decrease it?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-048",
+  "name": "Jackie Welles - Ride or Die Choom",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Valentino"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack",
+   "defeated"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Attack} Give this Unit +2 power this turn for each friendly Gig with an even value.\n{Defeated} Draw 1 for each friendly Gig with an odd value.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "048",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.017Z",
+  "base_card_id": "jackie-welles-ride-or-die-choom",
+  "slug": "jackie-welles-ride-or-die-choom",
+  "rulings": [
+   {
+    "q": "If Gig becomes odd after Jackie attacks, does Jackie lose the +2 power?",
+    "a": "No."
+   },
+   {
+    "q": "If I acquire another friendly even Gig after Jackie Welles attacks, does Jackie Welles get another +2 power this turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-010",
+  "name": "Japantown Jonin",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Tyger Claws"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Give a friendly Unit +2 power this turn.\n(Units with power 0 don't steal Gigs.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "010",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.372Z",
+  "base_card_id": "japantown-jonin",
+  "slug": "japantown-jonin",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, can Japantown Jonin choose itself?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-011",
+  "name": "Johnny Silverhand - Never Stop Fighting",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Rocker",
+   "Samurai"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "The first time this Unit wins a fight each turn, ready it.\nThis Unit wins all fights against CORPO Units.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "011",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.424Z",
+  "base_card_id": "johnny-silverhand-never-stop-fighting",
+  "slug": "johnny-silverhand-never-stop-fighting",
+  "rulings": [
+   {
+    "q": "What does the text \"This Unit wins all fights against CORPO Units.\" mean?",
+    "a": "This applies when this Unit fights an opposing CORPO Unit. This Unit will always be determined to be the potential winner when comparing power in a fight."
+   },
+   {
+    "q": "If your Johnny Silverhand wins a fight for the first time during your rival's turn. Will the first effect of Johnny Silverhand trigger?",
+    "a": "Yes."
+   },
+   {
+    "q": "If Johnny Silverhand is in the ready position when the first effect resolves, will the first effect be able to trigger again the next time Johnny Silverhand wins a fight this turn?",
+    "a": "No."
+   },
+   {
+    "q": "If Johnny Silverhand has a power of 0 when determining the winner of a fight against an opposing CORPO Unit, will Johnny Silverhand defeat the opposing CORPO Unit?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-003",
+  "name": "Johnny Silverhand - Rocking Renegade",
+  "card_type": "legend",
+  "color": "red",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Rocker",
+   "Samurai"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "003",
+  "rarity": "secret",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.405Z",
+  "base_card_id": "johnny-silverhand-rocking-renegade",
+  "slug": "johnny-silverhand-rocking-renegade",
+  "rulings": [
+   {
+    "q": "Can you activate the [Spend Icon:] for 0 €$ if you have 2 or more friendly Gigs with 8+ value?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you resolve the [Spend Icon:] effect, can you choose a friendly Unit already in the field from a previous turn?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you resolve the [Spend Icon:] effect on a friendly Unit that was played on a previous turn. Will that friendly Unit still be able to attack the rival's Gig area?",
+    "a": "Yes."
+   },
+   {
+    "q": "You activated Johnny Silverhand's [spend icon] effect and chose a friendly ROCKER Unit you played this turn. That same friendly ROCKER Unit is given the effect \"The next time this Unit attacks this turn, it may attack ready Units.\" Can you then declare an attack with the friendly ROCKER Unit towards a ready rival Unit?",
+    "a": "Yes. - Once you declare the attack, you can also choose to target a ready Unit as a valid attack target through the given effect of \"The next time this Unit attacks this turn, it may attack ready Units.\""
+   },
+   {
+    "q": "If a Unit with the effect \"A friendly Unit can attack spent rival Units this turn it's played.\" from Johnny Silverhand is then given the effect \"The next time this Unit attacks this turn, it may attack ready Units,\" will that Unit now be able to declare an attack on ready Units the turn it's played?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-8d0ad645-ac9a-4ecb-93d0-4c2061a4c477",
+  "name": "Judy Álvarez - Braindance Maestro",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Mox",
+   "Techie"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "When you play a BRAINDANCE Program, give a friendly Unit +1 power this turn.\n{Spend} Trash the top card of your deck. If it's a Program, you may add it to your hand.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "108",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:31.405Z",
+  "base_card_id": "judy-lvarez-braindance-maestro",
+  "slug": "judy-a-lvarez-braindance-maestro",
+  "rulings": [
+   {
+    "q": "If you play a BRAINDANCE Program from your trash, will it trigger the first effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "Does the first effect trigger for each BRAINDANCE Program you play?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving the first effect, can you choose a friendly Unit that you've already chosen for the same effect from this Legend if you resolved it earlier?",
+    "a": "Yes."
+   },
+   {
+    "q": "If you play a BRAINDANCE Program during your rival's turn, does the first effect of your face-up Judy Álvarez Legend trigger?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-dcfe8370-9abf-4395-b50b-efea505609ba",
+  "name": "Judy Álvarez - Nothing to Doubt",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 5,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 6,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Mox",
+   "Techie"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "1 €$, {Spend} Reveal the top card of your deck. You may play it for free. Otherwise, add it to your hand.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "116",
+  "rarity": "secret",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:33.143Z",
+  "base_card_id": "judy-lvarez-nothing-to-doubt",
+  "slug": "judy-a-lvarez-nothing-to-doubt",
+  "rulings": [
+   {
+    "q": "Can you activate the [Spend Icon:] effect when your deck has no cards left?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-037",
+  "name": "Kerry Eurodyne - Axe, Attitude, Audience",
+  "card_type": "legend",
+  "color": "yellow",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Rocker",
+   "Samurai"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "When you roll in a Gig from your fixer area, you may ignore the result and reroll it once.\nWhen you roll a min or max value on a Gig, draw 1. If it's a d20, draw 3 instead.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "037",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.238Z",
+  "base_card_id": "kerry-eurodyne-axe-attitude-audience",
+  "slug": "kerry-eurodyne-axe-attitude-audience",
+  "rulings": [
+   {
+    "q": "If you roll a min or max value on a friendly Gig and choose to reroll using Kerry Eurodyne's first effect, but don't roll a min or max value on the reroll, do you still get to trigger Kerry Eurodyne's second effect?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-012",
+  "name": "Kerry Eurodyne - The Last Rockerboy",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 5,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Rocker",
+   "Samurai"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "{Spend} If you control a Gig with 8+ value, draw 2.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "012",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.916Z",
+  "base_card_id": "kerry-eurodyne-the-last-rockerboy",
+  "slug": "kerry-eurodyne-the-last-rockerboy",
+  "rulings": [
+   {
+    "q": "Can you activate the [Spend Icon:] effect the same turn you play Kerry Eurodyne?",
+    "a": "No."
+   },
+   {
+    "q": "Can you activate the [Spend Icon:] even if you don't control a Gig with 8+ value?",
+    "a": "Yes. But if you do not have an 8+ value on resolution, you will not be able to draw 2."
+   },
+   {
+    "q": "If you've already activated [Spend Icon:] effect once this turn and your Kerry Eurodyne is put back into the ready position, can you activate [Spend Icon:] again?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-061",
+  "name": "Kiroshi Optics",
+  "card_type": "gear",
+  "color": "yellow",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": 1,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\n{Attack} Look at a friendly face-down Legend. (Don't reveal it.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "061",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.036Z",
+  "base_card_id": "kiroshi-optics",
+  "slug": "kiroshi-optics",
+  "rulings": [
+   {
+    "q": "When resolving the [Attack] effect, do you have to look at all your current friendly face-down Legends?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-013",
+  "name": "La Llorona - Ghost of the Past",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Valentino"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)\nWhen this Unit uses {Blocker}, increase a Gig by up to 3.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "013",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.284Z",
+  "base_card_id": "la-llorona-ghost-of-the-past",
+  "slug": "la-llorona-ghost-of-the-past",
+  "rulings": [
+   {
+    "q": "When La Llorona uses [BLOCKER], do I increase a Gig for her second effect before or after the ensuing fight?",
+    "a": "Before."
+   },
+   {
+    "q": "If you already used [Blocker] on another Unit, can you activate [Blocker] again on La Llorona during the same React step?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can La Llorona increase a Gig by 0, 1, 2, or 3, or must it increase by exactly 3?",
+    "a": "Up to means 0, 1, 2, or 3."
+   }
+  ]
+ },
+ {
+  "id": "official-14a0b813-d5e3-46e6-a001-aebbd3a95f11",
+  "name": "Les Élémens",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Bottom-deck a Rival's lowest-power Unit. (If there are multiple, choose 1.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "133",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:28.165Z",
+  "base_card_id": "les-l-mens",
+  "slug": "les-e-le-mens",
+  "rulings": [
+   {
+    "q": "If there are multiple, who chooses the unit for the bottom-deck?",
+    "a": "The player who played the Program and activated it's effect."
+   },
+   {
+    "q": "Can you play this card if there are no rival Units?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-068",
+  "name": "Live with the Aftermath",
+  "card_type": "program",
+  "color": "yellow",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Plan"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Each player defeats one of their Units.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "068",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.376Z",
+  "base_card_id": "live-with-the-aftermath",
+  "slug": "live-with-the-aftermath",
+  "rulings": [
+   {
+    "q": "Can you play this Program if you do not have a friendly Unit in the field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you play this Program if there are no rival Units in the field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you play this Program if neither player has any Units in their field area?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-117",
+  "name": "Lizzy Wizzy - Delicate Weapon",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 2,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Rocker"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} You may play a Program with cost 3 or less from your hand or trash for free. Bottom-deck it after you play it.\n{Blocker}",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "117",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.282Z",
+  "base_card_id": "lizzy-wizzy-delicate-weapon",
+  "slug": "lizzy-wizzy-delicate-weapon",
+  "rulings": [
+   {
+    "q": "When you finish resolving the activated program's effect with Lizzy Wizzy's effect. Will you place the Program in the trash before you bottom-deck it?",
+    "a": "No."
+   },
+   {
+    "q": "If an effect triggers at the same time the [Play] effect from Lizzy Wizzy triggers and go into pending. You choose to resolve the Lizzy Wizzy effect first to play a Program from your trash. Can you resolve the previous pending effect before the played Program resolves?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-9b4231da-b5e9-44ee-9de9-75ba6a6e6de6",
+  "name": "Lucyna Kushinada - Fresh Beginnings",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Maine's Crew",
+   "Merc",
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Call}: Draw 1. If you control 2 or more min Gigs, draw 2 instead.",
+  "flavor_text": null,
+  "set_code": "PRM01",
+  "set_name": "Set 1 Promos",
+  "card_number": "004a",
+  "rarity": "nova_rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-05T18:15:04.766Z",
+  "base_card_id": "lucyna-kushinada-fresh-beginnings",
+  "slug": "lucyna-kushinada-fresh-beginnings",
+  "rulings": []
+ },
+ {
+  "id": "wtnc-049",
+  "name": "Maelstrom Goons",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Maelstrom"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "When this Unit steals a Gig, if it's equipped, a Rival discards 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "049",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.455Z",
+  "base_card_id": "maelstrom-goons",
+  "slug": "maelstrom-goons",
+  "rulings": [
+   {
+    "q": "Will this effect trigger for each Gig stolen when this Unit steals 2 or more Gigs in the Steal step of an attack, while equipped?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-43e5568f-a609-4eff-8502-e81ba9134d2c",
+  "name": "Maelstrom Zealots",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Maelstrom"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "When this Unit loses a fight, defeat the opposing rival Unit.\n(Units with power 0 don't steal Gigs.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "079",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:29.873Z",
+  "base_card_id": "maelstrom-zealots",
+  "slug": "maelstrom-zealots",
+  "rulings": [
+   {
+    "q": "If this Unit has an effect, \"This Unit cannot be defeated in a fight this turn,\" can it still lose the fight?",
+    "a": "Yes."
+   },
+   {
+    "q": "When your Maelstrom Zealots' effect defeats the opposing rival Unit. Will your Maelstrom Zealots still be defeated in the fight by the opposing Unit?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-118",
+  "name": "Maman Brigitte - Spirit of Death",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Mystic",
+   "Netrunner",
+   "Voodoo Boys"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} You may discard 2 Programs. If you do, bottom-deck a rival unequipped Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "118",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.207Z",
+  "base_card_id": "maman-brigitte-spirit-of-death",
+  "slug": "maman-brigitte-spirit-of-death",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, can you discard 1 Program even if you do not get the rest of the effect?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-062",
+  "name": "Mandibular Upgrade",
+  "card_type": "gear",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": 0,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\n{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "062",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.042Z",
+  "base_card_id": "mandibular-upgrade",
+  "slug": "mandibular-upgrade",
+  "rulings": []
+ },
+ {
+  "id": "wtnc-025",
+  "name": "Mantis Blades",
+  "card_type": "gear",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": 2,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\n\"One cut, one kill.\"",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "025",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.955Z",
+  "base_card_id": "mantis-blades",
+  "slug": "mantis-blades",
+  "rulings": [
+   {
+    "q": "If a Unit or Legend is equipped with a Gear, does that Unit or Legend gain the Gear's tags?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-f1fa787d-e936-42a8-b42f-14999e722793",
+  "name": "MaxTac AV",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "NCPD",
+   "Vehicle"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} You may swap a friendly Gig with a rival Gig.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "080",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:33.738Z",
+  "base_card_id": "maxtac-av",
+  "slug": "maxtac-av",
+  "rulings": [
+   {
+    "q": "When you resolve the [Play] effect, do you have to swap a friendly Gig with a rival Gig?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-060f0c56-cbb7-45fd-a0cd-9c7b9d0f8103",
+  "name": "MaxTac Heavy",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 7,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "NCPD"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Play this Unit for -1 €$ for each of a Rival’s Units, to a minimum of 1 €$.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "081",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.623Z",
+  "base_card_id": "maxtac-heavy",
+  "slug": "maxtac-heavy",
+  "rulings": [
+   {
+    "q": "When you play this Unit, the effect only reduces the €$ required to play the card; it does not change its cost value.",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-22b276f4-7cf6-4b14-a220-8368a0839287",
+  "name": "MaxTac Squadron",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "NCPD"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "At the end of your turn, if this Unit is spent, ready a friendly face-up Legend.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "082",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:28.740Z",
+  "base_card_id": "maxtac-squadron",
+  "slug": "maxtac-squadron",
+  "rulings": [
+   {
+    "q": "When resolving the first effect of Maxtac, if Maxtac is ready, can you ready a friendly-face-up Legend?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-050",
+  "name": "MaxTac Suppression Team",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 7,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "NCPD"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Rival Units can't attack the turn they're played.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "050",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.405Z",
+  "base_card_id": "maxtac-suppression-team",
+  "slug": "maxtac-suppression-team",
+  "rulings": [
+   {
+    "q": "If I played a Legend with [Go Solo], can it declare an attack if my rival has a MaxTac Suppression Team?",
+    "a": "No."
+   },
+   {
+    "q": "If you played a Unit with [Adrenaline] and then defeated a rival's MaxTac Suppression Team that was already in the rival's Field area. Can the Unit with [Adrenaline] that you played now declare an attack?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-ef9f2959-de87-4a54-be45-5c9dcc507aba",
+  "name": "Memory Relapse",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Spend a rival Unit. It can't ready until your next turn. If your ☆ (Street Cred) is an even number, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "100",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:33.702Z",
+  "base_card_id": "memory-relapse",
+  "slug": "memory-relapse",
+  "rulings": [
+   {
+    "q": "Can you choose a rival Unit that is already spent when resolving this effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you play this Program if there are no rival Units in play?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-014",
+  "name": "Meredith Stout - Stone Cold Corpo",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 5,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Corpo",
+   "Militech"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Blocker}\nThis Unit has +2 power while fighting a Legend.\nWhen a Rival adjusts or swaps 1 or more friendly Gigs, you may add a card from your trash to your hand.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "014",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.914Z",
+  "base_card_id": "meredith-stout-stone-cold-corpo",
+  "slug": "meredith-stout-stone-cold-corpo",
+  "rulings": [
+   {
+    "q": "If your Rival adjusts or swaps multiple friendly Gigs simultaneously, will the third effect of Meredith Stout trigger for each swap?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "eps-003",
+  "name": "Minotaur",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 7,
+  "power": 9,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Drone",
+   "Militech"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} If you have more ☆ (Street Cred) than a Rival, defeat a rival Unit with power 5 or less.",
+  "flavor_text": null,
+  "set_code": "embracingpowerretailstarterdeck",
+  "set_name": "Embracing Power — Retail Starter Deck",
+  "card_number": "003",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.874Z",
+  "base_card_id": "minotaur",
+  "slug": "minotaur",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, do I have to choose a rival Unit to defeat if there is a valid target?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-119",
+  "name": "Misty Olszewski - Mender of Broken Spirits",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Mystic"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "This Unit can't attack.\nAt the end of your turn, choose a card type. Then, reveal the top card of your deck. If it's the chosen type, add it to your hand and ready 1 Eddie. Otherwise, trash it.\n(Unit, Gear, and Program are card types.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "119",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.269Z",
+  "base_card_id": "misty-olszewski-mender-of-broken-spirits",
+  "slug": "misty-olszewski-mender-of-broken-spirits",
+  "rulings": [
+   {
+    "q": "At the end of your turn, when choosing a card type. Can you choose Legend as a valid card type?",
+    "a": "Yes."
+   },
+   {
+    "q": "If Misty has an effect that reads, \"This Unit must attack if it can,\" Can you declare an attack with Misty?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-120",
+  "name": "Modded Kusanagi",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Tyger Claws",
+   "Vehicle"
+  ],
+  "keywords": [
+   "Adrenaline"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Adrenaline} (This Unit can attack the turn it's played.)\nAt the end of your turn, return this Unit to its owner's hand.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "120",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.221Z",
+  "base_card_id": "modded-kusanagi",
+  "slug": "modded-kusanagi",
+  "rulings": [
+   {
+    "q": "Can this effect be used in the trash?",
+    "a": "No."
+   },
+   {
+    "q": "At the end of your turn, Modded Kusanagi's effect triggers while it is under Cyberpsychosis. Can you resolve Modded Kusanagi's effect first to return it to your hand, and then avoid being defeated by Cyberpsychosis?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-3bd6767b-ef0c-47dd-9f47-d00112a74111",
+  "name": "Modded Muramasa",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Vehicle"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "At the end of your turn, if you have less ☆ (Street Cred) than a Rival, ready this Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "121",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:29.671Z",
+  "base_card_id": "modded-muramasa",
+  "slug": "modded-muramasa",
+  "rulings": [
+   {
+    "q": "At the end of your turn, if you have less ☆ (Street Cred) than a Rival, do you have to ready this Unit if it is spent?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-122",
+  "name": "Mox Inciters",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 2,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Mox"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} A rival Unit must attack next turn if it can.\n{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "122",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.276Z",
+  "base_card_id": "mox-inciters",
+  "slug": "mox-inciters",
+  "rulings": [
+   {
+    "q": "If you resolve the [Play] effect on a rival Unit that has the text \"This Unit can't attack,\" will that rival Unit now be able to attack on the Rival's next turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "ths-015",
+  "name": "MT0D12 Flathead",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 7,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Drone",
+   "Militech"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "If you have less ☆ (Street Cred) than a Rival, this Unit can't be blocked.",
+  "flavor_text": null,
+  "set_code": "theheistretailstarterdeck",
+  "set_name": "The Heist — Retail Starter Deck",
+  "card_number": "015",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.866Z",
+  "base_card_id": "mt0d12-flathead",
+  "slug": "mt0d12-flathead",
+  "rulings": [
+   {
+    "q": "Can you choose this card to sell even if it is a Unit?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you have less ☆ (Street Cred) than a Rival, you declare an attack on that Rival's Gig area. During that attack's React step, your Rival now has more ☆ (Street Cred) than you. Will your Rival now be able to activate [Blocker] on a rival Unit?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-038",
+  "name": "Muamar Reyes - El Capitán",
+  "card_type": "legend",
+  "color": "yellow",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Fixer"
+  ],
+  "keywords": [],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": true,
+  "ability_text": "{Call} Choose one effect.\nA friendly Unit can't be defeated in a fight this turn. // Draw 1.\n{Spend} Adjust a Gig by 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "038",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.483Z",
+  "base_card_id": "muamar-reyes-el-capit-n",
+  "slug": "muamar-reyes-el-capita-n",
+  "rulings": [
+   {
+    "q": "When you are resolving the [Call] effect of Muamar Reyes, can you choose \"A friendly Unit can't be defeated in a fight this turn.\" even if there are no friendly Units?",
+    "a": "Yes. - There will be no Units to choose from at the time of resolution, and you will do as much as you can when resolving the effect."
+   },
+   {
+    "q": "Does \"A friendly Unit can't be defeated in a fight this turn.\" count for each time that Unit is in a fight this turn?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a Unit can't be defeated in a fight, can it still lose?",
+    "a": "Yes."
+   },
+   {
+    "q": "Will Muamar Reyes's effect, \"A friendly Unit can't be defeated in a fight this turn,\" keep a friendly Unit from being defeated by an effect in the Fight step?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-083",
+  "name": "Nadia - Fighting Through Grief",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Medtech",
+   "Trauma Team"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "If a Rival controls more Gigs than you, this Unit can attack their Gig area the turn it's played.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "083",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.341Z",
+  "base_card_id": "nadia-fighting-through-grief",
+  "slug": "nadia-fighting-through-grief",
+  "rulings": [
+   {
+    "q": "If you played Nadia this turn while you controlled more Gigs than your rival, and during the same turn your rival now controls more Gigs than you, can you declare an attack with Nadia?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-07f119d6-8fb2-4b23-9862-818a7e941010",
+  "name": "NetWatch Netdriver",
+  "card_type": "gear",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 2,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware",
+   "Netrunner",
+   "Netwatch"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nWhen this Unit or Legend is spent, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "129",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.677Z",
+  "base_card_id": "netwatch-netdriver",
+  "slug": "netwatch-netdriver",
+  "rulings": [
+   {
+    "q": "When a friendly Unit equipped with a NetWatch Netdriver is spent when declaring an attack, can you resolve the NetWatch Netdriver's triggered effect before the React step and before the attack ends?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you spend a friendly Unit with the [ATTACK]  keyword to declare an attack while equipped with NetWatch Netdriver, both effects trigger at the same time. Can you choose the order in which to resolve the two now-pending effects??",
+    "a": "Yes."
+   },
+   {
+    "q": "When you choose to activate the [Spend Icon:] on a friendly Unit or Legend, the equipped NetWatch Netdriver's effect will trigger. Can you resolve the now pending NetWatch Netdriver effect before the activated [Spend Icon:] effect?",
+    "a": "No."
+   },
+   {
+    "q": "When paying the cost to play a card or activate an effect, you spend a friendly face-up Legend, triggering the effect of the equipped NetWatch Netdriver. Can you resolve the now-pending NetWatch Netdriver effect before you finish resolving the activated Program?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-70c7f11e-e41d-44f2-b5cd-e8568915d6ac",
+  "name": "Nocturne OP55 N1",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Plan"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "If your fixer area is empty, play this Program for 1 €$. Choose one effect.\nDraw 2. // A Unit can't attack until your next turn. // A friendly Legend may use {Go Solo} for -2 €$ this turn, to a minimum of 1 €$.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "134",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.761Z",
+  "base_card_id": "nocturne-op55-n1",
+  "slug": "nocturne-op55-n1",
+  "rulings": [
+   {
+    "q": "When is the fixer area empty?",
+    "a": "When you no longer have a d4, d6, d8, d10, d12 or d20 in the fixer area."
+   },
+   {
+    "q": "When choosing an effect, can you select \"A Unit can't attack until your next turn\" even if there are no Units in the Field?",
+    "a": "Yes."
+   },
+   {
+    "q": "If your fixer area is empty, can you play this Program for 3 €$ instead of 1 €$?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-015",
+  "name": "Octant",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 7,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Drone",
+   "Militech",
+   "Zetatech"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Play this Unit for -1 €$ for each friendly Gig with 8+ value, to a minimum of 1 €$.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "015",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.358Z",
+  "base_card_id": "octant",
+  "slug": "octant",
+  "rulings": [
+   {
+    "q": "When you play this Unit, the effect only reduces the €$ required to play the card; it does not change its cost value.",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-051",
+  "name": "Offduty Malfini",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 5,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Voodoo Boys"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Spend this Unit and a rival Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "051",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.183Z",
+  "base_card_id": "offduty-malfini",
+  "slug": "offduty-malfini",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, will this Unit be spent even if there is no rival Unit?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-034",
+  "name": "Over the Edge",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "034",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.312Z",
+  "base_card_id": "over-the-edge",
+  "slug": "over-the-edge",
+  "rulings": [
+   {
+    "q": "When resolving this effect, can you defeat a Unit with 0 power without a friendly d20?",
+    "a": "No."
+   },
+   {
+    "q": "Can you defeat a friendly Unit with this Program's effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "If you don't control a friendly d20, can you play Over the Edge?",
+    "a": "Yes."
+   },
+   {
+    "q": "Is a d20 in your Fixer area a friendly Gig?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-093",
+  "name": "Overwatch - Panam's Gift",
+  "card_type": "gear",
+  "color": "green",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 4,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Weapon"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "093",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.256Z",
+  "base_card_id": "overwatch-panam-s-gift",
+  "slug": "overwatch-panam-s-gift",
+  "rulings": [
+   {
+    "q": "Can you activate the [Spend Icon:] effect even if your hand is empty?",
+    "a": "Yes."
+   },
+   {
+    "q": "If an equipped Zetatech Faceplate is triggered and goes into pending when you activate the [Quick] 1 €$ [Spend Icon:] effect. When you resolve the [Spend Icon:] effect, you move the Zetatech Faceplate to another Unit; can you resolve the pending effect from the Zetatech Faceplate?",
+    "a": "Yes. The effect went into pending from the Unit the Zetatech Faceplate was equipped with before it was moved, and the Unit will resolve the effect from the Zetatech Faceplate even if it is no longer equipped."
+   }
+  ]
+ },
+ {
+  "id": "official-b43f5006-7388-4189-81ff-343b5428305b",
+  "name": "Pacifica Netrunner",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 1,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} If your ☆ (Street Cred) is an even number, a rival Unit can't ready until your next turn.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "084",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:32.325Z",
+  "base_card_id": "pacifica-netrunner",
+  "slug": "pacifica-netrunner",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] effect, do you choose a rival Unit already in the Field area?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-c7f0583f-2493-4e1f-9967-977bc0c6fa15",
+  "name": "Padre - Man of the Cross",
+  "card_type": "legend",
+  "color": "green",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Fixer",
+   "Ganger",
+   "Valentino"
+  ],
+  "keywords": [],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": true,
+  "ability_text": "{Call} Choose one effect.\nSpend a rival Unit. // Draw 1.\n{Spend} Set a player's Gig to the same value as another player's Gig.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "074",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:32.781Z",
+  "base_card_id": "padre-man-of-the-cross",
+  "slug": "padre-man-of-the-cross",
+  "rulings": [
+   {
+    "q": "When resolving Padre's [Call] effect, can you choose \"Spend a rival Unit\" even if there are no rival Units?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you activate the [Spend Icon:] effect even if all Gigs are the same value?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-075",
+  "name": "Panam Palmer - Nomad Cavalry",
+  "card_type": "legend",
+  "color": "green",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Aldecaldo",
+   "Merc",
+   "Nomad"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "2 €$, {Spend} Move a Gear from this Legend to an unequipped friendly Unit. If you do, ready that Unit.\nAt the end of your turn, if 5 or more friendly Units and/or Legends are equipped, ready them.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "075",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.080Z",
+  "base_card_id": "panam-palmer-nomad-cavalry",
+  "slug": "panam-palmer-nomad-cavalry",
+  "rulings": [
+   {
+    "q": "When resolving the [Spend Icon:] effect, can you move a Gear from this Legend to an unequipped friendly Unit in the ready position?",
+    "a": "Yes."
+   },
+   {
+    "q": "For the second effect,  do I need both Units and Legends equipped?",
+    "a": "No, a combination of any 5 equipped Units and equipped Legends satisfies the condition."
+   }
+  ]
+ },
+ {
+  "id": "official-9231f9ff-1ba5-4c4f-bd78-70e0780b58e5",
+  "name": "Panam Palmer - Strength Through Family",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 6,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Aldecaldo",
+   "Merc",
+   "Nomad"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "During your turn, you may Call a Legend for free.\n{Attack} Discard 1. If you do, draw 1 for each friendly face-up Legend.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "085",
+  "rarity": "secret",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:31.527Z",
+  "base_card_id": "panam-palmer-strength-through-family",
+  "slug": "panam-palmer-strength-through-family",
+  "rulings": [
+   {
+    "q": "If you've already called a Legend this turn and then play Panam Palmer, can you call a Legend again for free this turn?",
+    "a": "No."
+   },
+   {
+    "q": "When resolving the [Attack] effect, do you count all friendly face-up Legends in the field and the Legends area?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-8570122a-52aa-4a6b-8d72-4c8848df0f9b",
+  "name": "Peace Offering",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "You may set a Gig's value to the value of another Gig. Then, if you control a value-pair, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "101",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:31.244Z",
+  "base_card_id": "peace-offering",
+  "slug": "peace-offering",
+  "rulings": [
+   {
+    "q": "When you choose a Gig's value to set, does it have to be part of the value pair you control to draw 1?",
+    "a": "No."
+   },
+   {
+    "q": "Can you play this Program even if you cannot set a Gig to another's value?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-086",
+  "name": "Pepe Najarro - Working Doubles",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 6,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Valentino"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Attack} If you control a value-pair of Gigs, ready up to 2 MERC Legends in your Legends area.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "086",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.355Z",
+  "base_card_id": "pepe-najarro-working-doubles",
+  "slug": "pepe-najarro-working-doubles",
+  "rulings": [
+   {
+    "q": "What is a value-pair?",
+    "a": "A value-pair is 2 dice with the same value in the same Gig area."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-123",
+  "name": "Placide - Voodoo Sentinel",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 8,
+  "power": 10,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Netrunner",
+   "Voodoo Boys"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play",
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} {Attack} You may discard 1 Program. If you do, bottom-deck a rival Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "123",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.147Z",
+  "base_card_id": "placide-voodoo-sentinel",
+  "slug": "placide-voodoo-sentinel",
+  "rulings": [
+   {
+    "q": "When resolving the [Play] or [Attack] effects, can you choose to discard 1 Program if there are no rival Units in the Field area?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-124",
+  "name": "Psycho Squad",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 6,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "NCPD"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "[Flavour] Their protocol stops at “shoot first.”",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "124",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.204Z",
+  "base_card_id": "psycho-squad",
+  "slug": "psycho-squad",
+  "rulings": []
+ },
+ {
+  "id": "official-3b1d0570-bb8e-4ea5-9ec7-c698d9c9f94d",
+  "name": "Pyramid Song",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Choose one effect. If a friendly d4 is a min Gig, choose both instead.\nGive a rival Unit -4 power this turn. // Bottom-deck a rival Unit with power 0.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "135",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:29.616Z",
+  "base_card_id": "pyramid-song",
+  "slug": "pyramid-song",
+  "rulings": [
+   {
+    "q": "When choosing both effects, can you choose the order in which you do them?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "prm01-005",
+  "name": "Rebecca - Having a Moment",
+  "card_type": "legend",
+  "color": "red",
+  "ram_cost": null,
+  "ram_provided": null,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": null,
+  "flavor_text": null,
+  "set_code": "PRM01",
+  "set_name": "Set 1 Promos",
+  "card_number": "005",
+  "rarity": "nova_rare",
+  "version": "beta",
+  "legality": "not-legal",
+  "updated_at": "2026-09-23T15:11:08.871Z",
+  "base_card_id": "rebecca-having-a-moment",
+  "slug": "rebecca-having-a-moment",
+  "rulings": []
+ },
+ {
+  "id": "official-fb096d3f-48eb-47c0-a065-81b39691e12f",
+  "name": "Reboot Optics",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Quickhack"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Quick} The next time a rival Unit fights this turn, it doesn't defeat the opposing friendly Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "136",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:33.927Z",
+  "base_card_id": "reboot-optics",
+  "slug": "reboot-optics",
+  "rulings": [
+   {
+    "q": "If Reboot Optics protects your Unit from being defeated in a fight, will it still lose?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-087",
+  "name": "Riding Nomad",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Nomad"
+  ],
+  "keywords": [
+   "Adrenaline"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Adrenaline} (This Unit can attack the turn it's played.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "087",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.101Z",
+  "base_card_id": "riding-nomad",
+  "slug": "riding-nomad",
+  "rulings": []
+ },
+ {
+  "id": "official-ce570725-0de7-438a-a9c8-33074a7180ba",
+  "name": "Riot Shield",
+  "card_type": "gear",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 1,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Weapon"
+  ],
+  "keywords": [
+   "Blocker",
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\n{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)\nRivals must pay +2 €$ to use {Go Solo}.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "094",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:32.900Z",
+  "base_card_id": "riot-shield",
+  "slug": "riot-shield",
+  "rulings": [
+   {
+    "q": "Does the effect of Riot Shield force my Rival to activate [Go Solo] on their turn if they can?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-5d795b32-9ad8-4c94-abd4-d01e389db389",
+  "name": "Rita Wheeler - No Stupid Questions",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Mox"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)\nThe first time this Unit is spent each turn, draw 1, then discard 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "125",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.486Z",
+  "base_card_id": "rita-wheeler-no-stupid-questions",
+  "slug": "rita-wheeler-no-stupid-questions",
+  "rulings": [
+   {
+    "q": "When resolving the second effect of Rita Wheeler. If there are no cards left in your deck will you have to draw 1 and then lose the game?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-039",
+  "name": "River Ward - Detective on the Hunt",
+  "card_type": "legend",
+  "color": "yellow",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "NCPD"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "{Quick} {Spend} Play a Gear with cost 2 or less from your hand for free.\nWhen a friendly equipped Unit is defeated, search the top 2 cards of your deck and trash 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "039",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.976Z",
+  "base_card_id": "river-ward-detective-on-the-hunt",
+  "slug": "river-ward-detective-on-the-hunt",
+  "rulings": [
+   {
+    "q": "Can you activate the [QUICK][Spend Icon:] effect on River Ward and fail to play a Gear from your hand?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you play a Gear with cost 2 or less from your hand for free. Does it have to be played to this Legend?",
+    "a": "No."
+   },
+   {
+    "q": "When resolving River Ward's second effect, do you have to trash 1?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving the second effect of River Ward, will you put the card that wasn't trashed back on top of your deck?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-052",
+  "name": "Rockn' Rockerboy",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Rocker"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "[Flavor] Scream your throat raw for something. Anything.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "052",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.445Z",
+  "base_card_id": "rockn-rockerboy",
+  "slug": "rockn-rockerboy",
+  "rulings": []
+ },
+ {
+  "id": "wtnc-040",
+  "name": "Rogue Amendiares - Preem Solo",
+  "card_type": "legend",
+  "color": "yellow",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 7,
+  "power": 7,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)\nWhen a friendly Legend steals a Gig, if its value is even, draw 1. If its value is odd, a Rival discards 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "040",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.449Z",
+  "base_card_id": "rogue-amendiares-preem-solo",
+  "slug": "rogue-amendiares-preem-solo",
+  "rulings": [
+   {
+    "q": "When you steal a gig with Rogue Amendiares, does the second effect trigger?",
+    "a": "Yes."
+   },
+   {
+    "q": "When Rogue Amendiares is face-up in your Legends area and you steal a gig with a friendly Legend. Will you trigger Rogue Amendiares' second effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "What happens to a Gear equipped to a Legend when the Legend is defeated?",
+    "a": "When a Legend leaves the field or the legend's area, its equipped Gear follows the Legend to that new area; Gear cannot be equipped in the trash. So, when you remove the Legend from play, the Gear remains in the trash."
+   }
+  ]
+ },
+ {
+  "id": "official-3193a6bd-3e99-4501-9c5c-8d5ea32c779c",
+  "name": "Rogue Amendiares - Queen of the Afterlife",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Fixer",
+   "Merc"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": true,
+  "ability_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "126",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:29.305Z",
+  "base_card_id": "rogue-amendiares-queen-of-the-afterlife",
+  "slug": "rogue-amendiares-queen-of-the-afterlife",
+  "rulings": [
+   {
+    "q": "If you play Rogue Amendiares on your rival's turn during the React step. Will you be able to activate the [QUICK] 2 €$, [SPEND ICON:] effect this turn?",
+    "a": "No."
+   },
+   {
+    "q": "If a friendly Unit steals a Gig with a value less than its power for the first time this turn, and then you play Rogue Amendiares to the field area. Then, if another friendly Unit steals a Gig with a value lower than its power, will you trigger Rogue Amendiares' first effect?",
+    "a": "No."
+   },
+   {
+    "q": "The first effect of Rogue Amendiares has already resolved this turn from another friendly Unit stealing a Gig with value less than its power. If another friendly Unit steals a Gig with value less than its power this turn, will the first effect of Rogue Amendiares trigger again?",
+    "a": "No."
+   },
+   {
+    "q": "During this turn, you've already resolved the first effect of a friendly Rogue Amendiares, Queen of the Afterlife, in play; then you play another Rogue Amendiares. If another friendly Unit steals a Gig with a value less than its power this turn, will it trigger the effect of the Rogue Amendiares you played this turn?",
+    "a": "No. - The first effect of Rogue Amendiares triggers only on \"The first time another friendly Unit steals a Gig with value less than its power each turn\"; any other time this turn would be the second time, and so forth."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-016",
+  "name": "Royce - Don't Call Me Simon",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Maelstrom"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Defeat a rival Unit with power 2 or less. If you have more ☆ (Street Cred) than a Rival, defeat a rival Unit with power 3 or less instead.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "016",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.935Z",
+  "base_card_id": "royce-don-t-call-me-simon",
+  "slug": "royce-don-t-call-me-simon",
+  "rulings": [
+   {
+    "q": "When you resolve the [Play] effect, do you have to defeat a rival Unit if there is a valid target?",
+    "a": "Yes."
+   },
+   {
+    "q": "If a rival Unit's base power of 4 has been lowered by -2 through an effect. Can you defeat that rival Unit with Royce's [Play] effect?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-004",
+  "name": "Royce - Psycho on the Edge",
+  "card_type": "legend",
+  "color": "red",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 6,
+  "power": 6,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Maelstrom",
+   "Ganger"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)\nDuring your turn, this Legend has +2 power for each of its equipped Gear.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "004",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.898Z",
+  "base_card_id": "royce-psycho-on-the-edge",
+  "slug": "royce-psycho-on-the-edge",
+  "rulings": [
+   {
+    "q": "Can you equip a Gear to your face-up Royce in the Legends area?",
+    "a": "Yes."
+   },
+   {
+    "q": "During your turn, will your Royce have +2 power for each of its equipped while in the Legends area?",
+    "a": "Yes."
+   },
+   {
+    "q": "What happens to a Gear equipped to a Legend when the Legend is defeated?",
+    "a": "When a Legend leaves the field or the legend's area, its equipped Gear follows the Legend to that new area; Gear cannot be equipped in the trash. So, when you remove the Legend from play, the Gear remains in the trash."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-017",
+  "name": "Ruthless Lowlife",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Maelstrom"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "This Unit can only attack rival Units. (It can't attack Gig areas.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "017",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.493Z",
+  "base_card_id": "ruthless-lowlife",
+  "slug": "ruthless-lowlife",
+  "rulings": [
+   {
+    "q": "If your Ruthless Lowlife has been given the effect \"A rival Unit must attack next turn if it can,\" and there are no rival Units. Can your Ruthless Lowlife attack the rival Gig area?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "eps-013",
+  "name": "Saburo Arasaka - Stubborn Patriarch",
+  "card_type": "legend",
+  "color": "green",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Friendly ARASAKA Units have +1 power while attacking.\n(Units steal an extra Gig for every 10 power.)",
+  "flavor_text": null,
+  "set_code": "embracingpowerretailstarterdeck",
+  "set_name": "Embracing Power — Retail Starter Deck",
+  "card_number": "013",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.846Z",
+  "base_card_id": "saburo-arasaka-stubborn-patriarch",
+  "slug": "saburo-arasaka-stubborn-patriarch",
+  "rulings": [
+   {
+    "q": "Do your friendly ARASAKA Units have +1 power during the Fight and Steal step when attacking?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-069",
+  "name": "Safety Override",
+  "card_type": "program",
+  "color": "yellow",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Quickhack"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Quick} The next time a friendly Unit loses a fight this turn, defeat the opposing rival Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "069",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.430Z",
+  "base_card_id": "safety-override",
+  "slug": "safety-override",
+  "rulings": [
+   {
+    "q": "When you resolve the effect of Safety Override, do you need to choose a friendly Unit currently in the Field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "When the Safety Override effect on a friendly Unit defeats an opposing Unit, will your friendly Unit still be defeated by losing the fight?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-088",
+  "name": "Sandayu Oda - Hanako's Guardian",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 7,
+  "power": 8,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Spend a rival Unit for each friendly value-pair of Gigs.\nThis Unit can attack rival Units the turn it's played.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "088",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.102Z",
+  "base_card_id": "sandayu-oda-hanako-s-guardian",
+  "slug": "sandayu-oda-hanako-s-guardian",
+  "rulings": [
+   {
+    "q": "Can this Unit attack ready Units with its effect?",
+    "a": "No."
+   },
+   {
+    "q": "Does \"This Unit can attack rival Units the turn it's played\" effect allow Oda to attack a ready rival Unit?",
+    "a": "No. You still need to attack a spent rival Unit to make a valid attack."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-095",
+  "name": "Sandevistan",
+  "card_type": "gear",
+  "color": "green",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 2,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nAt the end of your turn, ready this Unit or Legend.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "095",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.109Z",
+  "base_card_id": "sandevistan",
+  "slug": "sandevistan",
+  "rulings": [
+   {
+    "q": "If Sandevistan is equipped to a friendly Unit or Legend that is spent at the end of your turn, will you have to ready that Unit or Legend when the effect from the Sandevistan resolves?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-2647f881-5a7e-4ffb-b231-6574dc531f43",
+  "name": "Sasha Yakovleva - Won't Let You Down",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 5,
+  "power": 0,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Maine's Crew",
+   "Merc",
+   "Netrunner"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [
+   "attack",
+   "defeated"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Go Solo}\n{Attack} Reveal the top card of your deck and add it to your hand. This Unit gains power equal to that card's cost this turn.\n{Defeated} A Rival discards 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "109",
+  "rarity": "secret",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:28.873Z",
+  "base_card_id": "sasha-yakovleva-won-t-let-you-down",
+  "slug": "sasha-yakovleva-won-t-let-you-down",
+  "rulings": [
+   {
+    "q": "During the steal step of an attack, if Sasha has a power of 0, will Sasha be able to steal a Gig?",
+    "a": "No."
+   },
+   {
+    "q": "Will you be able to trigger and resolve the [Attack] effect before you declare a valid attack target with Sasha Yakovleva?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-026",
+  "name": "Satori - Sword of Saburo",
+  "card_type": "gear",
+  "color": "red",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 2,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Weapon"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nWhen this Unit wins a fight against a rival Unit, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "026",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.953Z",
+  "base_card_id": "satori-sword-of-saburo",
+  "slug": "satori-sword-of-saburo",
+  "rulings": [
+   {
+    "q": "Your Unit, equipped with Satori, loses a fight and is defeated, but the opposing Unit also loses and is defeated. Will the Satori effect still trigger because the opposing Unit also loses?",
+    "a": "No."
+   },
+   {
+    "q": "If a friendly Unit equipped with Satori wins a fight from an attack by a rival Unit. Will the Satori effect trigger when the equipped friendly Unit wins this fight?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-089",
+  "name": "Saul Bright - Stormrider",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 8,
+  "power": 14,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Aldecaldo",
+   "Nomad"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Other friendly Units have +2 power while attacking.\nAt the end of your turn, ready up to 3 friendly Units.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "089",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.293Z",
+  "base_card_id": "saul-bright-stormrider",
+  "slug": "saul-bright-stormrider",
+  "rulings": [
+   {
+    "q": "Will other friendly Units have +2 power during the attack's fight and steal steps?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-018",
+  "name": "Screw - Lovelorn Fool",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 7,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Maelstrom"
+  ],
+  "keywords": [],
+  "triggers": [
+   "defeated"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Defeated} Add another Unit from your trash to your hand.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "018",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.306Z",
+  "base_card_id": "screw-lovelorn-fool",
+  "slug": "screw-lovelorn-fool",
+  "rulings": [
+   {
+    "q": "Will you have to add another Unit from your trash when resolving the [Defeated] effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you resolve the [Defeated] effect, can you add another Screw, Lovelorn Fool from your trash to your hand?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-053",
+  "name": "Secondhand Bombus",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Drone",
+   "Zetatech"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)\n(Units with power 0 don't steal Gigs.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "053",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.992Z",
+  "base_card_id": "secondhand-bombus",
+  "slug": "secondhand-bombus",
+  "rulings": []
+ },
+ {
+  "id": "wtnc-035",
+  "name": "Shattered Memories",
+  "card_type": "program",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Each player discards their hand and may draw 5.\nIf the total number of discarded cards equals the value of a friendly Gig, draw 2.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "035",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.509Z",
+  "base_card_id": "shattered-memories",
+  "slug": "shattered-memories",
+  "rulings": [
+   {
+    "q": "Will you be able to play this Program if either player has no cards in their hand?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-054",
+  "name": "Sketchy Ripper",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Ripperdoc",
+   "Scavenger"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Attack} Search the top 3 cards of your deck. Reveal a Gear and add it to your hand. Bottom-deck the rest.\n(Units with power 0 don't steal Gigs.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "054",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.255Z",
+  "base_card_id": "sketchy-ripper",
+  "slug": "sketchy-ripper",
+  "rulings": [
+   {
+    "q": "When you search the top 3 cards of your deck with the [Attack] effect, can you choose not to reveal any cards, even if there is a valid target, and then bottom-deck them in a random order?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-019",
+  "name": "Swordwise Huscle",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [],
+  "triggers": [
+   "attack"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Attack} If this Unit has power 5+, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "019",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.961Z",
+  "base_card_id": "swordwise-huscle",
+  "slug": "swordwise-huscle",
+  "rulings": [
+   {
+    "q": "If the [Attack] effect has finished resolving with this Unit at 3 power and then, during the attack, this Unit has 5+ power. Can you draw 1 from the effect?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-4277845b-1209-46df-8353-8fd36f56148a",
+  "name": "Synapse Burnout",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Quickhack"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Quick} A friendly Unit has +1 power for each friendly face-up Legend while fighting rival Units this turn.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "102",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:29.859Z",
+  "base_card_id": "synapse-burnout",
+  "slug": "synapse-burnout",
+  "rulings": [
+   {
+    "q": "When this friendly Unit is in a fight, does it have +1 power for each friendly face-up Legend in the Legends and Field area?",
+    "a": "Yes."
+   },
+   {
+    "q": "If you use this on a friendly face-up Legend that was played to the Field area, will that Legend get +1 while fighting rival Units this turn?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-055",
+  "name": "T-Bug - Amateur Philosopher",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [
+   "defeated"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Defeated} Look at all friendly face-down Legends. Then, you may Call a Legend for free. (You can only Call a Legend once per turn.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "055",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.003Z",
+  "base_card_id": "t-bug-amateur-philosopher",
+  "slug": "t-bug-amateur-philosopher",
+  "rulings": [
+   {
+    "q": "Do you have to reveal the friendly face-down Legend you look at when resolving this Unit's [Defeated] effect?",
+    "a": "No."
+   },
+   {
+    "q": "When resolving this Unit's [Defeated] effect, do you have to look at all your friendly face-down Legends?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-103",
+  "name": "Take Control",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Quickhack"
+  ],
+  "keywords": [
+   "Quick"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Quick} A rival Unit steals 1 fewer Gig this turn. If that Unit is an AI, DRONE, or VEHICLE, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "103",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.270Z",
+  "base_card_id": "take-control",
+  "slug": "take-control",
+  "rulings": [
+   {
+    "q": "When a rival Unit attempts to steal a Gig through an effect, it steals 1 fewer Gig this turn while under the effect of Take Control.",
+    "a": "Yes."
+   },
+   {
+    "q": "When a friendly Unit equipped with a Gorilla Arms at 9 power attempts to steal a Gig from an attack but can only steal 0 Gigs due to a rival's Take Control effect, will the equipped Gorilla Arms trigger off the Unit's attempt to steal the Gig?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-576f82ff-3c4d-4637-aa91-2773de43bbc8",
+  "name": "Tetratronic Rippler",
+  "card_type": "gear",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": 1,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nWhen this Unit or Legend is spent, search the top card of your deck. You may trash it. (Otherwise, keep it on the top of your deck.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "130",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.404Z",
+  "base_card_id": "tetratronic-rippler",
+  "slug": "tetratronic-rippler",
+  "rulings": [
+   {
+    "q": "When resolving the effect to search the top card of your deck. Is the card you're searching for still counted as part of the deck?",
+    "a": "Yes."
+   },
+   {
+    "q": "When a friendly Unit equipped with a Tetratronic Rippler is spent when declaring an attack, can you resolve the Tetratronic Rippler's triggered effect before the React step and before the attack ends?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you spend a friendly Unit with the [Attack] keyword to declare an attack while equipped with Tetratronic Rippler, both effects trigger at the same time. Can you choose the order in which to resolve the two now-pending effects?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you choose to activate the [Spend Icon:]  on a friendly Unit or Legend, the equipped Tetratronic Rippler's effect will trigger. Can you resolve the now pending Tetratronic Rippler effect before the activated [spend icon:] effect?",
+    "a": "No."
+   },
+   {
+    "q": "When paying the cost to play a card or activate an effect, you spend a friendly face-up Legend, triggering the effect of the equipped Tetratronic Rippler. Can you resolve the now-pending Tetratronic Rippler effect before you finish resolving the activated Program?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-070",
+  "name": "The Heist",
+  "card_type": "program",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Trash 4. Add a Gear from among them to your hand. If that Gear's cost equals the value of a friendly Gig, you may play it for free instead.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "070",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.390Z",
+  "base_card_id": "the-heist",
+  "slug": "the-heist",
+  "rulings": [
+   {
+    "q": "When resolving this effect, you trash at least one Gear; can you choose not to add a Gear to your hand?",
+    "a": "No."
+   },
+   {
+    "q": "When you resolve this effect, you trash a Gear with a cost equal to the value of a friendly Gig. When you choose the Gear, do you have to play it for free instead of adding it to your hand?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-063",
+  "name": "The Relic - Experimental Biochip",
+  "card_type": "gear",
+  "color": "yellow",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 3,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Cyberware"
+  ],
+  "keywords": [],
+  "triggers": [
+   "defeated"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Defeated} Play another Unit with cost 9 or less from your trash for free. Then, bottom-deck this Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "063",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.408Z",
+  "base_card_id": "the-relic-experimental-biochip",
+  "slug": "the-relic-experimental-biochip",
+  "rulings": [
+   {
+    "q": "When you resolve the [Defeated] effect to bottom-deck the equipped Unit or Legend, will the Gear that moved with it to the trash also be bottom-decked?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-573a88e9-ac01-4402-8e3d-2420dc4ca949",
+  "name": "Three Mouths, One Desire",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance",
+   "Doll"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Search the top 3 cards of your deck. Add 1 to your hand. You may add 1 more for each friendly min Gig. Bottom-deck the rest.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "137",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.401Z",
+  "base_card_id": "three-mouths-one-desire",
+  "slug": "three-mouths-one-desire",
+  "rulings": [
+   {
+    "q": "While you are searching the top 3 cards of your deck with this Program's effect, do those cards still count toward your deck count?",
+    "a": "Yes."
+   },
+   {
+    "q": "When resolving this Program's effect, if you have a min Gig, do you have to add 1 card from those searched to your hand?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-15920617-a06f-4302-9dfb-c85d3470c7eb",
+  "name": "Towerfall",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "138",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:28.305Z",
+  "base_card_id": "towerfall",
+  "slug": "towerfall",
+  "rulings": [
+   {
+    "q": "If you have the same Street Cred value as your Rival, can you choose both options for the Program's effect?",
+    "a": "No."
+   },
+   {
+    "q": "When you have to choose both effects of this Program instead of one, you must resolve the \"Give all rival Units -5 power this turn\" before you resolve the \"Bottom-deck all rival Units with power 0.",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-056",
+  "name": "Trauma Team Operatives",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 7,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Medtech",
+   "Trauma Team"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Play this Unit for -1 €$ for each Unit in your trash, to a minimum of 1 €$.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "056",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.466Z",
+  "base_card_id": "trauma-team-operatives",
+  "slug": "trauma-team-operatives",
+  "rulings": [
+   {
+    "q": "When you play this Unit, the effect only reduces the €$ required to play the card; it does not change its cost value.",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-70a2a18e-05c2-4a49-9236-e33b2c9819a5",
+  "name": "Trust No One",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 1,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Braindance"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Decrease a Gig by up to 3. Then, if you control a min Gig, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "139",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.748Z",
+  "base_card_id": "trust-no-one",
+  "slug": "trust-no-one",
+  "rulings": [
+   {
+    "q": "Does the Gig you chose to decrease when resolving this effect have to be the min Gig required to draw 1?",
+    "a": "No."
+   },
+   {
+    "q": "Can you play this Program if there are no Gigs to decrease?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-28267ce7-17dc-42c4-b8c4-4235a7f3c3df",
+  "name": "Tyger's Whisper",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 1,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 0,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Fixer",
+   "Tyger Claws"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} You may Call a Legend for free. (You can only Call a Legend once per turn.)\n(Units with power 0 don't steal Gigs.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "090",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:28.989Z",
+  "base_card_id": "tyger-s-whisper",
+  "slug": "tyger-s-whisper",
+  "rulings": [
+   {
+    "q": "If you do not Call a Legend for free when resolving the [Play] effect. If you use the Call a Legend game action later this turn, can you do it for free?",
+    "a": "No."
+   },
+   {
+    "q": "If you play this Unit on your rival's turn, will you be able to Call a Legend for free when resolving the [Play] effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "If you already Called a Legend once this turn, can you Call a Legend for free when resolving the [Play] effect?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-b21f86a3-cb77-44a3-bf94-4c5e068ac2c8",
+  "name": "Unlikely Bond",
+  "card_type": "program",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Maelstrom",
+   "Mox"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Bottom-deck a ready friendly Unit. If you do, bottom-deck a spent rival Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "140",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:32.293Z",
+  "base_card_id": "unlikely-bond",
+  "slug": "unlikely-bond",
+  "rulings": [
+   {
+    "q": "When resolving this Program's effect, if there are no spent rival Units, do you have to bottom-deck a ready friendly Unit?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "ths-012",
+  "name": "V - Corporate Exile",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 5,
+  "power": 8,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Corpo",
+   "Merc"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. When it leaves the field, remove it from the game.)",
+  "flavor_text": null,
+  "set_code": "theheistretailstarterdeck",
+  "set_name": "The Heist — Retail Starter Deck",
+  "card_number": "012",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.858Z",
+  "base_card_id": "v-corporate-exile",
+  "slug": "v-corporate-exile",
+  "rulings": [
+   {
+    "q": "Can you play this Legend to the Field area by paying its cost instead of paying the cost to activate the [Go Solo] keyword?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-020",
+  "name": "V - Roamer of the Badlands",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 6,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc",
+   "Nomad"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "When this Unit steals a Gig, increase it by up to 5.\nAt the end of your turn, if you control 2 or more Gigs with 8+ value, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "020",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.436Z",
+  "base_card_id": "v-roamer-of-the-badlands",
+  "slug": "v-roamer-of-the-badlands",
+  "rulings": [
+   {
+    "q": "If your V with 10 or more power steals 2 Gigs through an attack, will the first effect of V trigger for each of the Gigs stolen?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-005a",
+  "name": "V - Streetkid",
+  "card_type": "legend",
+  "color": "red",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 5,
+  "power": 6,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Merc"
+  ],
+  "keywords": [
+   "Go Solo"
+  ],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "005a",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:26.891Z",
+  "base_card_id": "v-streetkid",
+  "slug": "v-streetkid",
+  "rulings": [
+   {
+    "q": "After you Trash 3 with the [Call] effect will you be forced to add 1 BRAINDANCE Program from the trash to your hand if there is a valid target?",
+    "a": "Yes."
+   },
+   {
+    "q": "If you have only 2 cards left in your deck when you resolve the [Call] effect, will you be forced to trash them?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you add 1 for each BRAINDANCE Program that is trashed with the [Call] effect?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-021",
+  "name": "Valentino Guerrera",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Valentino"
+  ],
+  "keywords": [
+   "Blocker"
+  ],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "If you have more ☆ (Street Cred) than a Rival, this Unit can attack ready Units with {Blocker}.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "021",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.425Z",
+  "base_card_id": "valentino-guerrera",
+  "slug": "valentino-guerrera",
+  "rulings": [
+   {
+    "q": "If your Valentino Guerra attacks a rival Unit with [BLOCKER] that is in the ready position, can the attacked rival Unit in the ready position activate [BLOCKER] during the React step?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-091",
+  "name": "Valentino Street Racer",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Valentino",
+   "Vehicle"
+  ],
+  "keywords": [
+   "Adrenaline"
+  ],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Give another friendly Unit with cost 5 or less {Adrenaline} this turn. (A Unit with Adrenaline can attack the turn it's played.)",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "091",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.373Z",
+  "base_card_id": "valentino-street-racer",
+  "slug": "valentino-street-racer",
+  "rulings": [
+   {
+    "q": "If you play this Unit on your rival's turn and give another friendly Unit with cost 5 or less [Adrenaline], can you now attack with that Unit on your rival's turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-057",
+  "name": "Viktor Vektor - Drop Your Illusions",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 5,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ripperdoc"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Play your first CYBERWARE Gear each turn for -3 €$, to a minimum of 1 €$.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "057",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.482Z",
+  "base_card_id": "viktor-vektor-drop-your-illusions",
+  "slug": "viktor-vektor-drop-your-illusions",
+  "rulings": [
+   {
+    "q": "If you play a CYBERWARE Gear on your rival's turn, will you still get the -3 €$ effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "When playing your first CYBERWARE Gear this turn can you choose not to have the -3 €$ reduction?",
+    "a": "No."
+   },
+   {
+    "q": "When you play your first CYBERWARE Gear each turn for -3 €$, does it also reduce the cost value of the Gear you play?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "ths-001",
+  "name": "Viktor Vektor - Sit Down and Relax",
+  "card_type": "legend",
+  "color": "yellow",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ripperdoc"
+  ],
+  "keywords": [],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Call} Search the top 5 cards of your deck. Reveal up to 2 Gears with cost 2 or less and add them to your hand. Bottom-deck the rest in a random order.",
+  "flavor_text": null,
+  "set_code": "theheistretailstarterdeck",
+  "set_name": "The Heist — Retail Starter Deck",
+  "card_number": "001",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.819Z",
+  "base_card_id": "viktor-vektor-sit-down-and-relax",
+  "slug": "viktor-vektor-sit-down-and-relax",
+  "rulings": [
+   {
+    "q": "When you search the top 5 cards of your deck with the [Call] effect, can you choose not to reveal any cards, even if there is a valid target, and instead put them on the bottom of the deck in random order?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-058",
+  "name": "Viktor Vektor - You Might Feel a Little Pinch",
+  "card_type": "unit",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 3,
+  "power": 3,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ripperdoc"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Play a CYBERWARE Gear with cost 2 or less from your trash for free. Equip it only to another friendly Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "058",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.326Z",
+  "base_card_id": "viktor-vektor-you-might-feel-a-little-pinch",
+  "slug": "viktor-vektor-you-might-feel-a-little-pinch",
+  "rulings": [
+   {
+    "q": "When you resolve the [Play] effect, can you choose not to play a CYBERWARE Gear costing 2 or less from your trash for free?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-8f7a7d0b-5935-4732-a9ba-76b19467d5a0",
+  "name": "Wakako Okada - Peace and Harmony",
+  "card_type": "legend",
+  "color": "blue",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Fixer",
+   "Tyger Claws"
+  ],
+  "keywords": [],
+  "triggers": [
+   "call"
+  ],
+  "has_spend_ability": true,
+  "ability_text": "{Call} Choose one effect.\nGive a rival Unit -2 power this turn. // Draw 1.\n{Spend}: Decrease a Gig by up to 2.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "110",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:31.447Z",
+  "base_card_id": "wakako-okada-peace-and-harmony",
+  "slug": "wakako-okada-peace-and-harmony",
+  "rulings": [
+   {
+    "q": "When you are resolving the [Call] effect of Wakako Okada, can you choose \"Give a rival Unit -2 power this turn\" even if there are no rival Units?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you resolve the [Spend Icon:] effect on Wakako Okada, can you choose a min Gig?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "official-63821536-cdf5-4347-812a-0bf72d727596",
+  "name": "We Gotta Live Together",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Aldecaldo",
+   "Nomad"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "If a Rival controls at least 2 more Gigs than you, play this Program for 3 €$.\nPlay up to 2 Units with cost 3 or less from your trash for free.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "104",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.649Z",
+  "base_card_id": "we-gotta-live-together",
+  "slug": "we-gotta-live-together",
+  "rulings": [
+   {
+    "q": "If you spend 3 €$ to play this Program, will the cost value change from 5 to 3?",
+    "a": "No."
+   },
+   {
+    "q": "Can you choose to spend 5 €$ instead of 3 €$ if your Rival controls at least 2 more gigs than you?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-5801d086-7e87-4645-95e2-68239230098d",
+  "name": "Westbrook Netrunner",
+  "card_type": "unit",
+  "color": "blue",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 4,
+  "power": 5,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Netrunner"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} Until your next turn, rival Legends can't steal friendly Gigs with value less than their power.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "127",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.414Z",
+  "base_card_id": "westbrook-netrunner",
+  "slug": "westbrook-netrunner",
+  "rulings": [
+   {
+    "q": "If your Rival plays a Legend to the Field area after you played a Westbrook Netrunner, can the Rival Legend steal a gig with a lower value than its power?",
+    "a": "No."
+   },
+   {
+    "q": "You played a Westbrook Netrunner, resolved its [Play] effect, and ended your turn. During your rival's next turn, they use an effect to defeat your Westbrook Netrunner. Can the rival Legends now steal a Gig with a value lower than their power during that turn?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "official-54f0308f-8fb2-4861-a414-c15ca24426c3",
+  "name": "Wild in the Streets",
+  "card_type": "program",
+  "color": "green",
+  "ram_cost": 4,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Defeat a spent Unit.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "105",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:30.373Z",
+  "base_card_id": "wild-in-the-streets",
+  "slug": "wild-in-the-streets",
+  "rulings": [
+   {
+    "q": "Can you pay the cost to play this Program even if no Units are spent in the Field areas?",
+    "a": "Yes."
+   },
+   {
+    "q": "Can you choose a friendly Unit with the Wild in the Streets effect?",
+    "a": "Yes."
+   },
+   {
+    "q": "If you play this Program and there is only a spent friendly Unit in the Field area. Will you then be forced to choose and defeat your own spent Unit?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-092",
+  "name": "Wraith Marauders",
+  "card_type": "unit",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 5,
+  "power": 4,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Ganger",
+   "Nomad",
+   "Raffen Shiv"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "When this Unit steals a Gig, ready another friendly Unit with power equal to the Gig's value.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "092",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.202Z",
+  "base_card_id": "wraith-marauders",
+  "slug": "wraith-marauders",
+  "rulings": [
+   {
+    "q": "When you steal a Gig with a Wraith Marauders, does the effect force you to ready a friendly Unit with power equal to the Gig's value?",
+    "a": "Yes."
+   }
+  ]
+ },
+ {
+  "id": "eps-001",
+  "name": "Yorinobu Arasaka - Embracing Destruction",
+  "card_type": "legend",
+  "color": "red",
+  "ram_cost": null,
+  "ram_provided": 2,
+  "eddie_cost": 0,
+  "power": null,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+  "flavor_text": null,
+  "set_code": "embracingpowerretailstarterdeck",
+  "set_name": "Embracing Power — Retail Starter Deck",
+  "card_number": "001",
+  "rarity": "epic",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-11-06T18:17:26.727Z",
+  "base_card_id": "yorinobu-arasaka-embracing-destruction",
+  "slug": "yorinobu-arasaka-embracing-destruction",
+  "rulings": [
+   {
+    "q": "You've already attacked with a friendly ARASAKA Unit this turn and then called a friendly Yorinobu Arasaka Legend face-up. Can Yorinobu Arasaka's effect trigger if you attack with another friendly ARASAKA Unit this turn?",
+    "a": "No."
+   },
+   {
+    "q": "If you've already attacked with a friendly ARASAKA Unit this turn, will Yorinobu Arasaka's effect trigger a second time if another friendly ARASAKA Unit attacks?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-022",
+  "name": "Yorinobu Arasaka - Steel Dragon",
+  "card_type": "unit",
+  "color": "red",
+  "ram_cost": 3,
+  "ram_provided": null,
+  "eddie_cost": 7,
+  "power": 9,
+  "has_sell_tag": false,
+  "street_cred_requirement": null,
+  "classification": [
+   "Arasaka",
+   "Corpo"
+  ],
+  "keywords": [],
+  "triggers": [
+   "play"
+  ],
+  "has_spend_ability": false,
+  "ability_text": "{Play} You may play a Unit with cost 4 or less from your hand or trash for free. It can attack rival Units this turn.\nThe first time an ARASAKA Unit is defeated each turn, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "022",
+  "rarity": "rare",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.314Z",
+  "base_card_id": "yorinobu-arasaka-steel-dragon",
+  "slug": "yorinobu-arasaka-steel-dragon",
+  "rulings": [
+   {
+    "q": "If the Unit Yorinobu is playing has [ADRENALINE], can it attack the rival Gig area this turn?",
+    "a": "Yes."
+   },
+   {
+    "q": "When Yorinobu Arasaka is defeated, if it's the first time an ARASAKA Unit is defeated this turn, will Yorinobu Arasaka's effect trigger?",
+    "a": "Yes."
+   },
+   {
+    "q": "If an ARASAKA Unit was defeated this turn and you then play a Yorinobu Arasaka, will Yorinobu Arasaka's effect trigger if another ARASAKA Unit is defeated this turn?",
+    "a": "No."
+   },
+   {
+    "q": "Does the [Play] effect of Yorinobu Arasaka, \"It can attack rival Units this turn,\" allow the Unit to declare an attack on a ready rival Unit this turn?",
+    "a": "No. You still need a spent rival Unit as a valid attack target."
+   }
+  ]
+ },
+ {
+  "id": "official-8b8bcfcd-37c8-4bca-8c25-17a3b3363349",
+  "name": "Zetatech Berserk",
+  "card_type": "gear",
+  "color": "green",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 6,
+  "power": 3,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware",
+   "Zetatech"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "Play this Gear for -1 €$ for each friendly face-up Legend, to a minimum of 1 €$.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "096",
+  "rarity": "common",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:31.364Z",
+  "base_card_id": "zetatech-berserk",
+  "slug": "zetatech-berserk",
+  "rulings": [
+   {
+    "q": "When you play this Gear, the effect only reduces the €$ required to play the card; it does not change its cost value.",
+    "a": "Yes."
+   },
+   {
+    "q": "If a Unit or Legend is equipped with a Gear, does that Unit or Legend gain the Gear's tags?",
+    "a": "No."
+   }
+  ]
+ },
+ {
+  "id": "wtnc-064",
+  "name": "Zetatech Faceplate",
+  "card_type": "gear",
+  "color": "yellow",
+  "ram_cost": 2,
+  "ram_provided": null,
+  "eddie_cost": 2,
+  "power": 2,
+  "has_sell_tag": true,
+  "street_cred_requirement": null,
+  "classification": [
+   "Cyberware",
+   "Zetatech"
+  ],
+  "keywords": [],
+  "triggers": [],
+  "has_spend_ability": false,
+  "ability_text": "(Equip to a friendly Unit or face-up Legend.)\nWhen this Unit or Legend is spent, adjust a Gig by up to 1. Then, if you control 3 or more Gigs with different values, draw 1.",
+  "flavor_text": null,
+  "set_code": "welcometonightcityretail",
+  "set_name": "Welcome to Night City — Retail",
+  "card_number": "064",
+  "rarity": "uncommon",
+  "version": "beta",
+  "legality": "legal",
+  "updated_at": "2026-10-30T16:49:27.194Z",
+  "base_card_id": "zetatech-faceplate",
+  "slug": "zetatech-faceplate",
+  "rulings": [
+   {
+    "q": "When a friendly Unit equipped with a Zetatech Faceplate is spent when declaring an attack, can you resolve the Zetatech Faceplate's triggered effect before the React step and before the attack ends?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you spend a friendly Unit with the [Attack] keyword to declare an attack while equipped with Zetatech Faceplate, both effects trigger at the same time. Can you choose the order in which to resolve the two now-pending effects?",
+    "a": "Yes."
+   },
+   {
+    "q": "When you choose to activate the [Spend Icon:] on a friendly Unit or Legend, the equipped Zetatech Faceplate's effect will trigger. Can you resolve the now pending Zetatech Faceplate effect before the activated [Spend Icon] effect?",
+    "a": "No."
+   },
+   {
+    "q": "When paying the cost to play a card or activate an effect, you spend a friendly face-up Legend, triggering the effect of the equipped Zetatech Faceplate. Can you resolve the now-pending Zetatech Faceplate effect before you finish resolving the activated Program?",
+    "a": "No."
+   }
+  ]
+ }
+]

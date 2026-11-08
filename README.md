@@ -1,0 +1,69 @@
+# Cyberpunk TCG bot trainer
+
+A rules engine for the Cyberpunk TCG. The aim is self-play AI that plays well,
+tests decks and eventually designs its own.
+
+Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
+
+## Status
+
+| Milestone | State |
+| --- | --- |
+| 1. Card data in | Done: 152 cards and 286 official rulings in `data/cards.json` |
+| 2. Engine with vanilla cards | Done: turn structure, paying, selling, Call a Legend, Go Solo, combat, Blocker, Quick Programs, stealing, Overtime, win and loss checks |
+| 3. All card text scripted | Next. Card text is ignored for now, so every card plays with stats and keywords only |
+| 4+ | Watchable games, ISMCTS agent, deck search, self-play network |
+
+## Layout
+
+```
+cpbot/cards.py    card database (data/cards.json)
+cpbot/deck.py     deck rules (3 Legends, 40-50 cards, max 3 copies, RAM limits) and random legal decks
+cpbot/engine.py   game engine: plain-data state, explicit task stack, cloneable for search
+cpbot/effects.py  hook points for per-card scripts (milestone 3)
+cpbot/agents.py   random agents and a game loop
+docs/             comprehensive rules (29 Oct 2026), markdown and raw JSON
+scripts/soak.py   plays many random games and checks invariants after every decision
+scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
+tests/            rules tests
+```
+
+## Quick start
+
+```
+pip install pytest
+python -m pytest -q tests
+python scripts/soak.py 100000
+```
+
+```python
+import random
+from cpbot import Game, default_db, random_deck
+from cpbot.agents import RandomAgent, play_game
+
+db = default_db()
+rng = random.Random(0)
+g = Game(random_deck(rng, db), random_deck(rng, db), seed=0, log=True)
+play_game(g, [RandomAgent(1), RandomAgent(2)])
+print("\n".join(g.log))
+```
+
+## Engine interface
+
+- `g.decision` is the pending decision: `player`, `kind` and `options`. Kinds are
+  `go_first`, `mulligan`, `roll_in`, `main`, `pay`, `equip`, `react` and `steal`.
+- `g.step(option)` applies one option. Moves with only one option are applied automatically.
+- `g.clone()` deep-copies the game for look-ahead search.
+
+## Rules choices worth knowing
+
+- The game rolls in a Gig at the start of each turn, as in rule 8.6.5. The d20 is
+  only allowed once the fixer is otherwise empty.
+- Calling a Legend flips a random face-down Legend, because you can't see your own
+  face-down Legends (5.7.4.1).
+- A Legend must be face-up to Go Solo.
+- After 100 turns the game is a draw. This is a safety valve; random games end
+  by turn 26 at the latest.
+
+Card data comes from ripperdeck.gg and the rules from cyberpunktcg.com. This is a
+fan project, not affiliated with CD PROJEKT RED or WeirdCo.
