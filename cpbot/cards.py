@@ -3,12 +3,26 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from dataclasses import dataclass, field
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 
 LEGEND, UNIT, GEAR, PROGRAM = "legend", "unit", "gear", "program"
 COLORS = ("red", "green", "blue", "yellow")
+
+
+def own_keywords(listed, text):
+    """The keywords a card has itself. The source lists every keyword its text
+    mentions, including ones it gives to other cards ("Give another friendly Unit
+    {Adrenaline}"), so only keep those printed at the start of a line."""
+    own = set()
+    for k in listed or []:
+        k = k.lower()
+        pat = r"^\{" + re.escape(k) + r"\}"
+        if re.search(pat, text or "", re.I | re.M):
+            own.add(k)
+    return frozenset(own)
 
 
 @dataclass(frozen=True)
@@ -73,7 +87,7 @@ class CardDB:
                 power=r["power"], ram_cost=r["ram_cost"], ram_provided=r["ram_provided"],
                 sell=bool(r["has_sell_tag"]),
                 tags=frozenset(t.upper() for t in (r["classification"] or [])),
-                keywords=frozenset(k.lower() for k in (r["keywords"] or [])),
+                keywords=own_keywords(r["keywords"], r["ability_text"]),
                 triggers=frozenset(t.lower() for t in (r["triggers"] or [])),
                 has_spend=bool(r["has_spend_ability"]), text=r["ability_text"] or "",
                 legal=r["legality"] == "legal",

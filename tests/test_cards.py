@@ -433,3 +433,33 @@ def test_legend_played_without_go_solo_keeps_orientation_and_lag():
     c = g.cards[v]
     assert c.zone == "field" and c.spent and c.lag
     assert not any(o[0] == "attack" and o[1] == v for o in g.legal_actions())
+
+
+def test_valentino_street_racer_cannot_target_itself():
+    b = Board()
+    v_old = b.card(b.p, "Valentino Street Racer", "field")
+    b.card(b.p, "Valentino Street Racer", "hand")
+    b.eddies(b.p, 8)
+    g = b.go()
+    before = set(g.players[b.p].field)
+    play(b, "Valentino Street Racer")
+    v_new = next(u for u in g.players[b.p].field if u not in before)
+    grants = [L["unit"] for L in g.lasting if L.get("kw") == "adrenaline"]
+    assert grants == [v_old] and not g.has_kw(v_new, "adrenaline")
+
+
+def test_valentino_street_racer_alone_gives_nothing():
+    b = Board()
+    b.card(b.p, "Valentino Street Racer", "hand")
+    b.eddies(b.p, 8)
+    g = b.go()
+    play(b, "Valentino Street Racer")
+    assert not any(L.get("kw") == "adrenaline" for L in g.lasting)
+
+
+def test_keywords_given_to_others_are_not_the_cards_own():
+    assert not db.find("Valentino Street Racer").has("adrenaline")
+    assert not db.find("Valentino Guerrera").has("blocker")
+    assert not db.find("Goro Takemura - Vengeful Bodyguard").has("blocker")
+    assert not db.find("Arasaka Emergency Radioport").has("go solo")
+    assert db.find("Riding Nomad").has("adrenaline") and db.find("Riot Shield").has("blocker")
