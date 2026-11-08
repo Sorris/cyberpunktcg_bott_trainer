@@ -214,6 +214,10 @@ dialog::backdrop { background: rgba(0,0,0,.45); }
 </div>
 <dialog id="dlg"><div id="dlgBody"></div><form method="dialog" style="margin-top:10px"><button>Close</button></form></dialog>
 <div class="zoom" id="zoom"><img alt=""></div>
+<!-- Legend backs: the same card back with black and yellow swapped. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="swapYellow" color-interpolation-filters="sRGB">
+  <feColorMatrix type="matrix" values="-0.3496 -0.6992 -0.1165 0 1   -0.3248 -0.6496 -0.1082 0 0.929   0 0 0 0 0.008   0 0 0 1 0"/>
+</filter></svg>
 
 <script>
 const $ = (id) => document.getElementById(id);
@@ -247,7 +251,7 @@ function cardEl(c, extra = {}) {
     el.classList.add("back");
     if (S && S.images && S.card_back) {
       el.classList.add("imgback");
-      el.innerHTML = `<img src="/art/_back" alt="card back">`;
+      el.innerHTML = `<img src="/art/_back" alt="card back"${extra.legendBack ? ' style="filter:url(#swapYellow)"' : ""}>`;
     } else if (S && S.images) {
       el.classList.add("logoback");
       el.innerHTML = `<div class="logo"><img src="/art/_logo" alt="Cyberpunk TCG" onerror="this.remove()"></div><div class="q">${esc(extra.backLabel || "")}</div>`;
@@ -374,7 +378,7 @@ function side(sd, isYou) {
   // Legends, Eddies and trash side by side. Eddies are face-down: only ready or spent shows.
   const areas = document.createElement("div");
   areas.className = "areas";
-  areas.append(row("Legends", sd.legends.map((c) => c.hidden ? cardEl(c, {backLabel: "face-down Legend"}) : withGear(c, {}))));
+  areas.append(row("Legends", sd.legends.map((c) => c.hidden ? cardEl(c, {backLabel: "face-down Legend", legendBack: true}) : withGear(c, {}))));
   const ed = row(`Eddies ${sd.eddies[0]}/${sd.eddies[1]} ready`, sd.eddie_cards.map((c) => cardEl(c, {backLabel: "€$", readyFlag: true})));
   ed.classList.add("eddies");
   areas.append(ed);

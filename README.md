@@ -105,7 +105,8 @@ pictures.
 
 Face-down cards (hands, face-down Legends, Eddies) use a card-back picture if you
 save one as `.card_art/card-back.png` (or `.jpg` / `.webp`), or pass
-`--card-back path\to\back.png`. Without one they show the Cyberpunk TCG logo,
+`--card-back path\to\back.png`. Face-down Legends show it with black and yellow
+swapped, like the printed Legend backs. Without one they show the Cyberpunk TCG logo,
 downloaded once from cyberpunktcg.com.
 
 ## Engine interface
