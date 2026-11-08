@@ -81,17 +81,22 @@ def card_names(db):
 class LearnedValue:
     """Win chance for player p from a logistic model over `features`."""
 
-    def __init__(self, weights=None, path=WEIGHTS):
+    def __init__(self, weights=None, path=WEIGHTS, pairs=None):
+        data = {}
         if weights is None:
             data = json.loads(Path(path).read_text())
             weights = data["weights"]
         self.w = list(weights)
-        self.cards = len(self.w) > len(NAMES)      # card-aware weights
+        names = data.get("names", [])
+        self.pairs = pairs if pairs is not None else bool(names) and names[len(NAMES):len(NAMES) + len(PATTERN_NAMES)] == PATTERN_NAMES
+        self.cards = len(self.w) > len(NAMES) + (len(PATTERN_NAMES) if self.pairs else 0)    # card-aware weights
 
     def __call__(self, g, p) -> float:
         if g.over:
             return 1.0 if g.winner == p else 0.5 if g.winner == "draw" else 0.0
         x = features(g, p)
+        if self.pairs:
+            x = x + pattern_features(g, p)
         if self.cards:
             x = x + card_features(g, p)
         z = sum(a * b for a, b in zip(self.w, x))
@@ -200,3 +205,97 @@ class NetValue:
         z = float(h @ self.W2) + self.b2
         z = max(-30.0, min(30.0, z))
         return 1.0 / (1.0 + math.exp(-z))
+
+
+# ------------------------------------------------------------------ Gig patterns
+# Which Gigs are good depends on who can use them (Henry): blue wants min Gigs, red
+# Gigs of 8+, green value-pairs, and yellow a range of different values. So each
+# colour's pattern is scored together with what the player is known to have of that
+# colour: its RAM (for the rival, from revealed Legends only) and its pay-off cards
+# (for yourself your whole deck, for the rival only cards they've shown).
+# Everything here can also be read back from features_v2 rows
+# (pattern_features_from_v2), so old self-play data can be refitted with it.
+PAYOFFS = {
+    "blue": ("alt-cunningham-soulkiller-architect", "chrome-reverie", "jackie-welles-pour-one-out-for-me",
+             "lucyna-kushinada-fresh-beginnings", "pyramid-song", "three-mouths-one-desire", "trust-no-one"),
+    "red": ("carnage-at-the-colosseum", "industrial-assembly", "johnny-silverhand-rocking-renegade",
+            "kerry-eurodyne-the-last-rockerboy", "octant", "v-roamer-of-the-badlands"),
+    "green": ("hanako-arasaka-daughter-of-the-emperor", "pepe-najarro-working-doubles",
+              "sandayu-oda-hanako-s-guardian", "goro-takemura-vengeful-bodyguard", "peace-offering"),
+    "yellow": ("afterparty-at-lizzie-s", "bootleg-black-sapphire-show", "jackie-welles-ride-or-die-choom",
+               "zetatech-faceplate"),
+}
+PATTERN = {"blue": "min_gigs", "red": "gigs_8+", "green": "pairs", "yellow": "different_values"}
+PATTERN_NAMES = [f"{side}:{PATTERN[c]}*{what}" for side in ("me", "rival") for c in COLORS
+                 for what in (c, "payoffs")]
+
+
+def _patterns(pl):
+    vals = [v for _, v in pl.gigs]
+    counts = {}
+    for v in vals:
+        counts[v] = counts.get(v, 0) + 1
+    matching = sum(c - 1 for c in counts.values())
+    return {"blue": sum(1 for v in vals if v == 1), "red": sum(1 for v in vals if v >= 8),
+            "green": matching, "yellow": len(vals) - matching}
+
+
+def _payoff_ids(db):
+    ids = db.__dict__.get("_payoff_ids")
+    if ids is None:
+        ids = {c: frozenset(d.idx for d in db.cards if d.slug in PAYOFFS[c]) for c in COLORS}
+        db.__dict__["_payoff_ids"] = ids
+    return ids
+
+
+def _board_cids(g, pl):
+    cards = g.cards
+    for u in pl.field:
+        yield cards[u].cid
+        for x in cards[u].gears:
+            yield cards[x].cid
+    for u in pl.legends:
+        if cards[u].face_up:
+            yield cards[u].cid
+            for x in cards[u].gears:
+                yield cards[x].cid
+
+
+def _terms(pat, ram, pay):
+    out = []
+    for k, c in enumerate(COLORS):
+        out += [pat[c] * float(ram[k] > 0), pat[c] * min(pay[c], 3) / 3.0]
+    return out
+
+
+def pattern_features(g, p) -> list[float]:
+    ids = _payoff_ids(g.db)
+    cards = g.cards
+    me, op = g.players[p], g.players[1 - p]
+    mine = list(_board_cids(g, me)) + [cards[u].cid for u in me.hand + me.deck]
+    theirs = list(_board_cids(g, op)) + [cards[u].cid for u in op.trash + op.removed]
+    pay_me = {c: sum(1 for x in mine if x in ids[c]) for c in COLORS}
+    pay_op = {c: sum(1 for x in theirs if x in ids[c]) for c in COLORS}
+    return (_terms(_patterns(me), _ram(g, p, revealed_only=False), pay_me)
+            + _terms(_patterns(op), _ram(g, 1 - p, revealed_only=True), pay_op))
+
+
+def pattern_features_from_v2(V, db):
+    """The same numbers, computed from features_v2 rows (an n x 838 array)."""
+    import numpy as np
+    names = names_v2(db)
+    n = len(db.cards)
+    head = len(names) - 5 * n
+    col = {x: i for i, x in enumerate(names[:head])}
+    V = np.asarray(V, dtype=np.float32)
+    ids = _payoff_ids(db)
+    cols = []
+    for side, ram, blocks in (("me", "ram", (0, 2, 3)), ("rival", "revealed_ram", (1, 4))):
+        f = lambda x: V[:, col[f"{side}:{x}"]]  # noqa: E731
+        matching = f("matching")
+        pat = {"blue": f("at_min"), "red": f("high8+"), "green": matching, "yellow": f("gigs") - matching}
+        for c in COLORS:
+            idx = sorted(ids[c])
+            pay = sum(V[:, head + k * n:head + (k + 1) * n][:, idx].sum(1) for k in blocks)
+            cols += [pat[c] * (f(f"{ram}_{c}") > 0), pat[c] * np.minimum(pay, 3) / 3]
+    return np.stack(cols, 1)

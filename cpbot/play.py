@@ -526,6 +526,18 @@ class Match:
             self.g.win(BOT, "you resigned")
             self._collect()
 
+    # ---- a replay of the game so far
+    def record(self) -> dict:
+        """The game in the replay format of cpbot.watch (seed, decks and every choice),
+        so `python scripts/watch.py --replay FILE` rebuilds it exactly, bot hand included."""
+        from .watch import _jsonable
+        with self.lock:
+            return {"format": "cpbot-replay-1", "seed": self.seed, "names": ["You", self.bot_name],
+                    "decks": [{"legends": list(d.legends), "main": list(d.main)} for d in self.decks],
+                    "choices": [_jsonable(o) for o in self.choices],
+                    "winner": self.g.winner, "end_reason": self.g.end_reason,
+                    "resigned": self.resigned, "bot": getattr(self, "level_name", None)}
+
     # ---- what the page shows
     def view(self) -> dict:
         with self.lock:

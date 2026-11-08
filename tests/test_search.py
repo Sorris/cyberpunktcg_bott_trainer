@@ -134,3 +134,38 @@ def test_inferred_rival_cards_are_plausible():
             for u in d.players[o].hand + d.players[o].deck:
                 c = d.d(u)
                 assert (c.ram_cost or 0) <= lim.get(c.color, 0)
+
+
+def test_gig_pattern_features_match_their_offline_version():
+    import numpy as np
+    from cpbot import Game, default_db, random_deck
+    from cpbot.features import features_v2, pattern_features, pattern_features_from_v2
+    from cpbot.search import rollout_move
+    db = default_db()
+    rng = random.Random(3)
+    for s in range(20):
+        g = Game(random_deck(rng, db), random_deck(rng, db), seed=s)
+        while not g.over:
+            if rng.random() < 0.2:
+                for p in (0, 1):
+                    a = pattern_features(g, p)
+                    b = pattern_features_from_v2(np.array([features_v2(g, p)], dtype=np.float16), db)[0]
+                    assert np.allclose(a, b)
+            g.step(rollout_move(g, rng))
+
+
+def test_learned_value_reads_pattern_weights(tmp_path):
+    import json
+    from cpbot.features import NAMES, PATTERN_NAMES, LearnedValue
+    from cpbot import Game, default_db, random_deck
+    db = default_db()
+    names = NAMES + PATTERN_NAMES
+    w = [0.0] * len(names)
+    w[names.index("me:pairs*green")] = 1.0
+    f = tmp_path / "w.json"
+    f.write_text(json.dumps({"names": names, "weights": w}))
+    v = LearnedValue(path=f)
+    assert v.pairs and not v.cards
+    rng = random.Random(0)
+    g = Game(random_deck(rng, db), random_deck(rng, db), seed=0)
+    assert 0 <= v(g, 0) <= 1

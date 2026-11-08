@@ -34,6 +34,7 @@ from cpbot.search import ISMCTSAgent  # noqa: E402
 
 PAGE = ROOT / "cpbot" / "play.html"
 ART_DIR = ROOT / ".card_art"
+REPLAY_DIR = ROOT / "games" / "played"      # every game you play is saved here
 USER_AGENT = "cptcg-sim-research/0.1 (personal deck-testing project)"
 
 # Bot strengths: the search agent with a time budget per decision.
@@ -151,6 +152,8 @@ def new_game(body):
     m = Match(you, bot_deck, make(seed + 1), seed=seed, db=db, bot_name="Bot")
     m.level_name = name
     m.deck_lists = [deck_summary(you, db), deck_summary(bot_deck, db)]
+    m.replay_path = REPLAY_DIR / f"{time.strftime('%Y%m%d-%H%M%S')}-seed{seed}.json"
+    m.saved = None
     state["match"] = m
     start_bot(m)
     return m
@@ -179,10 +182,33 @@ def start_bot(m: Match):
     t.start()
 
 
+def save_replay(m: Match):
+    """Keep games/played/<time>-seed<seed>.json up to date (and an .html replay page
+    once the game is over), so a game can be looked at move by move afterwards."""
+    path = getattr(m, "replay_path", None)
+    if path is None:
+        return
+    rec = m.record()
+    key = (len(rec["choices"]), rec["winner"])
+    if key == m.saved:
+        return
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(rec), encoding="utf-8")
+        if rec["winner"] is not None:
+            from cpbot.watch import replay
+            page = replay(rec, db).html(title=f"Your game, seed {rec['seed']}")
+            path.with_suffix(".html").write_text(page, encoding="utf-8")
+        m.saved = key
+    except Exception:  # noqa: BLE001  (a failed save must never stop the game)
+        traceback.print_exc()
+
+
 def view():
     m = state["match"]
     if m is None:
         return {"match": None, "images": state["images"], "card_back": back_path() is not None}
+    save_replay(m)
     v = m.view()
     v["match"] = True
     v["seed"] = m.seed

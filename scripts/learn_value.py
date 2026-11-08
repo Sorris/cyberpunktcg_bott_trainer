@@ -23,15 +23,17 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
-from cpbot.features import NAMES, WEIGHTS, card_features, card_names, features  # noqa: E402
+from cpbot.features import NAMES, PATTERN_NAMES, WEIGHTS, card_features, card_names, features, \
+    pattern_features, pattern_features_from_v2  # noqa: E402
 from cpbot.search import rollout_move, value  # noqa: E402
 
 
-CARDS = {"on": False}
+CARDS = {"on": False, "patterns": False}
 
 
-def _init(cards):
+def _init(cards, patterns=False):
     CARDS["on"] = cards
+    CARDS["patterns"] = patterns
 
 
 def play(seed, sample=0.15):
@@ -43,6 +45,8 @@ def play(seed, sample=0.15):
     while not g.over:
         if g.turn_no > 0 and rng.random() < sample:
             f0, f1 = features(g, 0), features(g, 1)
+            if CARDS["patterns"]:
+                f0, f1 = f0 + pattern_features(g, 0), f1 + pattern_features(g, 1)
             if CARDS["on"]:
                 f0, f1 = f0 + card_features(g, 0), f1 + card_features(g, 1)
             pos.append((f0, f1, value(g, 0)))
@@ -81,6 +85,8 @@ def main():
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--seed", type=int, default=100000)
     ap.add_argument("--cards", action="store_true", help="add card-aware features (which cards are in play)")
+    ap.add_argument("--patterns", action="store_true",
+                    help="add Gig-pattern features (each colour's pattern times its RAM and pay-offs)")
     ap.add_argument("--l2", type=float, default=1e-3)
     ap.add_argument("--data", nargs="*", default=[], help="folders of selfplay .npz files")
     ap.add_argument("--out", default=str(WEIGHTS))
@@ -88,10 +94,11 @@ def main():
     t = time.time()
     rows = []
     if a.games:
-        with Pool(a.procs, initializer=_init, initargs=(a.cards,)) as pool:
+        with Pool(a.procs, initializer=_init, initargs=(a.cards, a.patterns)) as pool:
             chunks = pool.map(play, range(a.seed, a.seed + a.games), chunksize=50)
         rows = [r for c in chunks for r in c]
-    names = NAMES + (card_names(default_db()) if a.cards else [])
+    db = default_db()
+    names = NAMES + (PATTERN_NAMES if a.patterns else []) + (card_names(db) if a.cards else [])
     Xs = [np.array([r[0] for r in rows], dtype=np.float32).reshape(len(rows), len(names))]
     ys = [np.array([r[1] for r in rows])]
     hs = [np.array([r[2] for r in rows])]
@@ -101,7 +108,14 @@ def main():
             z = np.load(f)
             if len(z["y"]) == 0:
                 continue
-            Xs.append(np.hstack([z["X"], z["C"]]) if a.cards else z["X"])
+            parts = [z["X"]]
+            if a.patterns:
+                if "V" not in z.files:
+                    continue
+                parts.append(pattern_features_from_v2(z["V"], db))
+            if a.cards:
+                parts.append(z["C"])
+            Xs.append(np.hstack(parts) if len(parts) > 1 else parts[0])
             ys.append(z["y"])
             hs.append(np.full(len(z["y"]), np.nan))
             seeds.append(np.full(len(z["y"]), int(z["seed"])))

@@ -3,6 +3,9 @@ import json
 import random
 
 import pytest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
 
 from cpbot import default_db, random_deck
 from cpbot.agents import EagerRandomAgent
@@ -127,3 +130,25 @@ def test_eddies_stay_face_down():
     for side in ("you", "rival"):
         for c in m.view()[side]["eddie_cards"]:
             assert c["hidden"] and "title" not in c
+
+
+def test_record_replays_the_same_game():
+    from cpbot.watch import replay
+    m = _play(5)
+    rec = json.loads(json.dumps(m.record()))
+    r = replay(rec, db)
+    assert r.g.winner == m.g.winner and r.g.turn_no == m.g.turn_no
+    assert [len(p.hand) for p in r.g.players] == [len(p.hand) for p in m.g.players]
+
+
+def test_play_server_saves_replays(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("play_script", ROOT / "scripts" / "play.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    m = _play(6)
+    m.replay_path = tmp_path / "game.json"
+    m.saved = None
+    mod.save_replay(m)
+    assert json.loads(m.replay_path.read_text())["choices"]
+    assert (tmp_path / "game.html").exists()
