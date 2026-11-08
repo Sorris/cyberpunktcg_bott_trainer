@@ -13,7 +13,8 @@ Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
 | 2. Engine with vanilla cards | Done: turn structure, paying, selling, Call a Legend, Go Solo, combat, Blocker, Quick Programs, stealing, Overtime, win and loss checks |
 | 3. All card text scripted | Done: all 152 cards. Interpretations and shortcuts are listed in `docs/card-scripting-notes.md` |
 | 4. Watchable games | Done: play-by-play logs, exact replays from seed and choices, and an HTML replay page |
-| 5+ | ISMCTS agent, deck search, self-play network |
+| 5. Search agent | Done: ISMCTS agent. It beats random players almost every game, and more search beats less |
+| 6+ | Deck search, self-play network |
 
 ## Layout
 
@@ -24,9 +25,11 @@ cpbot/engine.py   game engine: plain-data state, explicit task stack, cloneable 
 cpbot/effects.py  effect framework: triggers, pending effects, steps, statics, abilities
 cpbot/scripts/    one script per card: legends.py, units.py, programs.py, gear.py
 cpbot/agents.py   random agents and a game loop
+cpbot/search.py   ISMCTS search agent: samples hidden cards, searches, plays out
 cpbot/watch.py    play-by-play log, replay record and HTML replay page (replay_template.html)
 docs/             comprehensive rules (29 Oct 2026) and rules FAQ (28 Oct 2026), with the FAQ check
 scripts/soak.py   plays many random games and checks invariants after every decision
+scripts/arena.py  pits two agents against each other over many games and reports the win rate
 scripts/watch.py  plays one game and writes games/<name>.txt, .json and .html
 scripts/coverage.py  shows which card scripts actually ran in random games
 scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
@@ -40,6 +43,7 @@ pip install pytest
 python -m pytest -q tests
 python scripts/soak.py 100000
 python scripts/watch.py --seed 7      # then open games/seed7.html
+python scripts/arena.py --a ismcts:200 --b eager --pairs 20
 ```
 
 ```python
@@ -60,7 +64,7 @@ print("\n".join(g.log))
   `go_first`, `mulligan`, `roll_in`, `main`, `pay`, `equip`, `react` and `steal`; card
   effects add kinds such as `target`, `adjust`, `discard`, `mode` and `may:<what>`.
 - `g.step(option)` applies one option. Moves with only one option are applied automatically.
-- `g.clone()` deep-copies the game for look-ahead search.
+- `g.clone()` copies the game for look-ahead search (about 0.1 ms).
 
 ## Rules choices worth knowing
 

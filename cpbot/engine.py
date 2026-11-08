@@ -147,13 +147,56 @@ class Game:
         self.advance()
 
     def clone(self) -> "Game":
-        db, reg, obs = self.db, self.effects, self.observer
-        self.db = self.effects = self.observer = None
-        try:
-            g = copy.deepcopy(self)
-        finally:
-            self.db, self.effects, self.observer = db, reg, obs
-        g.db, g.effects = db, reg
+        """Copy the game for look-ahead search. The log and observer aren't copied.
+
+        Cards, players and Gigs are copied by hand (fast); the task stack, pending
+        effects and other loose state are deep-copied with a memo that maps every
+        hand-copied object to its copy, so references between them (for example an
+        effect that holds a Gig) still point at the same object in the clone."""
+        g = Game.__new__(Game)
+        g.__dict__.update(self.__dict__)
+        memo = {}
+        cards = {}
+        for u, c in self.cards.items():
+            n = Card(c.uid, c.cid, c.owner, c.zone, c.spent, c.face_up, c.lag,
+                     c.entered_turn, c.solo_turn, list(c.gears), c.host, [])
+            for m in c.mods:
+                m2 = list(m) if isinstance(m, list) else m
+                memo[id(m)] = m2
+                n.mods.append(m2)
+            memo[id(c)] = n
+            memo[id(c.gears)] = n.gears
+            memo[id(c.mods)] = n.mods
+            cards[u] = n
+        players = []
+        for pl in self.players:
+            n = Player(pl.idx)
+            for name in ("deck", "hand", "field", "legends", "eddies", "trash", "removed",
+                         "fixer", "known_legends"):
+                old = getattr(pl, name)
+                new = list(old)
+                memo[id(old)] = new
+                setattr(n, name, new)
+            n.gigs = []
+            for gig in pl.gigs:
+                g2 = list(gig)
+                memo[id(gig)] = g2
+                n.gigs.append(g2)
+            memo[id(pl.gigs)] = n.gigs
+            n.sold, n.called, n.mulliganed = pl.sold, pl.called, pl.mulliganed
+            memo[id(pl)] = n
+            players.append(n)
+        memo[id(self.cards)] = cards
+        memo[id(self.players)] = players
+        g.cards, g.players = cards, players
+        loose = (self.stack, self.decision, self.attack, self.pending, self.lasting, self.turn_flags)
+        g.stack, g.decision, g.attack, g.pending, g.lasting, g.turn_flags = copy.deepcopy(loose, memo)
+        g.rng = random.Random()
+        g.rng.setstate(self.rng.getstate())
+        g.history = list(self.history)
+        g.log = []
+        g.logging = False
+        g.observer = None
         return g
 
     # ------------------------------------------------------------ machinery
