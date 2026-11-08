@@ -143,14 +143,21 @@ def _ram(g, q, revealed_only):
     return [lim[c] / 3.0 for c in COLORS]
 
 
-def features_v2(g, p) -> list[float]:
-    n = len(g.db.cards)
-    cards = g.cards
+def features_v2_head(g, p) -> list[float]:
+    """The counts at the start of features_v2, without the card blocks."""
     o = 1 - p
     head = [1.0, float(g.turn_player == p), float(g.overtime), g.turn_no / 10.0]
     head += _gig_pattern(g, p) + _gig_pattern(g, o)
     head += _side(g, p) + _side(g, o)
     head += _ram(g, p, revealed_only=False) + _ram(g, o, revealed_only=True)
+    return head
+
+
+def features_v2(g, p) -> list[float]:
+    n = len(g.db.cards)
+    cards = g.cards
+    o = 1 - p
+    head = features_v2_head(g, p)
     blocks = [0.0] * (5 * n)
     for k, q in ((0, p), (1, o)):
         pl = g.players[q]
@@ -195,12 +202,25 @@ class NetValue:
         self.np = np
         self.W1, self.b1, self.W2, self.b2 = z["W1"], z["b1"], z["W2"], float(z["b2"])
         self.mu, self.sd = z["mu"], z["sd"]
+        self.cols = z["cols"] if "cols" in z.files else None        # a subset of features_v2
+        self.patterns = bool(z["patterns"]) if "patterns" in z.files else False
+        self.head = None
 
     def __call__(self, g, p) -> float:
         if g.over:
             return 1.0 if g.winner == p else 0.5 if g.winner == "draw" else 0.0
         np = self.np
-        x = (np.asarray(features_v2(g, p), dtype=np.float32) - self.mu) / self.sd
+        if self.head is None:
+            self.head = len(names_v2(g.db)) - 5 * len(g.db.cards)
+        if self.cols is not None and self.cols.max() < self.head:
+            x = np.asarray(features_v2_head(g, p), dtype=np.float32)[self.cols]
+        else:
+            x = np.asarray(features_v2(g, p), dtype=np.float32)
+            if self.cols is not None:
+                x = x[self.cols]
+        if self.patterns:
+            x = np.concatenate([x, np.asarray(pattern_features(g, p), dtype=np.float32)])
+        x = (x - self.mu) / self.sd
         h = np.maximum(x @ self.W1 + self.b1, 0.0)
         z = float(h @ self.W2) + self.b2
         z = max(-30.0, min(30.0, z))
