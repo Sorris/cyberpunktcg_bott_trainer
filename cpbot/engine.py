@@ -108,6 +108,7 @@ class Game:
         self.history: list = []
         self.logging = log
         self.log: list[str] = []
+        self.observer = None         # optional watcher with .log(game, msg); see watch.py
         uid = 0
         for p, deck in ((0, deck0), (1, deck1)):
             for cid in deck.main:
@@ -146,12 +147,12 @@ class Game:
         self.advance()
 
     def clone(self) -> "Game":
-        db, reg = self.db, self.effects
-        self.db = self.effects = None
+        db, reg, obs = self.db, self.effects, self.observer
+        self.db = self.effects = self.observer = None
         try:
             g = copy.deepcopy(self)
         finally:
-            self.db, self.effects = db, reg
+            self.db, self.effects, self.observer = db, reg, obs
         g.db, g.effects = db, reg
         return g
 
@@ -181,6 +182,8 @@ class Game:
         self.decision = Decision(player, kind, list(options), resume, tuple(ctx))
 
     def _log(self, msg):
+        if self.observer is not None:
+            self.observer.log(self, msg)
         if self.logging:
             self.log.append(f"[T{self.turn_no}] {msg}")
 

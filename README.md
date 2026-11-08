@@ -12,7 +12,8 @@ Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
 | 1. Card data in | Done: 152 cards and 286 official rulings in `data/cards.json` |
 | 2. Engine with vanilla cards | Done: turn structure, paying, selling, Call a Legend, Go Solo, combat, Blocker, Quick Programs, stealing, Overtime, win and loss checks |
 | 3. All card text scripted | Done: all 152 cards. Interpretations and shortcuts are listed in `docs/card-scripting-notes.md` |
-| 4+ | Watchable games, ISMCTS agent, deck search, self-play network |
+| 4. Watchable games | Done: play-by-play logs, exact replays from seed and choices, and an HTML replay page |
+| 5+ | ISMCTS agent, deck search, self-play network |
 
 ## Layout
 
@@ -23,8 +24,10 @@ cpbot/engine.py   game engine: plain-data state, explicit task stack, cloneable 
 cpbot/effects.py  effect framework: triggers, pending effects, steps, statics, abilities
 cpbot/scripts/    one script per card: legends.py, units.py, programs.py, gear.py
 cpbot/agents.py   random agents and a game loop
+cpbot/watch.py    play-by-play log, replay record and HTML replay page (replay_template.html)
 docs/             comprehensive rules (29 Oct 2026) and rules FAQ (28 Oct 2026), with the FAQ check
 scripts/soak.py   plays many random games and checks invariants after every decision
+scripts/watch.py  plays one game and writes games/<name>.txt, .json and .html
 scripts/coverage.py  shows which card scripts actually ran in random games
 scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
 tests/            rules tests
@@ -36,6 +39,7 @@ tests/            rules tests
 pip install pytest
 python -m pytest -q tests
 python scripts/soak.py 100000
+python scripts/watch.py --seed 7      # then open games/seed7.html
 ```
 
 ```python
@@ -68,6 +72,17 @@ print("\n".join(g.log))
   (4.5). It may spend itself for an Eddie to pay for either (rules FAQ).
 - After 100 turns the game is a draw. This is a safety valve; random games end
   by turn 26 at the latest.
+
+## Watching games
+
+`scripts/watch.py` plays one game and writes three files to `games/`:
+
+- `<name>.txt` is the play-by-play. It's written for a spectator, so it shows hidden
+  cards such as hands, draws and face-down Legends. Players are P1 and P2.
+- `<name>.json` holds the seed, both decks and every choice. `--replay <file>`
+  rebuilds the same game from it, step by step.
+- `<name>.html` is a replay page. Step with the arrow keys (Shift for whole turns),
+  or click a line in the play-by-play to jump there.
 
 Card data comes from ripperdeck.gg and the rules from cyberpunktcg.com. This is a
 fan project, not affiliated with CD PROJEKT RED or WeirdCo.
