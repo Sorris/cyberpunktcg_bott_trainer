@@ -37,12 +37,13 @@ ART_DIR = ROOT / ".card_art"
 REPLAY_DIR = ROOT / "games" / "played"      # every game you play is saved here
 USER_AGENT = "cptcg-sim-research/0.1 (personal deck-testing project)"
 
-# Bot strengths: the search agent with a time budget per decision.
+# Bot strengths: the search agent with a time budget per decision. It guesses your
+# hidden cards from what you have revealed (infer_rival) instead of using your decklist.
 BOTS = {
     "easy": ("Easy bot (random)", lambda seed: EagerRandomAgent(seed)),
-    "quick": ("Bot (0.5 s a move)", lambda seed: ISMCTSAgent(seconds=0.5, seed=seed)),
-    "normal": ("Bot (2 s a move)", lambda seed: ISMCTSAgent(seconds=2.0, seed=seed)),
-    "strong": ("Bot (5 s a move)", lambda seed: ISMCTSAgent(seconds=5.0, seed=seed)),
+    "quick": ("Bot (0.5 s a move)", lambda seed: ISMCTSAgent(seconds=0.5, seed=seed, infer_rival=True)),
+    "normal": ("Bot (2 s a move)", lambda seed: ISMCTSAgent(seconds=2.0, seed=seed, infer_rival=True)),
+    "strong": ("Bot (5 s a move)", lambda seed: ISMCTSAgent(seconds=5.0, seed=seed, infer_rival=True)),
 }
 
 db = default_db()

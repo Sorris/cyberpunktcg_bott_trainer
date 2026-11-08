@@ -66,13 +66,15 @@ def determinize(g: Game, p: int, rng: random.Random, infer_rival=False) -> Game:
     random order (p is assumed to know the list). With infer_rival=True p only
     uses what it has seen: the rival's face-down Legends become random Legends that
     fit with the revealed ones, and their hand and deck are redrawn from the cards
-    those Legends' RAM allows, favouring cards and colours already seen."""
+    those Legends' RAM allows, favouring cards and colours already seen.
+    infer_rival="blind" is a baseline for testing that: hidden cards are drawn from
+    every main deck card, ignoring RAM and what has been seen."""
     d = g.clone()
     d.rng = random.Random(rng.getrandbits(64))
     o = 1 - p
     op = d.players[o]
     if infer_rival:
-        _infer_rival(d, o, rng)
+        _infer_rival(d, o, rng, blind=infer_rival == "blind")
     pool = op.hand + op.deck
     rng.shuffle(pool)
     n = len(op.hand)
@@ -86,7 +88,7 @@ def determinize(g: Game, p: int, rng: random.Random, infer_rival=False) -> Game:
     return d
 
 
-def _infer_rival(d: Game, o: int, rng: random.Random):
+def _infer_rival(d: Game, o: int, rng: random.Random, blind=False):
     from collections import Counter
 
     from .deck import MAX_COPIES, eligible_main_cards
@@ -109,9 +111,13 @@ def _infer_rival(d: Game, o: int, rng: random.Random):
     seen = Counter(cards[u].cid for u, c in cards.items()
                    if c.owner == o and u not in hidden and db[c.cid].type != "legend")
     seen_colors = {db[c].color for c in seen}
-    pool = eligible_main_cards(legs, db)
-    weights = [1.0 + (6.0 if seen.get(c.idx) else 0.0) + (1.5 if c.color in seen_colors else 0.0)
-               for c in pool]
+    if blind:
+        pool = list(db.main_cards())
+        weights = [1.0] * len(pool)
+    else:
+        pool = eligible_main_cards(legs, db)
+        weights = [1.0 + (6.0 if seen.get(c.idx) else 0.0) + (1.5 if c.color in seen_colors else 0.0)
+                   for c in pool]
     counts = Counter(seen)
     for u in hidden:
         for _ in range(50):

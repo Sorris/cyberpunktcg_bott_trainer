@@ -65,7 +65,7 @@ def make(spec, seed):
             elif k == "v":
                 kw["value_fn"] = LearnedValue(path=v)     # a weights file
             elif k == "i":
-                kw["infer_rival"] = bool(int(v))
+                kw["infer_rival"] = "blind" if v == "blind" else bool(int(v))
             else:
                 raise ValueError(tok)
         return ISMCTSAgent(seed=seed, **kw)
