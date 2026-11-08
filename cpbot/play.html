@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play the bot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #eceff2; --panel: #ffffff; --ink: #14181d; --muted: #5b6470; --line: #d3d9df;
+  --accent: #ffd23f; --accent-ink: #6b5200; --accent-soft: #fff4c7;
+  --pick: #00a3a3; --pick-soft: #d4f5f5;
+  --c-red: #cf3f37; --c-blue: #2c6bd1; --c-green: #23905a; --c-yellow: #c99700; --hatch: #dfe4e9;
+  --back: #1d232b;
+  --f-display: "Chakra Petch", "Bahnschrift", "Arial Narrow", sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --cw: 104px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1216; --panel: #171b21; --ink: #e7eaee; --muted: #98a1ac; --line: #2a3139;
+    --accent: #ffd23f; --accent-ink: #ffd23f; --accent-soft: #3a3214; --pick: #3fd9d9; --pick-soft: #0f3434;
+    --c-red: #ef6a61; --c-blue: #6b9cf0; --c-green: #4fc387; --c-yellow: #f0c43a; --hatch: #222830; --back: #262d37;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1216; --panel: #171b21; --ink: #e7eaee; --muted: #98a1ac; --line: #2a3139;
+  --accent: #ffd23f; --accent-ink: #ffd23f; --accent-soft: #3a3214; --pick: #3fd9d9; --pick-soft: #0f3434;
+  --c-red: #ef6a61; --c-blue: #6b9cf0; --c-green: #4fc387; --c-yellow: #f0c43a; --hatch: #222830; --back: #262d37;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 var(--f-body); padding: 14px 16px; }
+.app { max-width: 1500px; margin: 0 auto; display: grid; gap: 12px; }
+header.top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+h1 { font: 700 22px/1.1 var(--f-display); margin: 0; }
+.status { font: 500 13px var(--f-mono); color: var(--muted); }
+.status b { color: var(--ink); }
+.spacer { flex: 1; }
+button { font: 600 13px var(--f-body); color: var(--ink); background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; padding: 7px 11px; cursor: pointer; text-align: left; }
+button:hover { border-color: var(--muted); }
+button:disabled { opacity: .5; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #1b1600; }
+button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible, .card:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px; }
+select, input, textarea { font: 13px var(--f-body); color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
+textarea { width: 100%; min-height: 160px; font-family: var(--f-mono); font-size: 12px; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: 12px; align-items: start; }
+@media (max-width: 980px) { .main { grid-template-columns: minmax(0, 1fr); } }
+.table { display: grid; gap: 10px; min-width: 0; }
+.side { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 8px; min-width: 0; }
+.side.active { border-color: var(--accent-ink); box-shadow: inset 0 0 0 1px var(--accent-ink); }
+.side-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; }
+.who { font: 700 16px var(--f-display); }
+.turnflag { font: 600 10px var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: #1b1600; background: var(--accent); padding: 2px 6px; border-radius: 3px; }
+.cred { display: flex; align-items: baseline; gap: 6px; }
+.cred .n { font: 700 26px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.lbl { font: 600 10px var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.gigs { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.die { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 6px; border: 1.5px solid var(--ink); position: relative; }
+.die .v { font: 700 17px/1 var(--f-display); }
+.die .s { position: absolute; top: 1px; left: 3px; font: 500 9px var(--f-mono); color: var(--muted); }
+.die.fixer { border-style: dashed; border-color: var(--line); color: var(--muted); width: 30px; height: 30px; }
+.die.fixer .v { font: 500 10px var(--f-mono); }
+.zones { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+.zones b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.zones button { padding: 1px 6px; font-size: 12px; }
+.rowlbl { display: flex; gap: 8px; align-items: baseline; }
+.cards { display: flex; flex-wrap: wrap; gap: 8px; min-height: 40px; align-items: flex-start; }
+.empty { color: var(--muted); font-style: italic; font-size: 12px; align-self: center; }
+.stack { display: grid; gap: 3px; width: var(--cw); }
+.card { width: var(--cw); aspect-ratio: 733 / 1024; border-radius: 6px; position: relative; border: 1px solid var(--line);
+  background: var(--panel); overflow: hidden; cursor: pointer; transition: transform .15s; }
+.card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .txt { position: absolute; inset: 0; padding: 6px; display: grid; grid-template-rows: auto auto 1fr; gap: 3px; font-size: 11px; line-height: 1.25; }
+.card .txt .t { font-weight: 600; font-size: 12px; }
+.card .txt .x { color: var(--muted); overflow: hidden; }
+.card .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+.card.hasimg .txt { display: none; }
+.card.flagged .txt { padding-top: 22px; }
+.warn { font: 600 11px var(--f-body); color: #fff; background: var(--c-red); padding: 2px 7px; border-radius: 3px; }
+.card .pw { position: absolute; right: 4px; bottom: 4px; font: 700 15px/1 var(--f-display); background: rgba(0,0,0,.78); color: #fff;
+  padding: 3px 6px; border-radius: 4px; font-variant-numeric: tabular-nums; }
+.card .pw.up { color: #7dffb0; } .card .pw.down { color: #ff8f88; }
+.card .flags { position: absolute; left: 4px; top: 4px; display: flex; gap: 3px; flex-wrap: wrap; }
+.card .flag { font: 700 9px var(--f-body); letter-spacing: .05em; text-transform: uppercase; background: rgba(0,0,0,.78); color: #fff; padding: 1px 4px; border-radius: 3px; }
+.card.spent { transform: rotate(-8deg) scale(.94); filter: saturate(.4) brightness(.8); }
+.card.back { background: repeating-linear-gradient(135deg, var(--back) 0 7px, #2f3844 7px 14px); border-color: #000; cursor: default; }
+.card.back .q { position: absolute; inset: 0; display: grid; place-items: center; font: 700 12px var(--f-display); color: #9aa6b2; text-align: center; padding: 4px; }
+.card.pick { border: 2px solid var(--pick); box-shadow: 0 0 0 3px var(--pick-soft); }
+.card.pick:hover { transform: translateY(-3px); }
+.card.attacking { box-shadow: 0 0 0 3px var(--c-red); }
+.card.small { --cw: 70px; }
+.gearrow { display: flex; flex-wrap: wrap; gap: 3px; }
+.gearrow .card { --cw: 50px; }
+.hand .card { --cw: 118px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.red { background: var(--c-red); } .blue { background: var(--c-blue); } .green { background: var(--c-green); } .yellow { background: var(--c-yellow); }
+.rail { display: grid; gap: 10px; position: sticky; top: 10px; height: calc(100vh - 20px); grid-template-rows: auto auto minmax(0, 1fr); min-width: 0; }
+@media (max-width: 980px) { .rail { position: static; height: auto; } .log { max-height: 60vh; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+.panel h2 { font: 700 14px var(--f-display); margin: 0 0 6px; }
+.decision.mine { border-color: var(--pick); box-shadow: inset 0 0 0 1px var(--pick); }
+.prompt { font-weight: 600; margin-bottom: 8px; }
+.opts { display: grid; gap: 5px; max-height: 42vh; overflow: auto; }
+.opts button.hi { border-color: var(--pick); background: var(--pick-soft); }
+.opts .grp { font: 600 10px var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.peek { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.source { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 8px; margin-bottom: 8px; font-size: 12px; color: var(--muted); }
+.thinking { color: var(--muted); font-style: italic; }
+.log { overflow: auto; font-size: 12.5px; display: grid; gap: 1px; align-content: start; min-height: 120px; }
+.log .turn { font: 700 12px var(--f-display); margin-top: 8px; color: var(--ink); border-top: 1px solid var(--line); padding-top: 4px; }
+.log .effect { color: var(--muted); padding-left: 10px; }
+.log .choice { color: var(--ink); }
+.log .end { font-weight: 700; color: var(--accent-ink); }
+.inspect { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; }
+.inspect .card { --cw: 150px; cursor: default; }
+.inspect .t { font: 700 14px var(--f-display); }
+.inspect .meta { font-size: 12px; color: var(--muted); }
+.inspect .x { font-size: 12.5px; margin-top: 4px; white-space: pre-wrap; }
+.inspect .acts { display: grid; gap: 4px; margin-top: 6px; }
+.inspect .acts button { border-color: var(--pick); }
+.setup { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.setup .col { display: grid; gap: 6px; align-content: start; }
+.setup label { font-weight: 600; }
+.err { color: var(--c-red); font-size: 12.5px; white-space: pre-wrap; }
+.ok { color: var(--c-green); font-size: 12.5px; }
+dialog { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); max-width: min(900px, 94vw); }
+dialog::backdrop { background: rgba(0,0,0,.45); }
+.zoom { position: fixed; z-index: 50; pointer-events: none; width: 260px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.4); display: none; }
+.zoom img { width: 100%; display: block; }
+.banner { font: 700 20px var(--f-display); padding: 10px 12px; border-radius: 8px; background: var(--accent-soft); border: 1px solid var(--accent-ink); }
+.credit { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <h1>Play the bot</h1>
+    <span class="status" id="status"></span>
+    <span class="spacer"></span>
+    <button id="btnDecks">Decklists</button>
+    <button id="btnNew" class="primary">New game</button>
+  </header>
+
+  <section class="panel" id="setup" hidden>
+    <h2>New game</h2>
+    <div class="setup">
+      <div class="col">
+        <label for="youKind">Your deck</label>
+        <select id="youKind"><option value="sample">BBG Proactive (sample)</option><option value="random">Random legal deck</option><option value="text">Paste a decklist</option></select>
+        <textarea id="youText" hidden placeholder="1 Alt Cunningham: Soulkiller Architect&#10;3 Jacked-In Voodoo Boy&#10;..."></textarea>
+        <div id="youMsg"></div>
+      </div>
+      <div class="col">
+        <label for="botKind">Bot's deck</label>
+        <select id="botKind"><option value="random">Random legal deck</option><option value="sample">BBG Proactive (sample)</option><option value="text">Paste a decklist</option></select>
+        <textarea id="botText" hidden></textarea>
+        <div id="botMsg"></div>
+      </div>
+      <div class="col">
+        <label for="level">Bot strength</label>
+        <select id="level">
+          <option value="quick">Quick: thinks 0.5 s a move</option>
+          <option value="normal" selected>Normal: thinks 2 s a move</option>
+          <option value="strong">Strong: thinks 5 s a move</option>
+          <option value="easy">Easy: plays at random</option>
+        </select>
+        <label for="seed">Seed (blank for random)</label>
+        <input id="seed" inputmode="numeric" placeholder="random">
+        <div style="display:flex; gap:8px; margin-top:6px">
+          <button class="primary" id="btnStart">Start</button>
+          <button id="btnCancel">Cancel</button>
+        </div>
+        <div id="startMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="main" id="main" hidden>
+    <div class="table">
+      <div id="result"></div>
+      <section class="side" id="sideRival"></section>
+      <section class="side" id="sideYou"></section>
+    </div>
+    <aside class="rail">
+      <section class="panel decision" id="decision"></section>
+      <section class="panel" id="inspect"><div class="credit">Click a card to read it. Cards you can use are outlined.</div></section>
+      <section class="panel log" id="log"></section>
+    </aside>
+  </div>
+</div>
+<dialog id="dlg"><div id="dlgBody"></div><form method="dialog" style="margin-top:10px"><button>Close</button></form></dialog>
+<div class="zoom" id="zoom"><img alt=""></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let S = null;           // last state from the server
+let selected = null;    // uid or "c<cid>" of the inspected card
+let polling = null;
+let busy = false;
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const short = (t) => (t || "").split(" - ")[0];
+
+async function api(path, body) {
+  const r = await fetch(path, body === undefined ? {} : {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.error || r.statusText);
+  return j;
+}
+
+// ------------------------------------------------------------ options
+function myOptions() { return (S && S.decision && S.decision.mine) ? S.decision.options : []; }
+function optsForCard(c) {
+  return myOptions().filter((o) => (c.uid !== undefined && o.uids.includes(c.uid)) || (o.cids.includes(c.cid) && (c.uid === undefined || inMyHand(c.uid) || !o.uids.length)));
+}
+function inMyHand(uid) { return S && Array.isArray(S.you.hand) && S.you.hand.some((c) => c.uid === uid); }
+
+// --------------------------------------------------------------- cards
+function cardEl(c, extra = {}) {
+  const el = document.createElement("div");
+  el.className = "card";
+  if (c.hidden) {
+    el.classList.add("back");
+    el.innerHTML = `<div class="q">${esc(extra.backLabel || "")}</div>`;
+    return el;
+  }
+  const colour = c.color ? `<span class="bar ${c.color}"></span>` : "";
+  el.innerHTML = `${colour}<div class="txt"><div class="t">${esc(c.title)}</div>
+    <div class="lbl">${esc(c.type)} ${c.cost != null ? "· cost " + c.cost : ""} ${c.power != null ? "· " + c.power + " power" : ""}</div>
+    <div class="x">${esc(c.text)}</div></div>`;
+  if (S && S.images) {
+    const img = new Image();
+    img.alt = c.title; img.loading = "lazy"; img.src = `/art/${encodeURIComponent(c.id)}`;
+    img.onload = () => el.classList.add("hasimg");
+    img.onerror = () => img.remove();
+    el.prepend(img);
+  }
+  const flags = [];
+  if (c.spent) flags.push("spent");
+  if (c.lag) flags.push("lag");
+  if (c.face_up === false) flags.push("face down");
+  if (extra.flags) flags.push(...extra.flags);
+  if (flags.length) el.classList.add("flagged");
+  if (flags.length) el.insertAdjacentHTML("beforeend", `<div class="flags">${flags.map((f) => `<span class="flag">${esc(f)}</span>`).join("")}</div>`);
+  if (c.now_power != null && (c.type !== "legend" || extra.onField)) {
+    const cls = c.power != null && c.now_power > c.power ? "up" : c.power != null && c.now_power < c.power ? "down" : "";
+    el.insertAdjacentHTML("beforeend", `<span class="pw ${cls}">${c.now_power}</span>`);
+  }
+  if (c.spent) el.classList.add("spent");
+  if (S && S.attack && (S.attack.atk === c.uid || (S.attack.target && S.attack.target[1] === c.uid))) el.classList.add("attacking");
+  const opts = optsForCard(c);
+  if (opts.length) el.classList.add("pick");
+  el.tabIndex = 0;
+  el.title = c.title;
+  const key = c.uid !== undefined ? c.uid : "c" + c.cid;
+  el.onclick = () => { selected = key; showInspect(c); };
+  el.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); el.onclick(); } };
+  if (S && S.images) {
+    el.onmouseenter = (e) => zoomOn(c, e);
+    el.onmousemove = (e) => zoomMove(e);
+    el.onmouseleave = zoomOff;
+  }
+  return el;
+}
+
+function withGear(c, extra) {
+  const wrap = document.createElement("div");
+  wrap.className = "stack";
+  wrap.append(cardEl(c, extra));
+  if (c.gears && c.gears.length) {
+    const g = document.createElement("div");
+    g.className = "gearrow";
+    for (const x of c.gears) g.append(cardEl(x));
+    wrap.append(g);
+  }
+  return wrap;
+}
+
+const zoom = $("zoom");
+function zoomOn(c, e) { if (c.hidden) return; zoom.querySelector("img").src = `/art/${encodeURIComponent(c.id)}`; zoom.style.display = "block"; zoomMove(e); }
+function zoomMove(e) {
+  const w = 260, h = w * 1024 / 733;
+  let x = e.clientX + 18, y = e.clientY - h / 2;
+  if (x + w > innerWidth - 8) x = e.clientX - w - 18;
+  y = Math.max(8, Math.min(innerHeight - h - 8, y));
+  zoom.style.left = x + "px"; zoom.style.top = y + "px";
+}
+function zoomOff() { zoom.style.display = "none"; }
+
+// ------------------------------------------------------------- inspector
+function showInspect(c) {
+  const box = $("inspect");
+  box.innerHTML = "";
+  const wrap = document.createElement("div");
+  wrap.className = "inspect";
+  const big = cardEl(c);
+  big.classList.remove("pick", "spent"); big.onclick = null; big.onmouseenter = null;
+  wrap.append(big);
+  const info = document.createElement("div");
+  const bits = [c.type, c.color, c.cost != null ? `cost ${c.cost}` : null, c.power != null ? `power ${c.power}` : null,
+                c.ram ? `RAM ${c.ram}` : null, c.ram_provided ? `gives ${c.ram_provided} RAM` : null, c.sell ? "Sell Tag" : null].filter(Boolean);
+  info.innerHTML = `<div class="t">${esc(c.title)}</div><div class="meta">${esc(bits.join(" · "))}</div>
+    ${c.tags && c.tags.length ? `<div class="meta">${esc(c.tags.join(", "))}</div>` : ""}
+    <div class="x">${esc(c.text || "")}</div>`;
+  const opts = optsForCard(c);
+  if (opts.length) {
+    const acts = document.createElement("div");
+    acts.className = "acts";
+    for (const o of opts) acts.append(optButton(o));
+    info.append(acts);
+  }
+  wrap.append(info);
+  box.append(wrap);
+}
+
+// --------------------------------------------------------------- board
+function side(sd, isYou) {
+  const el = $(isYou ? "sideYou" : "sideRival");
+  const name = isYou ? "You" : (S.bot_name || "Bot");
+  const myTurn = (S.turn_player === 0) === isYou;
+  el.classList.toggle("active", myTurn && !S.winner && S.winner !== 0);
+  el.innerHTML = "";
+  const head = document.createElement("div");
+  head.className = "side-head";
+  const gigs = sd.gigs.map(([s, v]) => `<span class="die"><span class="s">d${s}</span><span class="v">${v}</span></span>`).join("") || `<span class="empty">no Gigs</span>`;
+  const fixer = sd.fixer.map((s) => `<span class="die fixer"><span class="v">d${s}</span></span>`).join("");
+  const handN = Array.isArray(sd.hand) ? sd.hand.length : sd.hand;
+  head.innerHTML = `<span class="who">${esc(name)}</span>${myTurn && S.winner == null ? `<span class="turnflag">turn ${S.turn}</span>` : ""}
+    <span class="cred"><span class="n">${sd.cred == null ? "–" : sd.cred}</span><span class="lbl">Street Cred</span></span>
+    <span class="gigs"><span class="lbl">Gigs ${sd.gigs.length}/7</span>${gigs}</span>
+    ${sd.gigs.length >= 7 && S.winner == null ? `<span class="warn">${isYou ? "7 Gigs: you win at the start of your next turn" : "7 Gigs: wins at the start of its next turn unless you steal one"}</span>` : ""}
+    <span class="gigs"><span class="lbl">Fixer</span>${fixer || '<span class="empty">empty</span>'}</span>`;
+  el.append(head);
+  const zones = document.createElement("div");
+  zones.className = "zones";
+  zones.innerHTML = `<span>Eddies <b>${sd.eddies[0]}</b>/${sd.eddies[1]} ready</span><span>Hand <b>${handN}</b></span><span>Deck <b>${sd.deck}</b></span>`;
+  const tb = document.createElement("button"); tb.textContent = `Trash ${sd.trash.length}`; tb.onclick = () => pile(`${name}: trash`, sd.trash);
+  const eb = document.createElement("button"); eb.textContent = `Eddies`; eb.onclick = () => pile(`${name}: Eddies`, sd.eddie_cards);
+  zones.append(tb, eb);
+  if (sd.removed.length) { const rb = document.createElement("button"); rb.textContent = `Removed ${sd.removed.length}`; rb.onclick = () => pile(`${name}: removed from the game`, sd.removed); zones.append(rb); }
+  el.append(zones);
+
+  const legends = row("Legends", sd.legends.map((c) => c.hidden ? cardEl(c, {backLabel: "face-down Legend"}) : withGear(c, {})));
+  const field = row("Field", sd.field.map((c) => withGear(c, {onField: true})));
+  if (isYou) {
+    el.append(field, legends);
+    const hand = row("Your hand", sd.hand.map((c) => cardEl(c)));
+    hand.classList.add("hand");
+    el.append(hand);
+  } else {
+    const backs = [];
+    for (let i = 0; i < Math.min(sd.hand, 10); i++) { const b = cardEl({hidden: true}); b.classList.add("small"); backs.push(b); }
+    el.append(row(`Hand (${sd.hand})`, backs), legends, field);
+  }
+}
+function row(label, items) {
+  const r = document.createElement("div");
+  r.innerHTML = `<div class="rowlbl"><span class="lbl">${esc(label)}</span></div>`;
+  const cs = document.createElement("div");
+  cs.className = "cards";
+  if (!items.length) cs.innerHTML = `<span class="empty">empty</span>`;
+  for (const it of items) cs.append(it);
+  r.append(cs);
+  return r;
+}
+function pile(title, cards) {
+  const b = $("dlgBody");
+  b.innerHTML = `<h2 style="font:700 16px var(--f-display);margin:0 0 8px">${esc(title)}</h2>`;
+  const cs = document.createElement("div"); cs.className = "cards";
+  if (!cards.length) cs.innerHTML = `<span class="empty">empty</span>`;
+  for (const c of cards) { const e = cardEl(c); e.onclick = () => { $("dlg").close(); selected = c.uid; showInspect(c); }; cs.append(e); }
+  b.append(cs);
+  $("dlg").showModal();
+}
+
+// ------------------------------------------------------------ decision
+const GROUPS = {pass: "Turn", end: "Turn", play: "Play a card", quick: "Play a card", sell: "Sell for an Eddie", call: "Legends",
+  deploy: "Legends", solo: "Legends", attack: "Attack", activate: "Abilities", block: "Block"};
+function optButton(o) {
+  const b = document.createElement("button");
+  b.textContent = o.label;
+  b.onclick = () => act(o.i);
+  b.disabled = busy;
+  return b;
+}
+function renderDecision() {
+  const box = $("decision");
+  box.innerHTML = "";
+  const d = S.decision;
+  box.classList.toggle("mine", !!(d && d.mine));
+  if (S.result) { box.innerHTML = `<h2>Game over</h2><div>${esc(S.result)}</div>`; return; }
+  if (!d) return;
+  if (!d.mine) {
+    box.innerHTML = `<h2>${esc(S.bot_name)}'s move</h2><div class="thinking">Thinking…</div>`;
+    return;
+  }
+  box.innerHTML = `<h2>Your move</h2><div class="prompt">${esc(d.prompt)}</div>`;
+  if (d.source) {
+    const src = document.createElement("div");
+    src.className = "source";
+    const e = cardEl(d.source); e.classList.add("small"); e.classList.remove("pick");
+    src.append(e);
+    src.insertAdjacentHTML("beforeend", `<div class="x">${esc(d.source.text)}</div>`);
+    box.append(src);
+  }
+  if (d.peek && d.peek.length && d.kind !== "main" && d.kind !== "react") {
+    const pk = document.createElement("div"); pk.className = "peek";
+    for (const c of d.peek) { const e = cardEl(c); e.classList.add("small"); pk.append(e); }
+    box.append(pk);
+  }
+  const list = document.createElement("div");
+  list.className = "opts";
+  let last = null;
+  const ORDER = ["Play a card", "Attack", "Block", "Abilities", "Legends", "Sell for an Eddie", "Other", "Turn"];
+  const grouped = (d.kind === "main" || d.kind === "react");
+  const rank = (o) => grouped ? ORDER.indexOf(GROUPS[o.key] || "Other") : 0;
+  const shown = d.options.map((o, n) => [o, n]).sort((a, b) => rank(a[0]) - rank(b[0]) || a[1] - b[1]).map((x) => x[0]);
+  for (const o of shown) {
+    const g = (d.kind === "main" || d.kind === "react") ? (GROUPS[o.key] || "Other") : null;
+    if (g && g !== last) { list.insertAdjacentHTML("beforeend", `<div class="grp">${esc(g)}</div>`); last = g; }
+    const b = optButton(o);
+    b.onmouseenter = () => hilite(o, true);
+    b.onmouseleave = () => hilite(o, false);
+    list.append(b);
+  }
+  box.append(list);
+}
+function hilite(o, on) {
+  document.querySelectorAll(".card").forEach((el) => el.style.outline = "");
+  if (!on) return;
+  // light up the cards an option is about
+  render._index.forEach(({el, c}) => {
+    if ((c.uid !== undefined && o.uids.includes(c.uid)) || (o.cids.includes(c.cid) && inMyHand(c.uid))) el.style.outline = "3px solid var(--accent)";
+  });
+}
+
+function renderLog() {
+  const box = $("log");
+  const atBottom = box.scrollTop + box.clientHeight >= box.scrollHeight - 30;
+  box.innerHTML = `<h2>Play-by-play</h2>` + S.log.map((l) => `<div class="${l.k}">${esc(l.t)}</div>`).join("");
+  if (atBottom || !render._logged) box.scrollTop = box.scrollHeight;
+  render._logged = true;
+}
+
+function render() {
+  if (!S || !S.match) { $("setup").hidden = false; $("main").hidden = true; $("status").textContent = ""; return; }
+  $("main").hidden = false;
+  const whose = S.result ? S.result : (S.decision && S.decision.mine ? "your move" : `${S.bot_name} is thinking`);
+  $("status").innerHTML = `Turn <b>${S.turn}</b> · ${esc(whose)} · ${esc(S.level)} · seed ${S.seed}${S.overtime ? " · <b>Overtime</b>" : ""}`;
+  $("result").innerHTML = S.result ? `<div class="banner">${esc(S.result)}</div>` : (S.error ? `<div class="err">${esc(S.error)}</div>` : "");
+  side(S.rival, false);
+  side(S.you, true);
+  render._index = [...document.querySelectorAll(".table .card")].map((el) => ({el, c: el._c}));
+  renderDecision();
+  renderLog();
+  if (selected !== null) {
+    const c = findCard(selected);
+    if (c) showInspect(c);
+  }
+}
+render._index = [];
+// keep each element's card for highlighting
+const _cardEl = cardEl;
+cardEl = function (c, extra) { const el = _cardEl(c, extra); el._c = c; return el; };
+
+function findCard(key) {
+  const all = [];
+  for (const sd of [S.you, S.rival]) {
+    if (Array.isArray(sd.hand)) all.push(...sd.hand);
+    for (const c of [...sd.field, ...sd.legends]) { all.push(c); if (c.gears) all.push(...c.gears); }
+    all.push(...sd.trash, ...sd.removed);
+  }
+  if (S.decision && S.decision.peek) all.push(...S.decision.peek);
+  return all.find((c) => !c.hidden && (c.uid === key || (typeof key === "string" && "c" + c.cid === key && c.uid === undefined)));
+}
+
+async function act(i) {
+  if (busy) return;
+  busy = true;
+  try { S = await api("/api/act", {i}); }
+  catch (e) { S = await api("/api/state"); }        // e.g. a button from a board that had already moved on
+  busy = false;
+  render();
+  poll();
+}
+async function refresh() { S = await api("/api/state"); render(); poll(); }
+function poll() {
+  clearTimeout(polling);
+  if (S && S.match && !S.result && (!S.decision || !S.decision.mine || S.thinking)) {
+    polling = setTimeout(refresh, 450);
+  }
+}
+
+// ---------------------------------------------------------------- setup
+function deckSpec(kind, text) { return kind === "text" ? {kind, text} : {kind}; }
+for (const who of ["you", "bot"]) {
+  const k = $(who + "Kind"), t = $(who + "Text"), msg = $(who + "Msg");
+  k.onchange = async () => {
+    t.hidden = k.value !== "text";
+    if (k.value === "text" && !t.value) t.value = (await api("/api/sample_deck")).text;
+    check(who);
+  };
+  let tm = null;
+  t.oninput = () => { clearTimeout(tm); tm = setTimeout(() => check(who), 400); };
+}
+async function check(who) {
+  const k = $(who + "Kind"), t = $(who + "Text"), msg = $(who + "Msg");
+  msg.innerHTML = "";
+  if (k.value !== "text") return true;
+  try {
+    const r = await api("/api/check_deck", {text: t.value});
+    msg.innerHTML = `<div class="ok">Legal deck: ${r.deck.legends.map(short).join(", ")} and ${r.deck.main.reduce((a, [n]) => a + n, 0)} cards.</div>`;
+    return true;
+  } catch (e) { msg.innerHTML = `<div class="err">${esc(e.message.replaceAll("; ", "\n"))}</div>`; return false; }
+}
+$("btnNew").onclick = () => { $("setup").hidden = !$("setup").hidden; };
+$("btnCancel").onclick = () => { if (S && S.match) $("setup").hidden = true; };
+$("btnStart").onclick = async () => {
+  $("startMsg").innerHTML = "";
+  if (!(await check("you")) || !(await check("bot"))) return;
+  try {
+    S = await api("/api/new", {you: deckSpec($("youKind").value, $("youText").value), bot: deckSpec($("botKind").value, $("botText").value),
+                               level: $("level").value, seed: $("seed").value.trim()});
+    selected = null; render._logged = false;
+    $("setup").hidden = true;
+    render(); poll();
+  } catch (e) { $("startMsg").innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+};
+$("btnDecks").onclick = () => {
+  if (!S || !S.decks) return;
+  const b = $("dlgBody");
+  b.innerHTML = ["You", S.bot_name].map((n, i) => {
+    const d = S.decks[i];
+    return `<div><h2 style="font:700 16px var(--f-display);margin:0 0 6px">${esc(n)}</h2><div class="lbl">Legends</div><div>${d.legends.map(esc).join("<br>")}</div>
+      <div class="lbl" style="margin-top:6px">Main deck</div><div style="columns:2 220px;font-size:13px">${d.main.map(([k, t]) => `${k} ${esc(t)}`).join("<br>")}</div></div>`;
+  }).join('<hr style="border:0;border-top:1px solid var(--line)">');
+  $("dlg").showModal();
+};
+
+refresh().catch((e) => { document.body.insertAdjacentHTML("beforeend", `<p class="err">Can't reach the game server: ${esc(e.message)}</p>`); });
+</script>
+</body>
+</html>

@@ -29,12 +29,16 @@ cpbot/agents.py   random agents and a game loop
 cpbot/search.py   ISMCTS search agent: samples hidden cards, searches, plays out
 cpbot/features.py position features and the learned position score (data/value_weights.json)
 cpbot/watch.py    play-by-play log, replay record and HTML replay page (replay_template.html)
+cpbot/play.py     play against the bot: what one player can see, readable choices, decklist reader
+cpbot/play.html   the battle page served by scripts/play.py
 docs/             comprehensive rules (29 Oct 2026) and rules FAQ (28 Oct 2026), with the FAQ check
 scripts/soak.py   plays many random games and checks invariants after every decision
 scripts/learn_value.py  plays self-play games and refits the position score
 scripts/arena.py  pits two agents against each other over many games and reports the win rate
 scripts/watch.py  plays one game and writes games/<name>.txt, .json and .html
 scripts/coverage.py  shows which card scripts actually ran in random games
+scripts/play.py   play the bot yourself in your browser (standard library only)
+scripts/card_images.py  builds data/card_images.json (card picture links) from ripperdeck.gg pages
 scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
 tests/            rules tests
 ```
@@ -60,6 +64,28 @@ g = Game(random_deck(rng, db), random_deck(rng, db), seed=0, log=True)
 play_game(g, [RandomAgent(1), RandomAgent(2)])
 print("\n".join(g.log))
 ```
+
+## Play against the bot
+
+```
+python scripts/play.py            # opens http://127.0.0.1:8765 in your browser
+```
+
+Pick your deck (the BBG Proactive sample, a random legal deck, or paste a decklist
+in the usual `3 Card Name` format; `//` headings are fine and the sideboard is
+left out), the bot's deck and how long the bot thinks per move. You play as the
+bottom player. Cards you can use are outlined; click a card to read it and see
+what you can do with it, or use the buttons on the right. Hover a card for a
+bigger picture. The bot can't see your hand, and you can't see its hand.
+
+Card pictures: `data/card_images.json` holds a link to each card's picture on
+ripperdeck.gg's image store. The pictures themselves aren't in the repo. The
+first time a card is shown, the server downloads its picture into `.card_art/`
+(ignored by git) and serves it from there after that, so later games don't hit
+the site again. `python scripts/play.py --prefetch-images` downloads all 152 in one
+slow, polite pass. `--no-images` plays with text-only cards. Card art belongs to
+CD PROJEKT RED and WeirdCo; this is for personal play only, so don't publish the
+pictures.
 
 ## Engine interface
 
