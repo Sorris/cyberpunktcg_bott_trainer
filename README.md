@@ -11,7 +11,7 @@ Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
 | --- | --- |
 | 1. Card data in | Done: 152 cards and 286 official rulings in `data/cards.json` |
 | 2. Engine with vanilla cards | Done: turn structure, paying, selling, Call a Legend, Go Solo, combat, Blocker, Quick Programs, stealing, Overtime, win and loss checks |
-| 3. All card text scripted | Next. Card text is ignored for now, so every card plays with stats and keywords only |
+| 3. All card text scripted | Done: all 152 cards. Interpretations and shortcuts are listed in `docs/card-scripting-notes.md` |
 | 4+ | Watchable games, ISMCTS agent, deck search, self-play network |
 
 ## Layout
@@ -20,10 +20,12 @@ Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
 cpbot/cards.py    card database (data/cards.json)
 cpbot/deck.py     deck rules (3 Legends, 40-50 cards, max 3 copies, RAM limits) and random legal decks
 cpbot/engine.py   game engine: plain-data state, explicit task stack, cloneable for search
-cpbot/effects.py  hook points for per-card scripts (milestone 3)
+cpbot/effects.py  effect framework: triggers, pending effects, steps, statics, abilities
+cpbot/scripts/    one script per card: legends.py, units.py, programs.py, gear.py
 cpbot/agents.py   random agents and a game loop
 docs/             comprehensive rules (29 Oct 2026), markdown and raw JSON
 scripts/soak.py   plays many random games and checks invariants after every decision
+scripts/coverage.py  shows which card scripts actually ran in random games
 scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
 tests/            rules tests
 ```
@@ -50,8 +52,9 @@ print("\n".join(g.log))
 
 ## Engine interface
 
-- `g.decision` is the pending decision: `player`, `kind` and `options`. Kinds are
-  `go_first`, `mulligan`, `roll_in`, `main`, `pay`, `equip`, `react` and `steal`.
+- `g.decision` is the pending decision: `player`, `kind` and `options`. Core kinds are
+  `go_first`, `mulligan`, `roll_in`, `main`, `pay`, `equip`, `react` and `steal`; card
+  effects add kinds such as `target`, `adjust`, `discard`, `mode` and `may:<what>`.
 - `g.step(option)` applies one option. Moves with only one option are applied automatically.
 - `g.clone()` deep-copies the game for look-ahead search.
 
