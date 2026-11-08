@@ -1,5 +1,5 @@
+.card_art/
 __pycache__/
 *.pyc
 .pytest_cache/
 games/
-.card_art/

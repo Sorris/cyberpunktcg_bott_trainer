@@ -89,6 +89,10 @@ left out), the bot's deck and how long the bot thinks per move. You play as the
 bottom player. Cards you can use are outlined; click a card to read it and see
 what you can do with it, or use the buttons on the right. Hover a card for a
 bigger picture. The bot can't see your hand, and you can't see its hand.
+Both trash piles sit beside the Legends and Eddies (click the top card or
+"View all"). Eddies are face-down, so only ready or spent shows. **Undo** takes
+back your last move and the bot's replies to it (press it again to go further
+back), **End game** concedes, and **Quit** stops the server (so does Ctrl+C).
 
 Card pictures: `data/card_images.json` holds a link to each card's picture on
 ripperdeck.gg's image store. The pictures themselves aren't in the repo. The
@@ -98,6 +102,12 @@ the site again. `python scripts/play.py --prefetch-images` downloads all 152 in 
 slow, polite pass. `--no-images` plays with text-only cards. Card art belongs to
 CD PROJEKT RED and WeirdCo; this is for personal play only, so don't publish the
 pictures.
+
+Face-down cards (hands, face-down Legends, Eddies) use a card-back picture if you
+save one as `.card_art/card-back.png` (or `.jpg` / `.webp`), or pass
+`--card-back path\to\back.png`. Face-down Legends show it with black and yellow
+swapped, like the printed Legend backs. Without one they show the Cyberpunk TCG logo,
+downloaded once from cyberpunktcg.com.
 
 ## Engine interface
 

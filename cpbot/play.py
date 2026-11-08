@@ -328,7 +328,8 @@ def player_view(g: Game, me: int = HUMAN) -> dict:
             "hand": [card(u) for u in pl.hand] if p == me else len(pl.hand),
             "deck": len(pl.deck),
             "eddies": [ready, len(pl.eddies)],
-            "eddie_cards": [card(u, spent=g.cards[u].spent) for u in pl.eddies],
+            # Eddies are face-down and nobody may look at them (5.8.3.1): only ready or spent.
+            "eddie_cards": [hidden(u, spent=g.cards[u].spent) for u in pl.eddies],
             "trash": [card(u) for u in pl.trash],
             "removed": [card(u) for u in pl.removed],
             "legends": legends,
@@ -370,6 +371,7 @@ class Match:
 
     def __init__(self, deck_you: Deck, deck_bot: Deck, bot, seed=None, db=None,
                  bot_name="Bot"):
+        self.db = db
         self.g = Game(deck_you, deck_bot, seed=seed, db=db, log=True)
         self.bot = bot
         self.bot_name = bot_name
@@ -378,6 +380,10 @@ class Match:
         self.lock = threading.RLock()
         self.thinking = False
         self.error = None
+        self.resigned = False
+        self.choices: list = []          # every option stepped, by both players, in order
+        self.mine: list[int] = []        # positions in self.choices where you chose
+        self.gen = 0                     # bumped by undo/resign so a thinking bot's move is dropped
         self.lines: list[dict] = []
         self._seen = 0
         self._hist = 0
@@ -456,20 +462,29 @@ class Match:
             opts = self.g.decision.options
             if not 0 <= i < len(opts):
                 raise ValueError("no such option")
+            self.mine.append(len(self.choices))
+            self.choices.append(opts[i])
             self.g.step(opts[i])
             self._collect()
 
-    def run_bot(self, on_step=None):
-        """Let the bot act until the human has a decision or the game ends."""
+    def run_bot(self, on_step=None, gen=None):
+        """Let the bot act until the human has a decision or the game ends.
+
+        If undo or resign happens while the bot is thinking (gen changes), its
+        move is dropped and it stops."""
+        gen = self.gen if gen is None else gen
         n = 0
         while True:
             with self.lock:
                 g = self.g
-                if g.over or g.decision.player != BOT:
+                if gen != self.gen or g.over or g.decision.player != BOT:
                     break
                 snap = g.clone()
             opt = self.bot.act(snap)                     # think without holding the lock
             with self.lock:
+                if gen != self.gen:
+                    break
+                self.choices.append(opt)
                 self.g.step(opt)
                 self._collect()
             n += 1
@@ -477,6 +492,39 @@ class Match:
                 on_step()
             if n > 5000:
                 raise RuntimeError("bot decision limit exceeded")
+
+    def can_undo(self) -> bool:
+        return bool(self.mine) and not self.resigned
+
+    def undo(self):
+        """Take back your last choice, and everything the bot did after it.
+
+        The game is rebuilt from the seed and the earlier choices, which gives the
+        exact same position (the engine is deterministic for a seed)."""
+        with self.lock:
+            if not self.can_undo():
+                raise ValueError("nothing to undo")
+            keep = self.choices[:self.mine.pop()]
+            self.gen += 1
+            self.thinking = False
+            self.g = Game(self.decks[0], self.decks[1], seed=self.seed, db=self.db, log=True)
+            self.choices = []
+            for opt in keep:
+                self.choices.append(opt)
+                self.g.step(opt)
+            self.lines, self._seen, self._hist, self._tp = [], 0, 0, 0
+            self._collect()
+
+    def resign(self):
+        """End the game now: you concede."""
+        with self.lock:
+            if self.g.over:
+                return
+            self.gen += 1
+            self.thinking = False
+            self.resigned = True
+            self.g.win(BOT, "you resigned")
+            self._collect()
 
     # ---- what the page shows
     def view(self) -> dict:
@@ -488,6 +536,7 @@ class Match:
             v["thinking"] = self.thinking
             v["error"] = self.error
             v["bot_name"] = self.bot_name
+            v["can_undo"] = self.can_undo()
             dec = None
             if not g.over:
                 d = g.decision
