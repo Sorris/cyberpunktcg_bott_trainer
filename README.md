@@ -22,6 +22,7 @@ Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
 ```
 cpbot/cards.py    card database (data/cards.json)
 cpbot/deck.py     deck rules (3 Legends, 40-50 cards, max 3 copies, RAM limits) and random legal decks
+cpbot/decklist.py deck list import and export in the standard text format (// Legends, // Units, ..., // Sideboard)
 cpbot/engine.py   game engine: plain-data state, explicit task stack, cloneable for search
 cpbot/effects.py  effect framework: triggers, pending effects, steps, statics, abilities
 cpbot/scripts/    one script per card: legends.py, units.py, programs.py, gear.py
@@ -29,12 +30,18 @@ cpbot/agents.py   random agents and a game loop
 cpbot/search.py   ISMCTS search agent: samples hidden cards, searches, plays out
 cpbot/features.py position features and the learned position score (data/value_weights.json)
 cpbot/watch.py    play-by-play log, replay record and HTML replay page (replay_template.html)
+cpbot/play.py     play against the bot: what one player can see, readable choices, decklist reader
+cpbot/play.html   the battle page served by scripts/play.py
 docs/             comprehensive rules (29 Oct 2026) and rules FAQ (28 Oct 2026), with the FAQ check
 scripts/soak.py   plays many random games and checks invariants after every decision
 scripts/learn_value.py  plays self-play games and refits the position score
 scripts/arena.py  pits two agents against each other over many games and reports the win rate
 scripts/watch.py  plays one game and writes games/<name>.txt, .json and .html
+scripts/deck.py   checks deck list files and rewrites them in the standard format
+decks/            deck lists
 scripts/coverage.py  shows which card scripts actually ran in random games
+scripts/play.py   play the bot yourself in your browser (standard library only)
+scripts/card_images.py  builds data/card_images.json (card picture links) from ripperdeck.gg pages
 scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
 tests/            rules tests
 ```
@@ -47,7 +54,16 @@ python -m pytest -q tests
 python scripts/soak.py 100000
 python scripts/watch.py --seed 7      # then open games/seed7.html
 python scripts/arena.py --a ismcts:200 --b eager --pairs 20
+python scripts/deck.py decks/bbg-proactive.txt   # check a deck list
+python scripts/arena.py --a ismcts:200 --b ismcts:200 --deck-a decks/bbg-proactive.txt --deck-b other.txt
 ```
+
+Deck lists use the common text format: a `# Deck name` line, `// Legends (3)`,
+`// Units`, `// Gear`, `// Programs` and `// Sideboard` headers, then `3 Card Name`
+lines. Names are matched forgivingly (case, accents, `:` or ` - ` before the
+subtitle, small typos), unknown cards are listed with suggestions, and the
+sideboard is kept out of the played deck. `cpbot.decklist.parse(text)` gives a
+`DeckList` with `.deck`, `.sideboard`, `.errors()` and `.to_text()`.
 
 ```python
 import random
@@ -60,6 +76,38 @@ g = Game(random_deck(rng, db), random_deck(rng, db), seed=0, log=True)
 play_game(g, [RandomAgent(1), RandomAgent(2)])
 print("\n".join(g.log))
 ```
+
+## Play against the bot
+
+```
+python scripts/play.py            # opens http://127.0.0.1:8765 in your browser
+```
+
+Pick your deck (the BBG Proactive sample, a random legal deck, or paste a decklist
+in the usual `3 Card Name` format; `//` headings are fine and the sideboard is
+left out), the bot's deck and how long the bot thinks per move. You play as the
+bottom player. Cards you can use are outlined; click a card to read it and see
+what you can do with it, or use the buttons on the right. Hover a card for a
+bigger picture. The bot can't see your hand, and you can't see its hand.
+Both trash piles sit beside the Legends and Eddies (click the top card or
+"View all"). Eddies are face-down, so only ready or spent shows. **Undo** takes
+back your last move and the bot's replies to it (press it again to go further
+back), **End game** concedes, and **Quit** stops the server (so does Ctrl+C).
+
+Card pictures: `data/card_images.json` holds a link to each card's picture on
+ripperdeck.gg's image store. The pictures themselves aren't in the repo. The
+first time a card is shown, the server downloads its picture into `.card_art/`
+(ignored by git) and serves it from there after that, so later games don't hit
+the site again. `python scripts/play.py --prefetch-images` downloads all 152 in one
+slow, polite pass. `--no-images` plays with text-only cards. Card art belongs to
+CD PROJEKT RED and WeirdCo; this is for personal play only, so don't publish the
+pictures.
+
+Face-down cards (hands, face-down Legends, Eddies) use a card-back picture if you
+save one as `.card_art/card-back.png` (or `.jpg` / `.webp`), or pass
+`--card-back path\to\back.png`. Face-down Legends show it with black and yellow
+swapped, like the printed Legend backs. Without one they show the Cyberpunk TCG logo,
+downloaded once from cyberpunktcg.com.
 
 ## Engine interface
 

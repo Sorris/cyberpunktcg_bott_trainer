@@ -1,0 +1,762 @@
+{
+ "eps-001": {
+  "slug": "yorinobu-arasaka-embracing-destruction",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/eps-001-a0e29ecf24eb0750c2a5411846b915dd7f53df76ccb73940a363f146ac7ede37.webp",
+  "artist": "ADIA"
+ },
+ "eps-003": {
+  "slug": "minotaur",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/eps-003-d99a02ae7500dd40fe3e49dd3c5847c81f5a2061c03e973ff3b024bbed236383.webp",
+  "artist": "CD Projekt Red"
+ },
+ "eps-012": {
+  "slug": "goro-takemura-hands-unclean",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/eps-012-4b998bfefbeb71ef176137eb2db28624355896c13445126e7d732600d8943136.webp",
+  "artist": "Bad Moon Studio"
+ },
+ "eps-013": {
+  "slug": "saburo-arasaka-stubborn-patriarch",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/eps-013-ea1b81963ca6f19bd026c728644e3073f102abf5eaae99369199aab8f8260469.webp",
+  "artist": "ADIA"
+ },
+ "eps-017": {
+  "slug": "goro-takemura-losing-his-way",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/eps-017-7c4710f120cf4aac3afe6a9cc4b3988c7616e6aa8240217bd4bbd7a729964f29.webp",
+  "artist": "Ilya Kuvshinov"
+ },
+ "official-060f0c56-cbb7-45fd-a0cd-9c7b9d0f8103": {
+  "slug": "maxtac-heavy",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-060f0c56-cbb7-45fd-a0cd-9c7b9d0f8103-7182d1f14b0ca9ac0a2e1233af823e4ad89c982dd72d532617e36f92d65616da.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "official-07f119d6-8fb2-4b23-9862-818a7e941010": {
+  "slug": "netwatch-netdriver",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-07f119d6-8fb2-4b23-9862-818a7e941010-0c61ab83d7314139812eb87319fa30ce6630a84f07d32ce199560a905d1f55aa.webp",
+  "artist": "Mooncolony"
+ },
+ "official-14a0b813-d5e3-46e6-a001-aebbd3a95f11": {
+  "slug": "les-e-le-mens",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-14a0b813-d5e3-46e6-a001-aebbd3a95f11-7b93460322de0778b3c44f4234107e9c96aebba1f84debdabbe769bd0e24b3f6.webp",
+  "artist": "Bernard Kowalczuk"
+ },
+ "official-15920617-a06f-4302-9dfb-c85d3470c7eb": {
+  "slug": "towerfall",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-15920617-a06f-4302-9dfb-c85d3470c7eb-3b5e6d963be7c9f5459858c8aa27795af331404884628907cce6f03be2e8fa77.webp",
+  "artist": "Mooncolony"
+ },
+ "official-22b276f4-7cf6-4b14-a220-8368a0839287": {
+  "slug": "maxtac-squadron",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-22b276f4-7cf6-4b14-a220-8368a0839287-8854e1842e83cd5d16ef0ea369dc2149bb82b2c04c8526481a5fb5d372172426.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "official-2647f881-5a7e-4ffb-b231-6574dc531f43": {
+  "slug": "sasha-yakovleva-won-t-let-you-down",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-2647f881-5a7e-4ffb-b231-6574dc531f43-66c6aeb0b33758d89d837ae7d1f2511ea993786ed556054da4b010e161345d61.webp",
+  "artist": "Łukasz Poller"
+ },
+ "official-28267ce7-17dc-42c4-b8c4-4235a7f3c3df": {
+  "slug": "tyger-s-whisper",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-28267ce7-17dc-42c4-b8c4-4235a7f3c3df-d96b61d88fbdd27e6629057b56981375b091ba2898a22c1c3094276a97078dd3.webp",
+  "artist": "Bernard Kowalczuk"
+ },
+ "official-3193a6bd-3e99-4501-9c5c-8d5ea32c779c": {
+  "slug": "rogue-amendiares-queen-of-the-afterlife",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-3193a6bd-3e99-4501-9c5c-8d5ea32c779c-a125064f871beffd36c0b504bc999a6766e0074136936918ba920c0889c77874.webp",
+  "artist": "Mooncolony"
+ },
+ "official-3b1d0570-bb8e-4ea5-9ec7-c698d9c9f94d": {
+  "slug": "pyramid-song",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-3b1d0570-bb8e-4ea5-9ec7-c698d9c9f94d-7764244436a6487d21f9ca9e76c14982210924249c11d0c79c36bdabd310dd45.webp",
+  "artist": "Elizaveta Kazakova"
+ },
+ "official-3bd6767b-ef0c-47dd-9f47-d00112a74111": {
+  "slug": "modded-muramasa",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-3bd6767b-ef0c-47dd-9f47-d00112a74111-e210cb7e4c4338971fbfc5b9412245d24e21e5f4415e8694759a423eb7741e51.webp",
+  "artist": "Mooncolony"
+ },
+ "official-4277845b-1209-46df-8353-8fd36f56148a": {
+  "slug": "synapse-burnout",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-4277845b-1209-46df-8353-8fd36f56148a-a89dd82c0d4b76712261da4bbf21ab2f76b51018266cec46ea77b36fb1f28a50.webp",
+  "artist": "Michal Ivan"
+ },
+ "official-43e5568f-a609-4eff-8502-e81ba9134d2c": {
+  "slug": "maelstrom-zealots",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-43e5568f-a609-4eff-8502-e81ba9134d2c-fb67db5a03e35e3bc6bb7abbb17ef0a61054175edc227c577ce7c80e6182d36c.webp",
+  "artist": "Michał Dziekan"
+ },
+ "official-54f0308f-8fb2-4861-a414-c15ca24426c3": {
+  "slug": "wild-in-the-streets",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-54f0308f-8fb2-4861-a414-c15ca24426c3-6e88c416eea4cfe321b85edf0d3cd7ba0305835e1d01c30833500baee627fde4.webp",
+  "artist": "Bernard Kowalczuk"
+ },
+ "official-573a88e9-ac01-4402-8e3d-2420dc4ca949": {
+  "slug": "three-mouths-one-desire",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-573a88e9-ac01-4402-8e3d-2420dc4ca949-7974b44acc8cfb2d107a8c18435662fa9b936b3baa8f5d588bd0800316bcae5b.webp",
+  "artist": "Łukasz Poller"
+ },
+ "official-576f82ff-3c4d-4637-aa91-2773de43bbc8": {
+  "slug": "tetratronic-rippler",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-576f82ff-3c4d-4637-aa91-2773de43bbc8-56850d8ce2660a1716c146e9f0cc719b6740e5a5209c16e3f58babddd68d6b94.webp",
+  "artist": "ADIA"
+ },
+ "official-5801d086-7e87-4645-95e2-68239230098d": {
+  "slug": "westbrook-netrunner",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-5801d086-7e87-4645-95e2-68239230098d-e32f50a30c8895d9647cfdbb7fdc043ee4d77bf5a7ba7ccc520e956fb92a0135.webp",
+  "artist": "ADIA"
+ },
+ "official-5b9cdefa-29f4-4a3a-a426-eea46302ef60": {
+  "slug": "delamain-cab",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-5b9cdefa-29f4-4a3a-a426-eea46302ef60-c9550e1979396237870ff1753b5df075e23a9eef5b2cf9f2b61805d8dce669e6.webp",
+  "artist": "CD PROJEKT RED"
+ },
+ "official-5d795b32-9ad8-4c94-abd4-d01e389db389": {
+  "slug": "rita-wheeler-no-stupid-questions",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-5d795b32-9ad8-4c94-abd4-d01e389db389-ce7130a0586b1f4c4b4090d4efadebd7e85a33dbc23cdbad98976b32366c2f80.webp",
+  "artist": "TOPDOG Entertainment"
+ },
+ "official-63821536-cdf5-4347-812a-0bf72d727596": {
+  "slug": "we-gotta-live-together",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-63821536-cdf5-4347-812a-0bf72d727596-fe1254fbe37bba58bfd0a155619e6f40aef1fbbea68052690c05630266cbd61d.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "official-70a2a18e-05c2-4a49-9236-e33b2c9819a5": {
+  "slug": "trust-no-one",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-70a2a18e-05c2-4a49-9236-e33b2c9819a5-c7c6d2fd005a3a50164fb9b3c2b64b2e89008eeea652b76c695abcaddcb8b4b7.webp",
+  "artist": "Jesús Hervás"
+ },
+ "official-70c7f11e-e41d-44f2-b5cd-e8568915d6ac": {
+  "slug": "nocturne-op55-n1",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-70c7f11e-e41d-44f2-b5cd-e8568915d6ac-928e291e877b5609fadd2c3f475d06d03b516e82aa0c69ca46a13a992238da9d.webp",
+  "artist": "Michał Dziekan"
+ },
+ "official-7751b719-978b-44b1-a82f-b2881d3a416e": {
+  "slug": "fool-on-the-hill",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-7751b719-978b-44b1-a82f-b2881d3a416e-fa1078e0d94cba7420fc44041fdfbbca47d0cb68058005ca0e49804ccb5fecd1.webp",
+  "artist": "DOFRESH"
+ },
+ "official-7dc71978-0995-4b93-9ba3-83d1118c3c4b": {
+  "slug": "hacked-corpo",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-7dc71978-0995-4b93-9ba3-83d1118c3c4b-7ebf9bb105de36fbd0f4c4330d89bc1281cbe75e956b36ab2b452a06dcad0790.webp",
+  "artist": "Luke Poller"
+ },
+ "official-8570122a-52aa-4a6b-8d72-4c8848df0f9b": {
+  "slug": "peace-offering",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-8570122a-52aa-4a6b-8d72-4c8848df0f9b-5e16b554906b589845ff9d71181aa8907a1481d74670221e19b8bc3d2c02fbea.webp",
+  "artist": "Mattia De Iulis"
+ },
+ "official-8b8bcfcd-37c8-4bca-8c25-17a3b3363349": {
+  "slug": "zetatech-berserk",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-8b8bcfcd-37c8-4bca-8c25-17a3b3363349-b999e245d36a3209ac539f0286b3922cefa477621997b8a77305d1a0125dd295.webp",
+  "artist": "Mooncolony"
+ },
+ "official-8d0ad645-ac9a-4ecb-93d0-4c2061a4c477": {
+  "slug": "judy-a-lvarez-braindance-maestro",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-8d0ad645-ac9a-4ecb-93d0-4c2061a4c477-0ad677c937b09a2b51cdf921e638cbfe99e17c0ae933c08666a13f7a5cdb1500.webp",
+  "artist": "Gautier Viller"
+ },
+ "official-8e2f2d0c-0e92-4744-a510-a9c7ac371d81": {
+  "slug": "jacked-in-voodoo-boy",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-8e2f2d0c-0e92-4744-a510-a9c7ac371d81-fed0a695607da58b4c48db9b694b9d4694dd83b06ad60e82e9334b6515c8faed.webp",
+  "artist": "Josan Gonzalez (Deathburger)"
+ },
+ "official-8f7a7d0b-5935-4732-a9ba-76b19467d5a0": {
+  "slug": "wakako-okada-peace-and-harmony",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-8f7a7d0b-5935-4732-a9ba-76b19467d5a0-5876d37713265e2e6a5747a7269dbc6518ee50aec2041ad1472774be8699b2e0.webp",
+  "artist": "Mooncolony"
+ },
+ "official-9231f9ff-1ba5-4c4f-bd78-70e0780b58e5": {
+  "slug": "panam-palmer-strength-through-family",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-9231f9ff-1ba5-4c4f-bd78-70e0780b58e5-4e375fbe4b8bcac7827f36686f355744f8a924ab4c442238386e75bf5a90bfd8.webp",
+  "artist": "Ilya Kuvshinov"
+ },
+ "official-9b4231da-b5e9-44ee-9de9-75ba6a6e6de6": {
+  "slug": "lucyna-kushinada-fresh-beginnings",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-9b4231da-b5e9-44ee-9de9-75ba6a6e6de6-2568cf0ed7726840c1f8f07b763605613adff5b330bab094e5357fbe43b402af.webp",
+  "artist": "Pandart Studio"
+ },
+ "official-b21f86a3-cb77-44a3-bf94-4c5e068ac2c8": {
+  "slug": "unlikely-bond",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-b21f86a3-cb77-44a3-bf94-4c5e068ac2c8-8d942300eeda52ec523d7bc89cf52d6e588be71456789ab5f5cd178d090e92f6.webp",
+  "artist": "Fabrizio De Tommaso"
+ },
+ "official-b43f5006-7388-4189-81ff-343b5428305b": {
+  "slug": "pacifica-netrunner",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-b43f5006-7388-4189-81ff-343b5428305b-e36f178ea403f93b65b4200a2a958c3742b5c943f2e536d83cb414ec97f7accc.webp",
+  "artist": "ADIA"
+ },
+ "official-c7eba3a0-63cb-4311-988e-d487a7c0841a": {
+  "slug": "delamain-rideshare-ai",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-c7eba3a0-63cb-4311-988e-d487a7c0841a-8c03d08aeeb674d929445f2a184188e8b497c6e9f54af718a3c45fc382904287.webp",
+  "artist": "Łukasz Wiktorzak"
+ },
+ "official-c7f0583f-2493-4e1f-9967-977bc0c6fa15": {
+  "slug": "padre-man-of-the-cross",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-c7f0583f-2493-4e1f-9967-977bc0c6fa15-d384b6ea0772adaa876f74718c377781e94933e9bf8971ccd0bac893875ea469.webp",
+  "artist": "Mooncolony"
+ },
+ "official-ce570725-0de7-438a-a9c8-33074a7180ba": {
+  "slug": "riot-shield",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-ce570725-0de7-438a-a9c8-33074a7180ba-bd9bb684889fa76ce4e597a1468fb24da57a8223741933fd9a0a00cef4afd01a.webp",
+  "artist": "TOPDOG Entertainment"
+ },
+ "official-dcfe8370-9abf-4395-b50b-efea505609ba": {
+  "slug": "judy-a-lvarez-nothing-to-doubt",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-dcfe8370-9abf-4395-b50b-efea505609ba-e1cbaf4ef61a50cfdb88db9d68a44af5936d65eff6890999f22ea20821364808.webp",
+  "artist": "Ilya Kuvshinov"
+ },
+ "official-e96d3167-5115-4c82-9b35-546cba0aaead": {
+  "slug": "don-t-fear-the-reaper",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-e96d3167-5115-4c82-9b35-546cba0aaead-be264d092973dbed93e71172513a2334a2faea6d0f989e7b6dc367377eccf9c0.webp",
+  "artist": "Alex Eckman-Lawn"
+ },
+ "official-ef9f2959-de87-4a54-be45-5c9dcc507aba": {
+  "slug": "memory-relapse",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-ef9f2959-de87-4a54-be45-5c9dcc507aba-3d18a49646a9be020019bfb11bcbb13d750014ea650414b0938daf96c5131fdd.webp",
+  "artist": "Max Fiumara"
+ },
+ "official-f1fa787d-e936-42a8-b42f-14999e722793": {
+  "slug": "maxtac-av",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-f1fa787d-e936-42a8-b42f-14999e722793-30a352601e125f92cc9d8a1c344b4cef5a3406a0b874f884ce7d75ee705ba16f.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "official-fb096d3f-48eb-47c0-a065-81b39691e12f": {
+  "slug": "reboot-optics",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/official-fb096d3f-48eb-47c0-a065-81b39691e12f-cdb5a01cb50091c0a3968d0862e30a089c18bc48fdcc848a7cddc3387c1d9ac4.webp",
+  "artist": "Miguel Valderrama"
+ },
+ "prm01-005": {
+  "slug": "rebecca-having-a-moment",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/prm01-005-0c9770d90d9c8b5ec8a1c4edfe4fd9eaeba8162c002e66acca03990f09ddf1e8.webp",
+  "artist": "Narupiti Harunsong"
+ },
+ "ths-001": {
+  "slug": "viktor-vektor-sit-down-and-relax",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/ths-001-14c33b51a1922caea8540a0cfb9e1acc67e850422af8053f949c664f4edf45e0.webp",
+  "artist": "Envar"
+ },
+ "ths-002": {
+  "slug": "dexter-deshawn-one-last-chance",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/ths-002-dc3cc292ac36d54ef2a654cd745adf1bdef2b35d6982ccd73af2f16260954652.webp",
+  "artist": "Mooncolony"
+ },
+ "ths-011": {
+  "slug": "jackie-welles-pour-one-out-for-me",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/ths-011-29202684c4942f70f3a1d2d3fd55a2b4b4059ca54f54950c4d922466aac7966c.webp",
+  "artist": "Envar"
+ },
+ "ths-012": {
+  "slug": "v-corporate-exile",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/ths-012-28ca9c119f18909ea26dc36452ed422fbf7d378a0360a4cd3e3f24301a821a9d.webp",
+  "artist": "Envar"
+ },
+ "ths-015": {
+  "slug": "mt0d12-flathead",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/ths-015-2ebadb412057b7b401878ca6c6fb089057bc74f45378f6a4c5e3b3e258e9dbac.webp",
+  "artist": "Federico Sabbatini"
+ },
+ "wtnc-001": {
+  "slug": "adam-smasher-ender-of-legends",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-001-557393b5a85f265ed7579dcedc167b0f51e30c8fdad1a8821281ee427d1d4c81.webp",
+  "artist": "Michał Dziekan"
+ },
+ "wtnc-002": {
+  "slug": "dexter-deshawn-off-the-grid",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-002-23c309c6f192e478b8eac24eef96cb5560ac5704a75fa9cfd8e63e384261874b.webp",
+  "artist": "Envar"
+ },
+ "wtnc-003": {
+  "slug": "johnny-silverhand-rocking-renegade",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-003-e31d0c7f3407ff254da0093e36ff5cc2259219603181801ed3766b8941092a3e.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-004": {
+  "slug": "royce-psycho-on-the-edge",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-004-4964c603b1808a83af8f8829157f83c836375963d2dc2fcca7bad58ba7ca71d4.webp",
+  "artist": "Michal Ivan"
+ },
+ "wtnc-005a": {
+  "slug": "v-streetkid",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-005a-ee37fcc0cd458e9ba14dd593c602a24001bc3eed83f9de40acd3bcdcf70406ff.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "wtnc-006": {
+  "slug": "6th-street-recruits",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-006-008cd40ccaec7a3e1c046affe18ded966ecf5208051be9de9e8971dee67da552.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-007": {
+  "slug": "animals-wrecker",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-007-09925df4901027ee54e7671c8c17701dc8e6bae204760519b444e431243785ff.webp",
+  "artist": "Michal Ivan"
+ },
+ "wtnc-008": {
+  "slug": "chrome-fang",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-008-0692431f6faa7c75f53287c3238cbb6318e56386330098e7269943db63d74339.webp",
+  "artist": "Bernard Kowalczuk"
+ },
+ "wtnc-009": {
+  "slug": "el-sombrero-n-la-venganza-lenta",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-009-6440933b8d6cec0212fc3c242dc7ea39b8d719e18c2cc12919f263264d0e58a5.webp",
+  "artist": "Rafael de Latorre & Clonerh"
+ },
+ "wtnc-010": {
+  "slug": "japantown-jonin",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-010-57fd904d0d4c09137bcee5c45dcc49784d9ca164a743941a2a3ec1ccc11dc5c1.webp",
+  "artist": "Michał Dziekan"
+ },
+ "wtnc-011": {
+  "slug": "johnny-silverhand-never-stop-fighting",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-011-53837fd88622addc266c7ac361a25ff531a7855e045ef1b72f3d961a474e54b6.webp",
+  "artist": "Łukasz Poller"
+ },
+ "wtnc-012": {
+  "slug": "kerry-eurodyne-the-last-rockerboy",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-012-2e5932d85deba6adb88109abe58568e7763cd0caa2ea8ffc7aec722407bcb337.webp",
+  "artist": "Bogna Gawrońska"
+ },
+ "wtnc-013": {
+  "slug": "la-llorona-ghost-of-the-past",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-013-8f03cfd646b0a7c7993d2da55d70318fb9ff53f94724b939c879e290eebd30fd.webp",
+  "artist": "Jesus Hervás"
+ },
+ "wtnc-014": {
+  "slug": "meredith-stout-stone-cold-corpo",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-014-fbf90c91b430f05c50a30406180890e43349b0c35ea123976aa6d800a2b9c4b0.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-015": {
+  "slug": "octant",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-015-364c230fc8b35c6608bc698c39479390c68a85fe616fae59e288c42085aaf3bc.webp",
+  "artist": "CD Projekt Red"
+ },
+ "wtnc-016": {
+  "slug": "royce-don-t-call-me-simon",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-016-8fb9c78fbd849346811159d9061f34a0632379f3fa7fb0c81ffccef64d15077c.webp",
+  "artist": "Mooncolony"
+ },
+ "wtnc-017": {
+  "slug": "ruthless-lowlife",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-017-11c95f6e90e9659ad5381b866ff88c53d256a9d2d82f4bf06e68a9d56cd11ab9.webp",
+  "artist": "Jeffrey Alan Love"
+ },
+ "wtnc-018": {
+  "slug": "screw-lovelorn-fool",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-018-63346430d216d68117c60e06437dc34635967e3653f137dfaa8e91132043897e.webp",
+  "artist": "Rion Chow"
+ },
+ "wtnc-019": {
+  "slug": "swordwise-huscle",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-019-56e2d08f209c45bbdb65d722f4fb079159f15df247638adba667fb806fc678b0.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "wtnc-020": {
+  "slug": "v-roamer-of-the-badlands",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-020-2188430f93841be5bce26aa52c552aeaf0fa29118380831ff8c908d73d16ba18.webp",
+  "artist": "Dardo Studios"
+ },
+ "wtnc-021": {
+  "slug": "valentino-guerrera",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-021-4a269c1eebb8be0b0d0ba6d5e5f3dc03f920561f7c6abd5e3fb833d7bce4f385.webp",
+  "artist": "Michał Dziekan"
+ },
+ "wtnc-022": {
+  "slug": "yorinobu-arasaka-steel-dragon",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-022-4ce701ceba2804285dd28495c5e7dfa71178156ef1544ddb823bda9c69bc2416.webp",
+  "artist": "Mooncolony"
+ },
+ "wtnc-023": {
+  "slug": "arasaka-emergency-radioport",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-023-ac37e1f12931dbd051be7c937a92009c3e444a4cd0a678fadc80452899f1d739.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-024": {
+  "slug": "deadman-transmitter",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-024-441afa96a7df87b821930c29ed78f3ca9af1ee595c42cb1fad0195c49d53dcc7.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-025": {
+  "slug": "mantis-blades",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-025-6a0e07e766855b331e92ef68d3f766efa50254f6bc4b321f3deca8f043c31456.webp",
+  "artist": "Ricardo Padierne Silvera"
+ },
+ "wtnc-026": {
+  "slug": "satori-sword-of-saburo",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-026-291832f42ed8c58ac1dfed9e6fe7869a26b3bb3713062518afc2a68371d016c4.webp",
+  "artist": "Ivan Shavrin"
+ },
+ "wtnc-027": {
+  "slug": "all-is-lost",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-027-62977a269ac2a8a46028160fd1eb6d37929ecefbde119d295d14c22f1837aad6.webp",
+  "artist": "Fabrizio De Tommaso"
+ },
+ "wtnc-028": {
+  "slug": "appetite-for-destruction",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-028-b249a6f9b3159aadb2d9471ef9f196aa6f02ebaf6d2572121da39934284eed82.webp",
+  "artist": "Miguel Valderrama & Jason Wordie"
+ },
+ "wtnc-029": {
+  "slug": "bonnie-and-clyde",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-029-281ab8e46b297cbb4bfac4319f2a5ebed625ca4d5efc239f90a33b9ecdd7f3b7.webp",
+  "artist": "Rion Chow"
+ },
+ "wtnc-030": {
+  "slug": "carnage-at-the-colosseum",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-030-b6ef9d755a2f338c9092d8fed3d19ec5891004c0565bc8571aca23e39a0fb8e2.webp",
+  "artist": "Matías Bergara"
+ },
+ "wtnc-031": {
+  "slug": "detonate",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-031-93b40ec24fee0bc7c857c7c82330f79f154e5f5413c03ecc3028bed0e55dea58.webp",
+  "artist": "Michal Ivan"
+ },
+ "wtnc-032": {
+  "slug": "gunpoint-diplomacy",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-032-173ddbb4ac47939b4553599852bfc3708fb36e42ad514f4833d14c299b3e735f.webp",
+  "artist": "Rafael de Latorre"
+ },
+ "wtnc-033": {
+  "slug": "industrial-assembly",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-033-3a12515bfac996b0477121d7ced29d647426100adf8ebab25ca7a99c710aeb43.webp",
+  "artist": "Alexander Dudar"
+ },
+ "wtnc-034": {
+  "slug": "over-the-edge",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-034-cb769ffd9e7c16443d534ffc03b825bd701cfe606d19fa9f21be7569dea99e34.webp",
+  "artist": "Roberto Ricci"
+ },
+ "wtnc-035": {
+  "slug": "shattered-memories",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-035-d7635220903294c7c35a6cca1a74d918aaba2c8a8bab78c588d4f3429a82febe.webp",
+  "artist": "Max Fiumara"
+ },
+ "wtnc-036": {
+  "slug": "dum-dum-maelstrom-triggerman",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-036-97986650ebea5904117aa127aae51410e34200dc24dff71ae11510b0ffbf6f7d.webp",
+  "artist": "Łukasz Poller"
+ },
+ "wtnc-037": {
+  "slug": "kerry-eurodyne-axe-attitude-audience",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-037-32f5b850d3e784e614ad96cb468ca3a6886469d70e231072afc149e5ca0be0e8.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-038": {
+  "slug": "muamar-reyes-el-capita-n",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-038-ee18cec3d73cb66e967d80a057c85f34485375d62d5eded34d360f660f99ba89.webp",
+  "artist": "Mooncolony"
+ },
+ "wtnc-039": {
+  "slug": "river-ward-detective-on-the-hunt",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-039-221ac17b55a54a5ac10d60dc4b8c8c5d5f9c4437fb2f96e3a8086e78efd2a8d8.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-040": {
+  "slug": "rogue-amendiares-preem-solo",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-040-1b9a47dd8fb25b5459549717c6a0c157a7454fbcb110fb48e60fa5b82ff4180e.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "wtnc-041": {
+  "slug": "adam-smasher-metal-over-meat",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-041-48aa00ef7ce5335d20ec9d3464dbdb8f2691aac769cfa5741ca307d9ad96230f.webp",
+  "artist": "Dardo Studios"
+ },
+ "wtnc-042": {
+  "slug": "alt-cunningham-mother-of-daemons",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-042-4364d72e60240c641947ca5efdb12a6664d2004c7ade2ae55c29936d3313300c.webp",
+  "artist": "Mooncolony"
+ },
+ "wtnc-043": {
+  "slug": "augmented-negotiators",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-043-3eb60b79bbbefd6f35f18acc5cddaabe115f342216f67b682c5e92a99ea21d8f.webp",
+  "artist": "Bernard Kowalczuk"
+ },
+ "wtnc-044": {
+  "slug": "caliber-totentanz-s-top-dog",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-044-20b8c5b01950a8c7e85f062e0bc8891d12f159cbc980662a58587c34fa55aba0.webp",
+  "artist": "André Lima Araújo & Chris O'Halloran"
+ },
+ "wtnc-045": {
+  "slug": "gilded-mato-n",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-045-c77e17972cc122434c8c8ab9d01b3b61baf6f465d079bb6a94fda3ce2a72f76a.webp",
+  "artist": "Josan Gonzalez (Deathburger)"
+ },
+ "wtnc-046": {
+  "slug": "hanako-arasaka-in-a-gilded-cage",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-046-799ef5247ce8fbd103476757add820855a00b537962569665c8d3af4127f07e2.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-047": {
+  "slug": "heywood-ripperdoc",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-047-fb9c222a36b930930bb00c83f5761f0b0a4055e0c8e35cc69877a3979516b31f.webp",
+  "artist": "Łukasz Poller"
+ },
+ "wtnc-048": {
+  "slug": "jackie-welles-ride-or-die-choom",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-048-8cf3b4f6c95b88e5340d4714ed828822765bcad35bc127b7b7b8e81719f1daa5.webp",
+  "artist": "Ilya Kuvshinov"
+ },
+ "wtnc-049": {
+  "slug": "maelstrom-goons",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-049-cc8c7b9a0470ac533124302b1dae3786fb9cb8141f3770a5b571a4212adb5d59.webp",
+  "artist": "Alexander Dudar"
+ },
+ "wtnc-050": {
+  "slug": "maxtac-suppression-team",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-050-1e9c35739351786c5efe65de5bd2591d0752ab2040d2d3be67ec858b2e8f1609.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-051": {
+  "slug": "offduty-malfini",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-051-be44a5594dee2c4764363be1eb38c1a7c9d31fd8bbaedd81dc4fa854b93f2407.webp",
+  "artist": "Bernard Kowalczuk"
+ },
+ "wtnc-052": {
+  "slug": "rockn-rockerboy",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-052-a416d7734ed33b5eb7b01dcf5e98bf29f26d09e8ef8c6e9277395abd007cdea0.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-053": {
+  "slug": "secondhand-bombus",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-053-330f622d862d5729b1730740ae5843fe96111f95993fd7807a907c986491d526.webp",
+  "artist": "Luca Claretti"
+ },
+ "wtnc-054": {
+  "slug": "sketchy-ripper",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-054-9476ca11e85ad01513857537d9e21682ee251a22ae96979bb26d9d647768dd72.webp",
+  "artist": "Michał Dziekan"
+ },
+ "wtnc-055": {
+  "slug": "t-bug-amateur-philosopher",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-055-7239f7b861d72d68bd935884546179d1a3a6ec140fbd52c01d93e1030982fe8b.webp",
+  "artist": "Łukasz Poller"
+ },
+ "wtnc-056": {
+  "slug": "trauma-team-operatives",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-056-c37ff430f8cda5779261d127d2db23a160b948d6ef489da869dad7771d029282.webp",
+  "artist": "Michal Ivan"
+ },
+ "wtnc-057": {
+  "slug": "viktor-vektor-drop-your-illusions",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-057-24991bd3305b873e57355000605e6571d47fd6c3da8fdac3f5c75936c6779e31.webp",
+  "artist": "TOPDOG Entertainment"
+ },
+ "wtnc-058": {
+  "slug": "viktor-vektor-you-might-feel-a-little-pinch",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-058-751e94f07b8fdf72d74fabbd04f3d03893ccafb5727e3dd18ae2d6dc38dc36e8.webp",
+  "artist": "Łukasz Poller"
+ },
+ "wtnc-059": {
+  "slug": "adrenaline-converter",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-059-e9d74b3ae76cea60cdb48faea9fa9899862a9fc71539661e02a95848240ab9ec.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-060": {
+  "slug": "gorilla-arms",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-060-1a786ce69db47be96401f3e3f59582f206c743cb8d837fcb6bcb8e8b4988d800.webp",
+  "artist": "TOPDOG Entertainment"
+ },
+ "wtnc-061": {
+  "slug": "kiroshi-optics",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-061-75e23a6cd2f5625fe45696657924391a704a84620b8776aea97bb2239b32c98b.webp",
+  "artist": "CD Projekt Red"
+ },
+ "wtnc-062": {
+  "slug": "mandibular-upgrade",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-062-4738ec9ef7a3dc7eeeb8ac819d49c54550ce3b957bedd9d64f0698abc39038a2.webp",
+  "artist": "Lea Leonowicz"
+ },
+ "wtnc-063": {
+  "slug": "the-relic-experimental-biochip",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-063-fa91c11b9d41fa21d436a8a4db77bb9b11dd94f39fcd30fdf9d5571e4aba4f28.webp",
+  "artist": "Dardo Studios"
+ },
+ "wtnc-064": {
+  "slug": "zetatech-faceplate",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-064-88026670e190165039cf92baf240ce485a4fe335a8b8a2fd47bc65163113ffce.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-065": {
+  "slug": "afterparty-at-lizzie-s",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-065-b5a66edce5b7f3017b0d44da633194ae041fdd25a1f588547a04b994038972ca.webp",
+  "artist": "Alicja Użarowska"
+ },
+ "wtnc-066": {
+  "slug": "bootleg-black-sapphire-show",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-066-b2f3140399fa41bcf920bb576b6689c84a39218ab4706184b3531aae396592fd.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-067": {
+  "slug": "cyberpsychosis",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-067-b76ceb91d6b6349e66035a250d0007627495a35fe77daeed20d90ab8372438ff.webp",
+  "artist": "Michal Ivan"
+ },
+ "wtnc-068": {
+  "slug": "live-with-the-aftermath",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-068-e2d92b29d522c6f7b10ccf03bc86aa6c45c9e945378591c087c39069bbcdea63.webp",
+  "artist": "DOFRESH"
+ },
+ "wtnc-069": {
+  "slug": "safety-override",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-069-dfcd7c6360db58a03d7bc54e89c45a55fcb25defb9eecf4303257996ccaccf51.webp",
+  "artist": "Miguel Valderrama"
+ },
+ "wtnc-070": {
+  "slug": "the-heist",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-070-5fe6d06313404189fd422855b277a515c8d49fb8af2771ac830dfb1d03b71004.webp",
+  "artist": "Dilara Özden"
+ },
+ "wtnc-071": {
+  "slug": "goro-takemura-vengeful-bodyguard",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-071-f6a182599e2c5a72064064dc5ac2b5510b0bdf4b6e5a37922aa44a85d81c7130.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-072": {
+  "slug": "hanako-arasaka-daughter-of-the-emperor",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-072-5e7834d575597758f6a2b75c4b1e92d739282098883a840ad4b3378b5ec98b1a.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-073": {
+  "slug": "jackie-welles-mama-s-favorite",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-073-c879e8b45e36ce24597c185f04222c6e1ab4379775663065f9be6309de2d4b0d.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-075": {
+  "slug": "panam-palmer-nomad-cavalry",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-075-cd95d6cdbdbb32ed6d797d21a045e7bd7e1ff69ed2147798b177ff8c7252d528.webp",
+  "artist": "Łukasz Poller"
+ },
+ "wtnc-076": {
+  "slug": "corpo-security",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-076-c4809896ce704266dcb8266d2bc9190b95f84103f9b90d562e3f7ff2cb6f20c1.webp",
+  "artist": "CD PROJEKT RED"
+ },
+ "wtnc-077": {
+  "slug": "emergency-atlus",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-077-5cb0421a2c11cb52c3a4922a47bf822930109936c80bae284e9099c5be7cb522.webp",
+  "artist": "Robert Sammelin"
+ },
+ "wtnc-078": {
+  "slug": "field-operator",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-078-9adf192d6b4183216160216b478c8ead1262eb0caf5ce9f11f48e1f8af1472c3.webp",
+  "artist": "Michal Ivan"
+ },
+ "wtnc-083": {
+  "slug": "nadia-fighting-through-grief",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-083-cf7d4afdaf80d39aaf2e9cea138d604b4f6e9221901e9a41df8d59202a9e26d5.webp",
+  "artist": "Miguel Valderrama"
+ },
+ "wtnc-086": {
+  "slug": "pepe-najarro-working-doubles",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-086-8bae333dd70cca45c6ace82f99ece50bc4623cf261912e127d1f18253925f5a9.webp",
+  "artist": "TOPDOG Entertainment"
+ },
+ "wtnc-087": {
+  "slug": "riding-nomad",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-087-31e1ba8876537928ea63cdedefade2aa4858671f178f513dada626c0a5b1c9da.webp",
+  "artist": "Michal Ivan"
+ },
+ "wtnc-088": {
+  "slug": "sandayu-oda-hanako-s-guardian",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-088-687e55238f128c659198e2ae0143f6e71fa9730243909f385810f8d988c4fbdb.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-089": {
+  "slug": "saul-bright-stormrider",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-089-1ef1a485c3af584544369b29fb8876ddc3a5f208714c3086621a88c59b7b8052.webp",
+  "artist": "Mooncolony"
+ },
+ "wtnc-091": {
+  "slug": "valentino-street-racer",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-091-feec233c020904704dcde3b04ccb4a1fa6d17db2c228f5e845237e92489086d8.webp",
+  "artist": "Michał Dziekan"
+ },
+ "wtnc-092": {
+  "slug": "wraith-marauders",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-092-1a2889395c920b36b778bf27aabe3c6a325b82c42255423871f9db6db8250085.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-093": {
+  "slug": "overwatch-panam-s-gift",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-093-5c0dd02cb208ac868db6809b3263049c8da7e0b82640a23c1bc06df4c9a0c4fc.webp",
+  "artist": "Mooncolony"
+ },
+ "wtnc-095": {
+  "slug": "sandevistan",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-095-5db768955b6ecd1952e3feee637915cf7c57a8998990bd553b1b9c0a7d718caa.webp",
+  "artist": "CD Projekt Red"
+ },
+ "wtnc-097": {
+  "slug": "corporate-surveillance",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-097-ee14fdea9b0329db5e83102d3e9f847657e13ca44784dc44dab7c0e220da86e4.webp",
+  "artist": "John Liew"
+ },
+ "wtnc-103": {
+  "slug": "take-control",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-103-f485158e507b7914f2add2da6dd6f03ff04e3be1d35ea8d4530a94072593a575.webp",
+  "artist": "RUDCEF"
+ },
+ "wtnc-106": {
+  "slug": "alt-cunningham-soulkiller-architect",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-106-0758b167ba2905177d716aa64d6f9141c2aa132b14f562ce6fe56a9d8e6425e5.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-107": {
+  "slug": "evelyn-parker-beautiful-enigma",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-107-a8942dc5aeb5ccc5c6b085cd4bb580694fd34b92b8e645f5cf68988fd650d76a.webp",
+  "artist": "Daniel Valaisis"
+ },
+ "wtnc-113": {
+  "slug": "evelyn-parker-scheming-siren",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-113-67a8e1d8262e264dd1e67ee7217cc243a7c846ff277302bfb57fcdbc884c8db9.webp",
+  "artist": "Olgierd Ciszak"
+ },
+ "wtnc-117": {
+  "slug": "lizzy-wizzy-delicate-weapon",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-117-4b09cc00067bbd9737814b5b5636518ad2fab857e9c529505aed69cbbf78e3a9.webp",
+  "artist": "CD Projekt Red"
+ },
+ "wtnc-118": {
+  "slug": "maman-brigitte-spirit-of-death",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-118-550422df6c73c0bb683d9158582f2101cc59ae91ba2eafb1361e78d4a398f84b.webp",
+  "artist": "TOPDOG Entertainment"
+ },
+ "wtnc-119": {
+  "slug": "misty-olszewski-mender-of-broken-spirits",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-119-8614a4fce3e6f8b152d72506c9f46976ca8750effdb1cd04412d04b90e2ac402.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-120": {
+  "slug": "modded-kusanagi",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-120-e17c013c6cdbe85d11fa9c8060b53210da717f249c3ca484ec443a39c0ad5892.webp",
+  "artist": "Łukasz Poller"
+ },
+ "wtnc-122": {
+  "slug": "mox-inciters",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-122-21c05a79f7795a3ea433c5bdaef493844c5ac98758259c2aa422123e76f10e16.webp",
+  "artist": "Michał Dziekan"
+ },
+ "wtnc-123": {
+  "slug": "placide-voodoo-sentinel",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-123-b2937b8a7d153325ca6f9bf2a94d9bc4f4355d61feb4f754b0a7b2f9677b22a2.webp",
+  "artist": "Mooncolony"
+ },
+ "wtnc-124": {
+  "slug": "psycho-squad",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-124-61fbdd94e8df902f7b8bb29adc2c9e83781acaf9b3973a7d81f5bd72e5d3208c.webp",
+  "artist": "Kieran McKeown & Giada Marchisio"
+ },
+ "wtnc-128": {
+  "slug": "dying-night-v-s-pistol",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-128-f91b454fa07ee8621d1a40c302744aada685e89923940a19dbf1aba8b123616e.webp",
+  "artist": "Ivan Shavrin"
+ },
+ "wtnc-131": {
+  "slug": "chrome-reverie",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-131-c3dd3e5e73c881fa53b47c0ae5160c8d16104aa071fb18266e7db024819b4f3a.webp",
+  "artist": "ADIA"
+ },
+ "wtnc-132": {
+  "slug": "floor-it",
+  "url": "https://gwupeldmdknkipmnuiwt.supabase.co/storage/v1/object/public/card-art/wtnc-132-2cdcff3f8c986afccc3348bace6725853a56e7f7073bdeba6ab114439718d9bb.webp",
+  "artist": "DOFRESH"
+ }
+}

@@ -1,3 +1,4 @@
+.card_art/
 __pycache__/
 *.pyc
 .pytest_cache/
