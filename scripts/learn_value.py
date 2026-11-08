@@ -1,14 +1,17 @@
 """Fit the learned position score from self-play games.
 
     python scripts/learn_value.py --games 20000 --procs 4
+    python scripts/learn_value.py --data selfplay/round1 --games 0 --out data/value_weights.json
 
-Plays games with the search agent's playout policy, samples positions, labels
-each with who went on to win, and fits a logistic model over cpbot.features.
-Writes data/value_weights.json and prints how well it predicts held-out games.
+Without --data it plays games with the search agent's playout policy. With --data it
+also (or only, with --games 0) reads positions recorded by scripts/selfplay.py.
+Each position is labelled with who went on to win, and a logistic model over
+cpbot.features is fitted. Prints how well it predicts held-out games.
 """
 import argparse
 import json
 import math
+import os
 import random
 import sys
 import time
@@ -67,27 +70,47 @@ def main():
     ap.add_argument("--games", type=int, default=20000)
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--seed", type=int, default=100000)
+    ap.add_argument("--data", nargs="*", default=[], help="folders of selfplay .npz files")
     ap.add_argument("--out", default=str(WEIGHTS))
     a = ap.parse_args()
     t = time.time()
-    with Pool(a.procs) as pool:
-        chunks = pool.map(play, range(a.seed, a.seed + a.games), chunksize=50)
-    rows = [r for c in chunks for r in c]
-    X = np.array([r[0] for r in rows])
-    y = np.array([r[1] for r in rows])
-    h = np.array([r[2] for r in rows])
-    test = np.array([r[3] % 10 == 0 for r in rows])        # hold out whole games
+    rows = []
+    if a.games:
+        with Pool(a.procs) as pool:
+            chunks = pool.map(play, range(a.seed, a.seed + a.games), chunksize=50)
+        rows = [r for c in chunks for r in c]
+    Xs = [np.array([r[0] for r in rows]).reshape(len(rows), len(NAMES))]
+    ys = [np.array([r[1] for r in rows])]
+    hs = [np.array([r[2] for r in rows])]
+    seeds = [np.array([r[3] for r in rows], dtype=int)]
+    for folder in a.data:
+        for f in sorted(Path(folder).glob("*.npz")):
+            z = np.load(f)
+            if len(z["y"]) == 0:
+                continue
+            Xs.append(z["X"])
+            ys.append(z["y"])
+            hs.append(np.full(len(z["y"]), np.nan))
+            seeds.append(np.full(len(z["y"]), int(z["seed"])))
+    X, y, h, seed = (np.concatenate(v) for v in (Xs, ys, hs, seeds))
+    rows = y
+    test = seed % 10 == 0                                   # hold out whole games
     w = fit(X[~test], y[~test])
     p = 1 / (1 + np.exp(-np.clip(X[test] @ w, -30, 30)))
     base = float(np.mean(y[~test]))
-    print(f"{a.games} games, {len(rows)} positions, {time.time() - t:.0f}s")
-    print(f"held-out log loss: learned {logloss(p, y[test]):.4f}, hand-made {logloss(h[test], y[test]):.4f}, "
+    print(f"{len(y)} positions ({a.games} new playout games, {len(a.data)} self-play folders), "
+          f"{time.time() - t:.0f}s")
+    print(f"held-out log loss: learned {logloss(p, y[test]):.4f}, "
           f"coin flip {logloss(np.full(test.sum(), base), y[test]):.4f}")
-    print(f"held-out accuracy: learned {np.mean((p > .5) == (y[test] > .5)):.3f}, "
-          f"hand-made {np.mean((h[test] > .5) == (y[test] > .5)):.3f}")
+    print(f"held-out accuracy: learned {np.mean((p > .5) == (y[test] > .5)):.3f}")
+    if os.environ.get("COMPARE"):
+        old = np.array(json.loads(Path(os.environ["COMPARE"]).read_text())["weights"])
+        q = 1 / (1 + np.exp(-np.clip(X[test] @ old, -30, 30)))
+        print(f"  {os.environ['COMPARE']} on the same positions: log loss {logloss(q, y[test]):.4f}, "
+              f"accuracy {np.mean((q > .5) == (y[test] > .5)):.3f}")
     Path(a.out).write_text(json.dumps({
         "about": "Logistic position score over cpbot.features; fitted by scripts/learn_value.py",
-        "games": a.games, "names": NAMES, "weights": [round(float(x), 5) for x in w]}, indent=1))
+        "games": a.games, "selfplay": a.data, "positions": int(len(y)), "names": NAMES, "weights": [round(float(x), 5) for x in w]}, indent=1))
     for n, x in sorted(zip(NAMES, w), key=lambda t: -abs(t[1]))[:12]:
         print(f"  {n:22s} {x:+.3f}")
 
