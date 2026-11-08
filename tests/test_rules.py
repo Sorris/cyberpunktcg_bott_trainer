@@ -95,8 +95,8 @@ def setup_fight(pa, pd, rival_gigs=((4, 1), (6, 2), (8, 3), (10, 4))):
     g.move(atk.uid, "field")
     g.move(dfn.uid, "field")
     dfn.spent = True
-    g.add_mod(atk.uid, pa - g.power(atk.uid), "permanent")
-    g.add_mod(dfn.uid, pd - g.power(dfn.uid), "permanent")
+    g.give_power(atk.uid, pa - g.power(atk.uid), "permanent")
+    g.give_power(dfn.uid, pd - g.power(dfn.uid), "permanent")
     rival = g.players[1 - tp]
     rival.gigs[:] = [list(x) for x in rival_gigs]
     rival.fixer[:] = [d for d in (4, 6, 8, 10, 12, 20) if d not in [x[0] for x in rival_gigs]]
@@ -158,7 +158,7 @@ def test_blocker_redirects():
     b = next(c for c in g.cards.values() if c.owner == dp and c.zone == "deck")
     b.cid = blk.idx
     g.move(b.uid, "field")
-    g.add_mod(b.uid, 9 - g.power(b.uid), "permanent")
+    g.give_power(b.uid, 9 - g.power(b.uid), "permanent")
     g.decision = None
     g.stack.append(("main", ()))
     g.advance()
