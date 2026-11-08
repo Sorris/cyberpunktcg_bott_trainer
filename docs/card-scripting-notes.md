@@ -11,6 +11,7 @@ can check it. Anything marked **Review** is the most likely to be wrong.
 | Order of pending effects | Turn player's first (10.13); each player picks the order of their own when they have more than one | Rule 10.12, confirmed by Henry |
 | Simultaneous defeats | Units defeated together (a tied fight, Adam Smasher - Metal Over Meat) leave play at once; all their triggers go to pending together and each player orders their own | Confirmed by Henry |
 | Calling a Legend | Flips a random face-down Legend | You can't look at your own face-down Legends (5.7.4.1). T-Bug is the exception: after looking, you choose |
+| Keywords | A card has a keyword only if it's printed at the start of a line. The card data also lists keywords a card gives to others (Valentino Street Racer, Valentino Guerrera, Goro Takemura - Vengeful Bodyguard, Radioport, Riot Shield, Nocturne), and those are ignored | Found by Henry: Valentino Street Racer could attack the turn it was played |
 | Go Solo | Legend must be face-up | Face-down cards have no cost (3.4.1) |
 | "Must attack next turn if it can" | The player can't pass while that Unit has a legal attack | Confirmed by Henry: any target, any time before the turn ends |
 | Selling through an effect | Doesn't use up the once-per-turn Sell action | Rule 5.8.2.3, confirmed by Henry |
