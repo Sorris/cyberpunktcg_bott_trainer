@@ -108,3 +108,29 @@ def test_search_agent_with_learned_value_beats_random():
             g.step(agents[g.current_player].act(g))
         wins += g.winner == seat
     assert wins >= 3
+
+
+def test_inferred_rival_cards_are_plausible():
+    from collections import Counter
+
+    from cpbot.deck import ram_limits
+    for seed in range(8):
+        g = _midgame(seed, steps=60)
+        if g.over:
+            continue
+        p = g.decision.player
+        o = 1 - p
+        shown = {u: g.cards[u].cid for u in g.players[o].field + g.players[o].trash}
+        for i in range(5):
+            d = determinize(g, p, random.Random(i), infer_rival=True)
+            assert len(d.players[o].hand) == len(g.players[o].hand)
+            assert all(d.cards[u].cid == c for u, c in shown.items())     # seen cards unchanged
+            assert d.players[p].hand == g.players[p].hand
+            legs = [d.d(u) for u, c in d.cards.items() if c.owner == o and d.d(u).type == "legend"]
+            lim = ram_limits(legs)
+            counts = Counter(d.cards[u].cid for u, c in d.cards.items()
+                             if c.owner == o and d.d(u).type != "legend")
+            assert max(counts.values()) <= 3
+            for u in d.players[o].hand + d.players[o].deck:
+                c = d.d(u)
+                assert (c.ram_cost or 0) <= lim.get(c.color, 0)

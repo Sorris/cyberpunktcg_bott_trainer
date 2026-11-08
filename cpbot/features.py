@@ -51,6 +51,33 @@ def features(g, p) -> list[float]:
             + _side(g, p) + _side(g, 1 - p))
 
 
+def card_features(g, p) -> list[float]:
+    """Which cards are in play: one slot per card in the database for p's board
+    (field Units, their Gear and face-up Legends), the rival's board and p's hand."""
+    n = len(g.db.cards)
+    out = [0.0] * (3 * n)
+    cards = g.cards
+    for k, q in ((0, p), (1, 1 - p)):
+        pl = g.players[q]
+        for u in pl.field:
+            out[k * n + cards[u].cid] += 1
+            for x in cards[u].gears:
+                out[k * n + cards[x].cid] += 1
+        for u in pl.legends:
+            if cards[u].face_up:
+                out[k * n + cards[u].cid] += 1
+                for x in cards[u].gears:
+                    out[k * n + cards[x].cid] += 1
+    for u in g.players[p].hand:
+        out[2 * n + cards[u].cid] += 1
+    return out
+
+
+def card_names(db):
+    return ([f"board:{c.title}" for c in db.cards] + [f"rival_board:{c.title}" for c in db.cards]
+            + [f"hand:{c.title}" for c in db.cards])
+
+
 class LearnedValue:
     """Win chance for player p from a logistic model over `features`."""
 
@@ -59,11 +86,117 @@ class LearnedValue:
             data = json.loads(Path(path).read_text())
             weights = data["weights"]
         self.w = list(weights)
+        self.cards = len(self.w) > len(NAMES)      # card-aware weights
 
     def __call__(self, g, p) -> float:
         if g.over:
             return 1.0 if g.winner == p else 0.5 if g.winner == "draw" else 0.0
         x = features(g, p)
+        if self.cards:
+            x = x + card_features(g, p)
         z = sum(a * b for a, b in zip(self.w, x))
+        z = max(-30.0, min(30.0, z))
+        return 1.0 / (1.0 + math.exp(-z))
+
+
+# ------------------------------------------------------------------ version 2
+# Adds what Henry pointed out matters: Gig value patterns for both players, what's
+# left in your own deck, and everything the rival has revealed (face-up Legends,
+# so their colours and RAM, plus cards played and trashed). A small neural network
+# (NetValue) can then learn combinations such as "even Gigs are good when I hold
+# green even/odd payoffs", which a linear score can't.
+from .cards import COLORS  # noqa: E402
+from .deck import ram_limits  # noqa: E402
+
+
+def _gig_pattern(g, q):
+    pl = g.players[q]
+    vals = [v for _, v in pl.gigs]
+    n = len(vals)
+    counts = {}
+    for v in vals:
+        counts[v] = counts.get(v, 0) + 1
+    return [
+        n, (g.street_cred(q) or 0) / 10.0,
+        sum(1 for v in vals if v % 2 == 0), sum(1 for v in vals if v % 2 == 1),
+        sum(1 for s, v in pl.gigs if v == s), sum(1 for v in vals if v == 1),
+        sum(c - 1 for c in counts.values()),                 # matching values
+        sum(1 for v in vals if v >= 8), sum(1 for v in vals if v <= 3),
+        max(vals, default=0) / 10.0, min(vals, default=0) / 10.0,
+        len(pl.fixer), sum(pl.fixer) / 20.0, float(20 in pl.fixer),
+    ]
+
+
+GIG_NAMES = ["gigs", "cred/10", "even", "odd", "at_max", "at_min", "matching", "high8+", "low3-",
+             "max/10", "min/10", "fixer_dice", "fixer_sides/20", "d20_left"]
+
+
+def _ram(g, q, revealed_only):
+    legs = [g.d(u) for u in g.players[q].legends + g.players[q].field + g.players[q].removed
+            if g.d(u).type == "legend" and (g.cards[u].face_up or not revealed_only)]
+    lim = ram_limits(legs)
+    return [lim[c] / 3.0 for c in COLORS]
+
+
+def features_v2(g, p) -> list[float]:
+    n = len(g.db.cards)
+    cards = g.cards
+    o = 1 - p
+    head = [1.0, float(g.turn_player == p), float(g.overtime), g.turn_no / 10.0]
+    head += _gig_pattern(g, p) + _gig_pattern(g, o)
+    head += _side(g, p) + _side(g, o)
+    head += _ram(g, p, revealed_only=False) + _ram(g, o, revealed_only=True)
+    blocks = [0.0] * (5 * n)
+    for k, q in ((0, p), (1, o)):
+        pl = g.players[q]
+        for u in pl.field:
+            blocks[k * n + cards[u].cid] += 1
+            for x in cards[u].gears:
+                blocks[k * n + cards[x].cid] += 1
+        for u in pl.legends:
+            if cards[u].face_up:
+                blocks[k * n + cards[u].cid] += 1
+                for x in cards[u].gears:
+                    blocks[k * n + cards[x].cid] += 1
+    me, op = g.players[p], g.players[o]
+    for u in me.hand:
+        blocks[2 * n + cards[u].cid] += 1
+    for u in me.deck:
+        blocks[3 * n + cards[u].cid] += 1                  # you know your own decklist
+    for u in op.trash + op.removed:
+        blocks[4 * n + cards[u].cid] += 1                  # cards the rival has shown
+    return head + blocks
+
+
+def names_v2(db):
+    head = ["bias", "my_turn", "overtime", "turn/10"]
+    head += ["me:" + x for x in GIG_NAMES] + ["rival:" + x for x in GIG_NAMES]
+    head += ["me:" + x for x in SIDE_NAMES] + ["rival:" + x for x in SIDE_NAMES]
+    head += [f"me:ram_{c}" for c in COLORS] + [f"rival:revealed_ram_{c}" for c in COLORS]
+    for blk in ("board", "rival_board", "hand", "my_deck", "rival_shown"):
+        head += [f"{blk}:{c.title}" for c in db.cards]
+    return head
+
+
+NET_WEIGHTS = WEIGHTS.with_name("value_net.npz")
+
+
+class NetValue:
+    """Win chance from a one-hidden-layer network over features_v2."""
+
+    def __init__(self, path=NET_WEIGHTS):
+        import numpy as np
+        z = np.load(path)
+        self.np = np
+        self.W1, self.b1, self.W2, self.b2 = z["W1"], z["b1"], z["W2"], float(z["b2"])
+        self.mu, self.sd = z["mu"], z["sd"]
+
+    def __call__(self, g, p) -> float:
+        if g.over:
+            return 1.0 if g.winner == p else 0.5 if g.winner == "draw" else 0.0
+        np = self.np
+        x = (np.asarray(features_v2(g, p), dtype=np.float32) - self.mu) / self.sd
+        h = np.maximum(x @ self.W1 + self.b1, 0.0)
+        z = float(h @ self.W2) + self.b2
         z = max(-30.0, min(30.0, z))
         return 1.0 / (1.0 + math.exp(-z))

@@ -19,14 +19,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
 from cpbot.agents import EagerRandomAgent, RandomAgent  # noqa: E402
-from cpbot.features import LearnedValue  # noqa: E402
+from cpbot.features import LearnedValue, NetValue  # noqa: E402
 from cpbot.search import ISMCTSAgent  # noqa: E402
 
 
 def make(spec, seed):
     """random | eager | ismcts[:iterations[:rollout_depth]][:key=value,...]
     ismcts keys: it (iterations), d (rollout depth), s (seconds per move, overrides it),
-    v (learned, the default, hand, or a weights .json file), c (exploration)."""
+    v (learned, the default, hand, net, or a weights .json/.npz file),
+    i (1 = guess the rival's decklist from what it has seen instead of knowing it), c (exploration)."""
     name, *args = spec.split(":")
     if name == "random":
         return RandomAgent(seed)
@@ -53,8 +54,14 @@ def make(spec, seed):
                 kw["c"] = float(v)
             elif k == "v" and v in ("learned", "hand"):
                 kw["value_fn"] = v
+            elif k == "v" and v == "net":
+                kw["value_fn"] = NetValue()
+            elif k == "v" and v.endswith(".npz"):
+                kw["value_fn"] = NetValue(path=v)
             elif k == "v":
                 kw["value_fn"] = LearnedValue(path=v)     # a weights file
+            elif k == "i":
+                kw["infer_rival"] = bool(int(v))
             else:
                 raise ValueError(tok)
         return ISMCTSAgent(seed=seed, **kw)

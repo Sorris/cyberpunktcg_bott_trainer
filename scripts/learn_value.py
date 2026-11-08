@@ -23,8 +23,15 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
-from cpbot.features import NAMES, WEIGHTS, features  # noqa: E402
+from cpbot.features import NAMES, WEIGHTS, card_features, card_names, features  # noqa: E402
 from cpbot.search import rollout_move, value  # noqa: E402
+
+
+CARDS = {"on": False}
+
+
+def _init(cards):
+    CARDS["on"] = cards
 
 
 def play(seed, sample=0.15):
@@ -35,7 +42,10 @@ def play(seed, sample=0.15):
     pos = []
     while not g.over:
         if g.turn_no > 0 and rng.random() < sample:
-            pos.append((features(g, 0), features(g, 1), value(g, 0)))
+            f0, f1 = features(g, 0), features(g, 1)
+            if CARDS["on"]:
+                f0, f1 = f0 + card_features(g, 0), f1 + card_features(g, 1)
+            pos.append((f0, f1, value(g, 0)))
         g.step(rollout_move(g, rng))
     y0 = 0.5 if g.winner == "draw" else float(g.winner == 0)
     rows = []
@@ -70,16 +80,19 @@ def main():
     ap.add_argument("--games", type=int, default=20000)
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--seed", type=int, default=100000)
+    ap.add_argument("--cards", action="store_true", help="add card-aware features (which cards are in play)")
+    ap.add_argument("--l2", type=float, default=1e-3)
     ap.add_argument("--data", nargs="*", default=[], help="folders of selfplay .npz files")
     ap.add_argument("--out", default=str(WEIGHTS))
     a = ap.parse_args()
     t = time.time()
     rows = []
     if a.games:
-        with Pool(a.procs) as pool:
+        with Pool(a.procs, initializer=_init, initargs=(a.cards,)) as pool:
             chunks = pool.map(play, range(a.seed, a.seed + a.games), chunksize=50)
         rows = [r for c in chunks for r in c]
-    Xs = [np.array([r[0] for r in rows]).reshape(len(rows), len(NAMES))]
+    names = NAMES + (card_names(default_db()) if a.cards else [])
+    Xs = [np.array([r[0] for r in rows], dtype=np.float32).reshape(len(rows), len(names))]
     ys = [np.array([r[1] for r in rows])]
     hs = [np.array([r[2] for r in rows])]
     seeds = [np.array([r[3] for r in rows], dtype=int)]
@@ -88,14 +101,14 @@ def main():
             z = np.load(f)
             if len(z["y"]) == 0:
                 continue
-            Xs.append(z["X"])
+            Xs.append(np.hstack([z["X"], z["C"]]) if a.cards else z["X"])
             ys.append(z["y"])
             hs.append(np.full(len(z["y"]), np.nan))
             seeds.append(np.full(len(z["y"]), int(z["seed"])))
     X, y, h, seed = (np.concatenate(v) for v in (Xs, ys, hs, seeds))
     rows = y
     test = seed % 10 == 0                                   # hold out whole games
-    w = fit(X[~test], y[~test])
+    w = fit(X[~test].astype(np.float64), y[~test], l2=a.l2)
     p = 1 / (1 + np.exp(-np.clip(X[test] @ w, -30, 30)))
     base = float(np.mean(y[~test]))
     print(f"{len(y)} positions ({a.games} new playout games, {len(a.data)} self-play folders), "
@@ -105,13 +118,13 @@ def main():
     print(f"held-out accuracy: learned {np.mean((p > .5) == (y[test] > .5)):.3f}")
     if os.environ.get("COMPARE"):
         old = np.array(json.loads(Path(os.environ["COMPARE"]).read_text())["weights"])
-        q = 1 / (1 + np.exp(-np.clip(X[test] @ old, -30, 30)))
+        q = 1 / (1 + np.exp(-np.clip(X[test][:, :len(old)] @ old, -30, 30)))
         print(f"  {os.environ['COMPARE']} on the same positions: log loss {logloss(q, y[test]):.4f}, "
               f"accuracy {np.mean((q > .5) == (y[test] > .5)):.3f}")
     Path(a.out).write_text(json.dumps({
         "about": "Logistic position score over cpbot.features; fitted by scripts/learn_value.py",
-        "games": a.games, "selfplay": a.data, "positions": int(len(y)), "names": NAMES, "weights": [round(float(x), 5) for x in w]}, indent=1))
-    for n, x in sorted(zip(NAMES, w), key=lambda t: -abs(t[1]))[:12]:
+        "games": a.games, "selfplay": a.data, "positions": int(len(y)), "names": names, "weights": [round(float(x), 5) for x in w]}, indent=1))
+    for n, x in sorted(zip(names, w), key=lambda t: -abs(t[1]))[:16]:
         print(f"  {n:22s} {x:+.3f}")
 
 

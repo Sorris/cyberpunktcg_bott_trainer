@@ -1,6 +1,7 @@
 """Let the search agent play itself and record positions for training.
 
     python scripts/selfplay.py --games 400 --iterations 60 --out selfplay/round1
+    python scripts/selfplay.py --games 20000 --iterations 0 --out selfplay/playout   # fast, weaker play
 
 Each game uses two fresh random decks. Every decision with more than one option is
 recorded from both players' points of view (cpbot.features) and labelled with who
@@ -19,8 +20,8 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
-from cpbot.features import LearnedValue, features  # noqa: E402
-from cpbot.search import ISMCTSAgent  # noqa: E402
+from cpbot.features import LearnedValue, card_features, features, features_v2  # noqa: E402
+from cpbot.search import ISMCTSAgent, rollout_move  # noqa: E402
 
 
 def play(job):
@@ -33,23 +34,31 @@ def play(job):
     decks = [random_deck(rng, db), random_deck(rng, db)]
     g = Game(decks[0], decks[1], seed=seed, db=db)
     vf = LearnedValue(path=weights) if weights else "learned"
-    agents = [ISMCTSAgent(iterations=iterations, rollout_depth=depth, seed=seed * 2 + i, value_fn=vf)
+    agents = [ISMCTSAgent(iterations=max(iterations, 1), rollout_depth=depth, seed=seed * 2 + i, value_fn=vf)
               for i in (0, 1)]
-    X, turn = [], []
+    X, C, V, turn = [], [], [], []
+    fast = iterations == 0                         # cheap playout-policy games, sampled positions
     while not g.over:
         d = g.decision
-        if g.turn_no > 0 and len(d.options) > 1:
+        if g.turn_no > 0 and len(d.options) > 1 and (not fast or rng.random() < 0.15):
             X.append(features(g, 0))
             X.append(features(g, 1))
+            C.append(card_features(g, 0))
+            C.append(card_features(g, 1))
+            V.append(features_v2(g, 0))
+            V.append(features_v2(g, 1))
             turn.append(g.turn_no)
-        if explore and g.turn_no > 0 and rng.random() < explore:
+        if fast:
+            move = rollout_move(g, rng)
+        elif explore and g.turn_no > 0 and rng.random() < explore:
             move = rng.choice(d.options)          # a little randomness for variety
         else:
             move = agents[d.player].act(g)
         g.step(move)
     y0 = 0.5 if g.winner == "draw" else float(g.winner == 0)
     y = np.array([y0, 1 - y0] * (len(X) // 2))
-    np.savez_compressed(path, X=np.array(X), y=y, seed=seed)
+    np.savez_compressed(path, X=np.array(X), C=np.array(C, dtype=np.int8),
+                        V=np.array(V, dtype=np.float16), y=y, seed=seed)
     return 1
 
 

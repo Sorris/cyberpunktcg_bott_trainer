@@ -7,8 +7,10 @@ so the same tree node collects statistics across all the sampled worlds.
 
 What the agent is allowed to know:
 - its own hand, its own known Legends and everything face-up;
-- the rival's decklist (as a player who has seen the deck would), but not which
-  of those cards are in the rival's hand or where they are in the deck;
+- by default, the rival's decklist (as a player who has seen the deck would), but
+  not which of those cards are in the rival's hand or where they are in the deck;
+  with infer_rival=True it doesn't know the list either and guesses it from the
+  revealed Legends (their RAM) and the cards it has seen;
 - not the order of either deck and not future dice rolls (the random number
   generator is reseeded for every sample).
 
@@ -57,12 +59,20 @@ def value(g: Game, p: int, scale=0.35) -> float:
 
 
 # ---------------------------------------------------------- determinization
-def determinize(g: Game, p: int, rng: random.Random) -> Game:
-    """A copy of g in which everything p can't see is resampled."""
+def determinize(g: Game, p: int, rng: random.Random, infer_rival=False) -> Game:
+    """A copy of g in which everything p can't see is resampled.
+
+    With infer_rival=False the rival's hidden cards are their real decklist in a
+    random order (p is assumed to know the list). With infer_rival=True p only
+    uses what it has seen: the rival's face-down Legends become random Legends that
+    fit with the revealed ones, and their hand and deck are redrawn from the cards
+    those Legends' RAM allows, favouring cards and colours already seen."""
     d = g.clone()
     d.rng = random.Random(rng.getrandbits(64))
     o = 1 - p
     op = d.players[o]
+    if infer_rival:
+        _infer_rival(d, o, rng)
     pool = op.hand + op.deck
     rng.shuffle(pool)
     n = len(op.hand)
@@ -74,6 +84,42 @@ def determinize(g: Game, p: int, rng: random.Random) -> Game:
         d.cards[u].zone = "deck"
     rng.shuffle(d.players[p].deck)
     return d
+
+
+def _infer_rival(d: Game, o: int, rng: random.Random):
+    from collections import Counter
+
+    from .deck import MAX_COPIES, eligible_main_cards
+    db = d.db
+    op = d.players[o]
+    cards = d.cards
+    all_legends = [u for u, c in cards.items() if c.owner == o and db[c.cid].type == "legend"]
+    shown_legends = [u for u in all_legends if cards[u].face_up or cards[u].zone in ("field", "removed")]
+    hidden_legends = [u for u in all_legends if u not in shown_legends]
+    names = set()
+    for u in shown_legends:
+        names |= db[cards[u].cid].names
+    for u in hidden_legends:                       # random Legends that fit with the shown ones
+        choices = [l for l in db.legends() if not (l.names & names)]
+        pick = rng.choice(choices)
+        cards[u].cid = pick.idx
+        names |= pick.names
+    legs = [db[cards[u].cid] for u in all_legends]
+    hidden = op.hand + op.deck
+    seen = Counter(cards[u].cid for u, c in cards.items()
+                   if c.owner == o and u not in hidden and db[c.cid].type != "legend")
+    seen_colors = {db[c].color for c in seen}
+    pool = eligible_main_cards(legs, db)
+    weights = [1.0 + (6.0 if seen.get(c.idx) else 0.0) + (1.5 if c.color in seen_colors else 0.0)
+               for c in pool]
+    counts = Counter(seen)
+    for u in hidden:
+        for _ in range(50):
+            c = rng.choices(pool, weights)[0]
+            if counts[c.idx] < MAX_COPIES:
+                break
+        counts[c.idx] += 1
+        cards[u].cid = c.idx
 
 
 # ------------------------------------------------------------- tree search
@@ -112,7 +158,7 @@ class ISMCTSAgent:
     """Search for `iterations` samples (or `seconds`, if given) per decision."""
 
     def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=20, seed=None,
-                 scale=0.35, value_fn="learned"):
+                 scale=0.35, value_fn="learned", infer_rival=False):
         """value_fn(g, p) -> win chance in [0, 1] scores the end of each rollout.
         "learned" (the default) uses the score fitted on self-play games
         (cpbot.features.LearnedValue); "hand" uses the hand-made `value`, which
@@ -123,6 +169,7 @@ class ISMCTSAgent:
         elif value_fn == "hand":
             value_fn = (lambda g, p: value(g, p, scale))
         self.value_fn = value_fn
+        self.infer_rival = infer_rival
         self.iterations = iterations
         self.seconds = seconds
         self.c = c
@@ -159,7 +206,7 @@ class ISMCTSAgent:
 
     def _iterate(self, game, root, root_player):
         rng = self.rng
-        g = determinize(game, root_player, rng)
+        g = determinize(game, root_player, rng, self.infer_rival)
         node = root
         # Selection and expansion
         while not g.over:
