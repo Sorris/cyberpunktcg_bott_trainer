@@ -276,15 +276,8 @@ ability("judy-a-lvarez-braindance-maestro", "trash top", [S("judy_trash")],
 def _kerry_roll(g, me, ev):
     p = g.controller(me)
     if face_up_or_field(g, me) and ev["player"] == p:
-        g.trigger(me, [S("kerry_minmax", gig_ref=None), S("_may", what="reroll", key="rr"), S("kerry_reroll")],
+        g.trigger(me, [S("_may", what="reroll", key="rr"), S("kerry_reroll"), S("kerry_minmax")],
                   gig=ev["gig"])
-
-
-@step("kerry_minmax")
-def _kerry_minmax(g, ctx, gig_ref=None):
-    s, v = ctx["gig"]
-    if v in (1, s):
-        g.draw(ctx["p"], 3 if s == 20 else 1)
 
 
 @step("kerry_reroll")
@@ -292,16 +285,24 @@ def _kerry_reroll(g, ctx):
     if not ctx.get("rr"):
         return
     gig = ctx["gig"]
-    p = ctx["p"]
-    if not any(x is gig for x in g.players[p].gigs):
+    if not any(x is gig for x in g.players[ctx["p"]].gigs):
         return
     gig[1] = g.rng.randint(1, gig[0])
     g._log(f"  rerolls d{gig[0]} = {gig[1]}")
-    if gig[1] in (1, gig[0]):
-        g.draw(p, 3 if gig[0] == 20 else 1)
 
 
-note("kerry-eurodyne-axe-attitude-audience", "Min/max draw checked on the roll-in and on the reroll.")
+@step("kerry_minmax")
+def _kerry_minmax(g, ctx):
+    """Draw if the roll you keep is a min or max (ruling from Henry, 8 Nov 2026)."""
+    gig = ctx["gig"]
+    if not any(x is gig for x in g.players[ctx["p"]].gigs):
+        return
+    s, v = gig
+    if v in (1, s):
+        g.draw(ctx["p"], 3 if s == 20 else 1)
+
+
+note("kerry-eurodyne-axe-attitude-audience", "Draws only if the kept roll (first or reroll) is a min or max.")
 
 
 # ---- Lucyna Kushinada - Fresh Beginnings

@@ -1,7 +1,7 @@
 """Unit scripts (73 cards)."""
 from __future__ import annotations
 
-from ..effects import STOP, Ask, S, ability, lasting_static, note, on, static, step, vanilla
+from ..effects import STOP, Ask, S, ability, lasting_static, note, on, on_global, static, step, vanilla
 from .common import choose_unit, discard, draw, pick_uid, self_trigger, when
 
 vanilla("animals-wrecker", "emergency-atlus", "psycho-squad", "riding-nomad", "rockn-rockerboy",
@@ -878,9 +878,18 @@ def _lau(g, L, uid, target):
 play_trigger("yorinobu-arasaka-steel-dragon", S("yori_dragon"))
 
 
+@on_global("defeated")
+def _count_arasaka_defeats(g, ev):
+    snap = ev.get("snapshot", {})
+    if snap.get("zone") == "field" and "ARASAKA" in snap.get("tags", []):
+        g.turn_flags["arasaka_defeats"] = g.turn_flags.get("arasaka_defeats", 0) + 1
+
+
 @on("defeated", "yorinobu-arasaka-steel-dragon")
 def _yori_draw(g, me, ev):
-    if (on_field(g, me) and ev["uid"] != me and "ARASAKA" in ev["snapshot"].get("tags", [])
-            and not g.turn_flags.get(("yori_dragon", me))):
-        g.turn_flags[("yori_dragon", me)] = True
+    # Only the first ARASAKA Unit defeated in the whole turn counts, even if it was
+    # defeated before Yorinobu entered play (ruling from Henry, 8 Nov 2026).
+    snap = ev.get("snapshot", {})
+    if (on_field(g, me) and ev["uid"] != me and snap.get("zone") == "field"
+            and "ARASAKA" in snap.get("tags", []) and g.turn_flags.get("arasaka_defeats") == 1):
         g.trigger(me, [draw(1)])

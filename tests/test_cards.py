@@ -5,6 +5,7 @@ import pytest
 
 from cpbot import Deck, Game, default_db, random_deck
 from cpbot.agents import RandomAgent, play_game
+from cpbot.effects import S
 
 db = default_db()
 FILLER = next(c for c in db.main_cards() if c.type == "unit" and not c.text.strip("[] ").startswith("{")
@@ -297,3 +298,83 @@ def test_clone_mid_effect():
                 assert g.history == hist
                 break
             g.step(a.act(g))
+
+
+# ---- Henry's rulings, 8 Nov 2026
+def _kerry_board():
+    b = Board(["Kerry Eurodyne - Axe, Attitude, Audience", "Padre - Man of the Cross",
+               "Wakako Okada - Peace and Harmony"])
+    b.card(b.p, "Kerry Eurodyne - Axe, Attitude, Audience", "legends", face_up=True)
+    g = b.go()
+    return b, g
+
+
+def _kerry_roll(b, g, sides, first, reroll, keep_reroll):
+    """Roll in a d`sides` showing `first`; the reroll (if taken) shows `reroll`."""
+    pl = g.players[b.p]
+    gig = [sides, first]
+    pl.gigs.append(gig)
+    g.emit("roll_in", player=b.p, gig=gig)
+    hand = len(pl.hand)
+    g.rng.randint = lambda lo, hi: reroll
+    g.decision = None
+    g.stack.append(("main", ()))
+    g.advance()
+    b.answer(("may", keep_reroll))
+    return len(pl.hand) - hand
+
+
+def test_kerry_draws_on_kept_first_roll_max():
+    b, g = _kerry_board()
+    assert _kerry_roll(b, g, 6, 6, 3, False) == 1
+
+
+def test_kerry_no_draw_if_max_is_rerolled_away():
+    b, g = _kerry_board()
+    assert _kerry_roll(b, g, 6, 6, 3, True) == 0
+
+
+def test_kerry_draws_on_reroll_min():
+    b, g = _kerry_board()
+    assert _kerry_roll(b, g, 8, 4, 1, True) == 1
+
+
+def test_kerry_d20_draws_three():
+    b, g = _kerry_board()
+    assert _kerry_roll(b, g, 20, 20, 5, False) == 3
+
+
+def test_yorinobu_only_first_arasaka_defeat_of_turn_counts():
+    b = Board()
+    g = b.g
+    a1 = b.card(b.p, "Field Operator", "field")             # ARASAKA
+    a2 = b.card(b.p, "Field Operator", "field")
+    g.defeat_now(a1)                                        # before Yorinobu is in play
+    b.card(b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    g.defeat_now(a2)
+    assert g.pending == []
+
+
+def test_yorinobu_draws_for_first_arasaka_defeat():
+    b = Board()
+    g = b.g
+    b.card(b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    a1 = b.card(b.p, "Field Operator", "field")
+    a2 = b.card(1 - b.p, "Field Operator", "field")
+    g.defeat_now(a1)
+    assert len(g.pending) == 1
+    g.defeat_now(a2)
+    assert len(g.pending) == 1
+
+
+def test_controller_orders_own_pending_effects():
+    b = Board()
+    g = b.go()
+    src = b.card(b.p, "Psycho Squad", "field")
+    g.trigger(src, [S("draw", n=1)])
+    g.trigger(src, [S("draw", n=2)])
+    g.decision = None
+    g.stack.append(("main", ()))
+    g.advance()
+    assert g.decision.kind == "order_pending" and g.decision.player == b.p
+    assert len(g.decision.options) == 2

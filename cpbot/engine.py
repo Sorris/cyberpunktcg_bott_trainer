@@ -209,13 +209,32 @@ class Game:
         self.then(("effect", (tuple(steps), ctx, 0)))
 
     def _t_resolve_pending(self):
+        """Turn player resolves all their pending effects first (10.13), in any order
+        they choose (10.12); then the Rival does the same."""
         tp = self.turn_player
-        for who in (tp, 1 - tp):                              # 10.13
-            for i, (p, steps, ctx) in enumerate(self.pending):
-                if p == who:
-                    del self.pending[i]
-                    self.then(("effect", (steps, ctx, 0)))
-                    return
+        for who in (tp, 1 - tp):
+            mine = [i for i, pe in enumerate(self.pending) if pe[0] == who]
+            if not mine:
+                continue
+            if len(mine) == 1:
+                self._t_resolve_pick(("pending", 0, None))
+                return
+            opts = []
+            for k, i in enumerate(mine):
+                src = self.pending[i][2].get("src")
+                opts.append(("pending", k, self.cards[src].cid if src is not None else None))
+            self.decision = Decision(who, "order_pending", opts, "resolve_pick", ())
+            return
+
+    def _t_resolve_pick(self, opt):
+        tp = self.turn_player
+        for who in (tp, 1 - tp):
+            mine = [i for i, pe in enumerate(self.pending) if pe[0] == who]
+            if mine:
+                i = mine[opt[1]]
+                _, steps, ctx = self.pending.pop(i)
+                self.then(("effect", (steps, ctx, 0)))
+                return
 
     def _t_effect(self, steps, ctx, i):
         steps = list(steps)

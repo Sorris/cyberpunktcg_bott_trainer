@@ -101,7 +101,7 @@ def _eo(g, ctx):
 
 program("bootleg-black-sapphire-show", S("sell_top"), S("even_and_odd_draw2"))
 note("bootleg-black-sapphire-show", "Selling by effect does not use the once-per-turn Sell action "
-     "(5.8.2.3); ruling 11.12.2.2 suggests otherwise, flagged for review.")
+     "(5.8.2.3, confirmed by Henry).")
 
 
 # ---- Carnage at the Colosseum
