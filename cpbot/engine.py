@@ -109,6 +109,7 @@ class Game:
         self.logging = log
         self.log: list[str] = []
         self.observer = None         # optional watcher with .log(game, msg); see watch.py
+        self._active = None          # cached active cards while listing options (read-only)
         uid = 0
         for p, deck in ((0, deck0), (1, deck1)):
             for cid in deck.main:
@@ -804,6 +805,15 @@ class Game:
 
     # ---- main phase (8.9 - 8.15)
     def main_options(self):
+        """Listing options only reads the state, so the active cards are cached."""
+        self._active = None
+        self._active = self.effects.active_cards(self)
+        try:
+            return self._main_options()
+        finally:
+            self._active = None
+
+    def _main_options(self):
         tp = self.turn_player
         pl = self.players[tp]
         opts = []
@@ -1048,6 +1058,15 @@ class Game:
             self.then(("end_attack", ()))
 
     def react_options(self):
+        """Listing options only reads the state, so the active cards are cached."""
+        self._active = None
+        self._active = self.effects.active_cards(self)
+        try:
+            return self._react_options()
+        finally:
+            self._active = None
+
+    def _react_options(self):
         a = self.attack
         dp = a["dp"]
         pl = self.players[dp]

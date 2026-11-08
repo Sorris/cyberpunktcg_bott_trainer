@@ -14,7 +14,8 @@ Plan: see the project's "Cyberpunk TCG self-play bot: plan" doc.
 | 3. All card text scripted | Done: all 152 cards. Interpretations and shortcuts are listed in `docs/card-scripting-notes.md` |
 | 4. Watchable games | Done: play-by-play logs, exact replays from seed and choices, and an HTML replay page |
 | 5. Search agent | Done: ISMCTS agent. It beats random players almost every game, and more search beats less |
-| 6+ | Deck search, self-play network |
+| 6. Stronger, faster play | Done: faster playouts and a position score learned from 20,000 self-play games. At equal thinking time it beats the old agent in 69% of games |
+| 7+ | Deck search, self-play network |
 
 ## Layout
 
@@ -26,9 +27,11 @@ cpbot/effects.py  effect framework: triggers, pending effects, steps, statics, a
 cpbot/scripts/    one script per card: legends.py, units.py, programs.py, gear.py
 cpbot/agents.py   random agents and a game loop
 cpbot/search.py   ISMCTS search agent: samples hidden cards, searches, plays out
+cpbot/features.py position features and the learned position score (data/value_weights.json)
 cpbot/watch.py    play-by-play log, replay record and HTML replay page (replay_template.html)
 docs/             comprehensive rules (29 Oct 2026) and rules FAQ (28 Oct 2026), with the FAQ check
 scripts/soak.py   plays many random games and checks invariants after every decision
+scripts/learn_value.py  plays self-play games and refits the position score
 scripts/arena.py  pits two agents against each other over many games and reports the win rate
 scripts/watch.py  plays one game and writes games/<name>.txt, .json and .html
 scripts/coverage.py  shows which card scripts actually ran in random games

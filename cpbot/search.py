@@ -111,8 +111,18 @@ def rollout_move(g: Game, rng: random.Random):
 class ISMCTSAgent:
     """Search for `iterations` samples (or `seconds`, if given) per decision."""
 
-    def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=60, seed=None,
-                 scale=0.35):
+    def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=20, seed=None,
+                 scale=0.35, value_fn="learned"):
+        """value_fn(g, p) -> win chance in [0, 1] scores the end of each rollout.
+        "learned" (the default) uses the score fitted on self-play games
+        (cpbot.features.LearnedValue); "hand" uses the hand-made `value`, which
+        works best with longer rollouts (about 60)."""
+        if value_fn == "learned":
+            from .features import LearnedValue
+            value_fn = LearnedValue()
+        elif value_fn == "hand":
+            value_fn = (lambda g, p: value(g, p, scale))
+        self.value_fn = value_fn
         self.iterations = iterations
         self.seconds = seconds
         self.c = c
@@ -182,7 +192,7 @@ class ISMCTSAgent:
         while not g.over and k < self.rollout_depth:
             g.step(rollout_move(g, rng))
             k += 1
-        v0 = value(g, 0, self.scale)
+        v0 = self.value_fn(g, 0)
         # Backpropagation
         while node is not None and node.player is not None:
             node.n += 1

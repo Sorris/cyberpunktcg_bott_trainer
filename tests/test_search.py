@@ -71,7 +71,38 @@ def test_search_agent_beats_random():
         g = Game(decks[0], decks[1], seed=seed, db=db)
         seat = seed % 2
         agents = [None, None]
-        agents[seat] = ISMCTSAgent(iterations=40, rollout_depth=30, seed=seed)
+        agents[seat] = ISMCTSAgent(iterations=40, rollout_depth=30, seed=seed, value_fn="hand")
+        agents[1 - seat] = RandomAgent(seed)
+        while not g.over:
+            g.step(agents[g.current_player].act(g))
+        wins += g.winner == seat
+    assert wins >= 3
+
+
+def test_learned_value_is_symmetric_and_in_range():
+    from cpbot.features import NAMES, LearnedValue, features
+    lv = LearnedValue()
+    assert len(lv.w) == len(NAMES)
+    for seed in range(10):
+        g = _midgame(seed, steps=40)
+        assert len(features(g, 0)) == len(NAMES)
+        v0, v1 = lv(g, 0), lv(g, 1)
+        assert 0.0 <= v0 <= 1.0
+        if not g.over:
+            # The model is fitted on both players' views, so the two views roughly agree.
+            assert abs(v0 + v1 - 1.0) < 0.35
+
+
+def test_search_agent_with_learned_value_beats_random():
+    from cpbot.features import LearnedValue
+    wins = 0
+    for seed in range(4):
+        rng = random.Random(seed + 10)
+        decks = [random_deck(rng, db), random_deck(rng, db)]
+        g = Game(decks[0], decks[1], seed=seed, db=db)
+        seat = seed % 2
+        agents = [None, None]
+        agents[seat] = ISMCTSAgent(iterations=40, rollout_depth=10, seed=seed, value_fn=LearnedValue())
         agents[1 - seat] = RandomAgent(seed)
         while not g.over:
             g.step(agents[g.current_player].act(g))
