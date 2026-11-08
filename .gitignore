@@ -4,3 +4,4 @@ __pycache__/
 games/
 selfplay/
 decksearch/
+*.log
