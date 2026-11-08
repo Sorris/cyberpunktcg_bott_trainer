@@ -38,3 +38,12 @@ def test_state_saves_and_breeds():
     assert len(kids) == 4 and all(k.born == 1 for k in kids)
     jobs = schedule(s2, s2.population + kids, rng, 2)
     assert len(jobs) == 2 * 10 and all(j[0] != j[1] for j in jobs)
+
+
+def test_deck_building_and_training_never_read_eval_decks():
+    # Henry's decklists are evaluation opponents only; deck search must explore unguided.
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+    for f in ["cpbot/decksearch.py", "cpbot/deck.py", "cpbot/features.py", "scripts/decksearch.py",
+              "scripts/selfplay.py", "scripts/learn_value.py", "scripts/train_net.py"]:
+        assert "eval_decks" not in (root / f).read_text(encoding="utf-8"), f
