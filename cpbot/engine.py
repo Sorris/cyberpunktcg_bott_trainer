@@ -429,7 +429,7 @@ class Game:
         try:
             if k in ("sell", "play", "quick", "card"):
                 return f"{k} {self.db[opt[1]].title}"
-            if k in ("solo", "block", "legend", "equip", "unit", "target"):
+            if k in ("solo", "deploy", "block", "legend", "equip", "unit", "target"):
                 return f"{k} {self.d(opt[1]).title}"
             if k == "attack":
                 return f"attack with {self.d(opt[1]).title} -> {self.describe(opt[2])}"
@@ -783,9 +783,12 @@ class Game:
         for u in pl.legends:
             c = self.cards[u]
             dd = self.d(u)
-            if c.face_up and dd.cost is not None and dd.power is not None and dd.has("go solo"):
-                if self.can_pay(tp, self.play_cost(tp, u), exclude=u):
-                    opts.append(("solo", u))
+            if c.face_up and dd.cost is not None and dd.power is not None:
+                # A Legend may spend itself for an Eddie to pay for its own play (rules FAQ).
+                if self.can_pay(tp, self.play_cost(tp, u)) and not self.flag("cant_play", tp, u):
+                    opts.append(("deploy", u))                  # 4.5: enters with lag
+                    if dd.has("go solo"):
+                        opts.append(("solo", u))                # 11.29: ready, can attack
         for u in pl.field:
             for t in self.attack_targets(u):
                 opts.append(("attack", u, t))
@@ -826,7 +829,10 @@ class Game:
             self.start_play(tp, uid)
         elif kind == "solo":
             uid = act[1]
-            self.then(("pay", (tp, self.play_cost(tp, uid), uid)), ("do_solo", (tp, uid)))
+            self.then(("pay", (tp, self.play_cost(tp, uid), -1)), ("do_solo", (tp, uid)))
+        elif kind == "deploy":
+            uid = act[1]
+            self.then(("pay", (tp, self.play_cost(tp, uid), -1)), ("do_deploy", (tp, uid)))
         elif kind == "attack":
             self.then(("declare_attack", (act[1], act[2])))
         elif kind == "activate":
@@ -947,6 +953,17 @@ class Game:
 
     def _t_do_call(self, p):
         self.call_legend(p)
+
+    def _t_do_deploy(self, p, uid):
+        """Play a Legend from the Legends area without Go Solo (4.5)."""
+        c = self.cards[uid]
+        spent = c.spent
+        self.move(uid, "field", p)
+        c.spent = spent                                         # 4.5.1: same orientation
+        c.lag = True                                            # 4.5.2
+        self._log(f"  P{p} plays {self.d(uid).title} from the Legends area")
+        self.emit("play", player=p, uid=uid)
+        self.emit("played_unit", player=p, uid=uid)
 
     def _t_do_solo(self, p, uid):
         self.move(uid, "field", p)

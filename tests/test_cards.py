@@ -402,3 +402,34 @@ def test_yorinobu_no_draw_when_defeated_second():
     g.pending.clear()
     g.defeat_now(y)
     assert g.pending == []
+
+
+# ---- Rules FAQ (cyberpunktcg.com/rules-faq, 28 Oct 2026)
+def _v_board(v_spent=False):
+    b = Board(["V - Corporate Exile", "Padre - Man of the Cross", "Wakako Okada - Peace and Harmony"])
+    v = b.card(b.p, "V - Corporate Exile", "legends", face_up=True, spent=v_spent)
+    for u in b.g.players[b.p].legends:
+        if u != v:
+            b.g.cards[u].spent = True
+    return b, v
+
+
+def test_legend_can_spend_itself_to_pay_for_its_own_go_solo():
+    b, v = _v_board()
+    b.eddies(b.p, 4)                                          # 4 Eddies + V itself = 5
+    g = b.go()
+    assert ("solo", v) in g.legal_actions()
+    g.step(("solo", v))
+    assert g.cards[v].zone == "field" and not g.cards[v].spent
+
+
+def test_legend_played_without_go_solo_keeps_orientation_and_lag():
+    b, v = _v_board(v_spent=True)
+    b.eddies(b.p, 6)
+    b.card(b.p, "Psycho Squad", "hand")                       # keeps the main phase open
+    b.gigs(1 - b.p, (6, 3))
+    g = b.go()
+    g.step(("deploy", v))
+    c = g.cards[v]
+    assert c.zone == "field" and c.spent and c.lag
+    assert not any(o[0] == "attack" and o[1] == v for o in g.legal_actions())

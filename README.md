@@ -23,7 +23,7 @@ cpbot/engine.py   game engine: plain-data state, explicit task stack, cloneable 
 cpbot/effects.py  effect framework: triggers, pending effects, steps, statics, abilities
 cpbot/scripts/    one script per card: legends.py, units.py, programs.py, gear.py
 cpbot/agents.py   random agents and a game loop
-docs/             comprehensive rules (29 Oct 2026), markdown and raw JSON
+docs/             comprehensive rules (29 Oct 2026) and rules FAQ (28 Oct 2026), with the FAQ check
 scripts/soak.py   plays many random games and checks invariants after every decision
 scripts/coverage.py  shows which card scripts actually ran in random games
 scripts/fetch.sh, scripts/parse.py   how data/cards.json was built from ripperdeck.gg
@@ -64,7 +64,8 @@ print("\n".join(g.log))
   only allowed once the fixer is otherwise empty.
 - Calling a Legend flips a random face-down Legend, because you can't see your own
   face-down Legends (5.7.4.1).
-- A Legend must be face-up to Go Solo.
+- A Legend must be face-up to Go Solo, or to be played to the field without Go Solo
+  (4.5). It may spend itself for an Eddie to pay for either (rules FAQ).
 - After 100 turns the game is a draw. This is a safety valve; random games end
   by turn 26 at the latest.
 
