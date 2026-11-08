@@ -602,23 +602,55 @@ class Game:
     # ---- defeat (11.6)
     def defeat_steps(self, uid, by=None):
         """Steps that defeat a card, offering optional replacement effects (10.26)."""
-        return [fx.S("_defeat_offer", uid=uid, by=by), fx.S("_defeat_do", uid=uid, by=by)]
+        return self.defeat_batch_steps([(uid, by)])
+
+    def defeat_batch_steps(self, pairs):
+        """Steps that defeat several cards at the same moment (for example a tied fight,
+        or "defeat all other Units"). Each one is offered its optional replacements
+        first; then they're all defeated together and their triggers become pending
+        at once (Henry, 8 Nov 2026)."""
+        steps = []
+        for uid, by in pairs:
+            steps += [fx.S("_defeat_offer", uid=uid, by=by), fx.S("_defeat_do", uid=uid, by=by)]
+        return steps + [fx.S("_defeat_batch")]
 
     def defeat_now(self, uid, by=None):
         """Defeat with only mandatory replacements (used where no choice can be asked)."""
-        c = self.cards[uid]
-        if c.zone not in ("field", "legends", "equipped"):
+        self.defeat_many([(uid, by)])
+
+    def defeat_many(self, pairs):
+        """Defeat cards simultaneously: move them all, then announce each defeat.
+        Every card in the batch can still trigger on the others' defeats."""
+        todo, seen = [], set()
+        for uid, by in pairs:
+            while True:
+                c = self.cards[uid]
+                if c.zone not in ("field", "legends", "equipped"):
+                    uid = None
+                    break
+                repl = self.mandatory_defeat_replacement(uid)
+                if repl is None:
+                    break
+                uid = repl
+            if uid is not None and uid not in seen:
+                seen.add(uid)
+                todo.append((uid, by))
+        if not todo:
             return
-        repl = self.mandatory_defeat_replacement(uid)
-        if repl is not None:
-            self.defeat_now(repl, by)
-            return
-        self._log(f"  {self.d(uid).title} is defeated")
-        snapshot = {"power": self.power(uid), "gears": list(c.gears), "owner": c.owner,
-                    "controller": self.controller(uid), "tags": list(self.d(uid).tags),
-                    "zone": c.zone, "host": c.host}
-        self.move(uid, "trash")
-        self.emit("defeated", uid=uid, by=by, snapshot=snapshot)
+        snaps = []
+        for uid, by in todo:
+            c = self.cards[uid]
+            self._log(f"  {self.d(uid).title} is defeated")
+            snaps.append({"power": self.power(uid) if c.zone == "field" else 0, "gears": list(c.gears),
+                          "owner": c.owner, "controller": self.controller(uid),
+                          "tags": list(self.d(uid).tags), "zone": c.zone, "host": c.host})
+        for uid, by in todo:
+            self.move(uid, "trash")                 # a Legend goes to removed (4.4.1)
+        batch = self.turn_flags.get("defeat_batch", 0) + 1
+        self.turn_flags["defeat_batch"] = batch
+        uids = [u for u, _ in todo]
+        for (uid, by), snap in zip(todo, snaps):
+            self.emit("defeated", uid=uid, by=by, snapshot=snap, batch=batch, batch_uids=uids)
 
     def mandatory_defeat_replacement(self, uid):
         """Deadman Transmitter: 'If this Unit would be defeated, defeat its DEADMAN TRANSMITTER instead.'"""
@@ -1153,11 +1185,8 @@ class Game:
                 defeats.append((loser, other))
         self.emit("fight_result", atk=atk, dfn=dfn, winners=winners, losers=losers,
                   margin=margin, defeats=[d[0] for d in defeats])
-        steps = []
-        for loser, other in defeats:
-            steps.extend(self.defeat_steps(loser, by=other))
-        if steps:
-            self.run_effect(self.turn_player, steps)
+        if defeats:                                             # a tie defeats both at once
+            self.run_effect(self.turn_player, self.defeat_batch_steps(defeats))
 
     def _t_steal_step(self):
         a = self.attack
@@ -1328,25 +1357,24 @@ def _defeat_offer(g, ctx, uid, by=None):
 
 @fx.step("_defeat_do")
 def _defeat_do(g, ctx, uid, by=None):
+    batch = ctx.setdefault("_batch", [])
     if ctx.pop("_jackie_ans", False):
         j = ctx.pop("_jackie")
         p = g.controller(j)
         ctx["_paying"] = True
-        return [fx.S("_pay_n", n=1, who=p), fx.S("_defeat_now", uid=j, by=by)]
+        return [fx.S("_pay_n", n=1, who=p), fx.S("_defeat_add", uid=j, by=by)]
     ctx.pop("_jackie", None)
-    g.defeat_now(uid, by)
+    batch.append((uid, by))
 
 
-@fx.step("_defeat_now")
-def _defeat_now(g, ctx, uid, by=None):
-    c = g.cards[uid]
-    if c.zone == "legends":
-        g.move(uid, "removed")
-        g.emit("defeated", uid=uid, by=by, snapshot={"gears": [], "owner": c.owner, "controller": c.owner,
-                                                     "power": 0, "tags": list(g.d(uid).tags), "zone": "legends",
-                                                     "host": None})
-    else:
-        g.defeat_now(uid, by)
+@fx.step("_defeat_add")
+def _defeat_add(g, ctx, uid, by=None):
+    ctx.setdefault("_batch", []).append((uid, by))
+
+
+@fx.step("_defeat_batch")
+def _defeat_batch(g, ctx):
+    g.defeat_many(ctx.pop("_batch", []))
 
 
 @fx.step("_pay_n")

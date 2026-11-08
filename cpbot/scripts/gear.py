@@ -38,7 +38,16 @@ def _radioport(g, ctx):
     down = [u for u in g.players[p].legends if not g.cards[u].face_up]
     if not down:
         return None
-    looked = g.rng.choice(down)
+    known = g.players[p].known_legends
+
+    def fits(u):
+        d = g.d(u)
+        return "ARASAKA" in d.tags or d.has("go solo")
+    # You can't tell face-down Legends apart, but if an earlier look (Kiroshi Optics,
+    # an earlier Radioport) showed you one that fits, you pick that one (Henry, 8 Nov).
+    good = [u for u in down if u in known and fits(u)]
+    unknown = [u for u in down if u not in known]
+    looked = g.rng.choice(good or unknown or down)
     if looked not in g.players[p].known_legends:
         g.players[p].known_legends.append(looked)
     d = g.d(looked)
@@ -60,7 +69,8 @@ def _radioport_call(g, ctx):
 
 on_host_spent("arasaka-emergency-radioport", S("_may", what="look", key="look"),
               when(("ctx", "look"), S("radioport")))
-note("arasaka-emergency-radioport", "Looks at a random face-down Legend (they are indistinguishable).")
+note("arasaka-emergency-radioport", "Looks at a known face-down Legend that fits if there is one, "
+     "otherwise a random one you haven't looked at yet.")
 
 
 # ---- Dying Night - V's Pistol

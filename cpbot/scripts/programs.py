@@ -361,8 +361,20 @@ def _reboot_static(g, L, loser, other):
     return True
 
 
+@on_global("fight_result")
+def _reboot_used_up(g, ev):
+    # The next fight between a rival Unit and a friendly Unit uses it up, even if the
+    # friendly Unit would have survived anyway (Henry, 8 Nov 2026).
+    a, d = ev["atk"], ev["dfn"]
+    for L in g.lasting:
+        if L.get("kind") == "reboot" and not L["used"]:
+            if (g.controller(a) == L["p"]) != (g.controller(d) == L["p"]):
+                L["used"] = True
+
+
 program("reboot-optics", S("reboot"))
-note("reboot-optics", "Used up by the first fight a rival Unit is in this turn where a friendly Unit would be defeated.")
+note("reboot-optics", "Used up by the next fight between a rival Unit and a friendly Unit this turn, "
+     "whether or not the friendly Unit would have been defeated.")
 
 
 # ---- Safety Override: the next time a friendly Unit loses a fight this turn, defeat the opposing rival Unit

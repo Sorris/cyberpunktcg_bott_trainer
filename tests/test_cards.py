@@ -433,3 +433,67 @@ def test_legend_played_without_go_solo_keeps_orientation_and_lag():
     c = g.cards[v]
     assert c.zone == "field" and c.spent and c.lag
     assert not any(o[0] == "attack" and o[1] == v for o in g.legal_actions())
+
+
+# ---- Card audit with Henry (8 Nov 2026)
+def test_tied_yorinobus_both_draw():
+    b = Board()
+    g = b.g
+    y0 = b.card(b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    y1 = b.card(1 - b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    g.defeat_many([(y0, y1), (y1, y0)])                     # simultaneous, as in a tie
+    assert sorted(pe[0] for pe in g.pending) == [0, 1]
+
+
+def test_yorinobu_draws_once_for_a_batch_of_arasaka_defeats():
+    b = Board()
+    g = b.g
+    b.card(b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    a1 = b.card(b.p, "Field Operator", "field")
+    a2 = b.card(1 - b.p, "Field Operator", "field")
+    g.defeat_many([(a1, None), (a2, None)])
+    assert len(g.pending) == 1
+
+
+def test_adam_smasher_defeats_everything_at_once():
+    b = Board()
+    g = b.go()
+    smasher = b.card(b.p, "Adam Smasher - Metal Over Meat", "field")
+    a1 = b.card(b.p, "Field Operator", "field")
+    y = b.card(1 - b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    g.decision = None
+    g.stack = [("main", ())]
+    g.run_effect(b.p, [S("defeat_all_other")], src=smasher)
+    g.advance()
+    assert g.cards[a1].zone == "trash" and g.cards[y].zone == "trash"
+    assert g.players[1 - b.p].hand                          # Yorinobu died with the first ARASAKA batch
+
+
+def test_reboot_optics_used_up_by_a_fight_it_did_not_need():
+    b = Board()
+    atk = b.card(b.p, "Animals Wrecker", "field")             # 10 power
+    dfn = b.card(1 - b.p, "Japantown Jonin", "field", spent=True)
+    g = b.go()
+    g.cards[atk].lag = False
+    g.add_lasting({"kind": "reboot", "p": b.p, "until": "eot", "used": False})
+    g.step(("attack", atk, ("unit", dfn)))
+    if g.decision and g.decision.kind == "react":
+        g.step(("end",))
+    L = next(L for L in g.lasting if L["kind"] == "reboot")
+    assert L["used"]
+    assert not g.flag("no_fight_defeat", atk, dfn)
+
+
+def test_radioport_looks_at_a_known_fitting_legend():
+    b = Board(["V - Corporate Exile", "Padre - Man of the Cross", "Wakako Okada - Peace and Harmony"])
+    g = b.g
+    v = b.card(b.p, "V - Corporate Exile", "legends", face_up=False)
+    for u in g.players[b.p].legends:
+        g.cards[u].face_up = False
+    g.players[b.p].known_legends[:] = [v]
+    for seed in range(10):
+        g.rng.seed(seed)
+        ctx = {"p": b.p}
+        from cpbot.effects import STEPS
+        STEPS["radioport"](g, ctx)
+        assert ctx.get("looked") == v

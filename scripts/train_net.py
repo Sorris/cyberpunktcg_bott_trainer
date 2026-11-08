@@ -3,7 +3,8 @@
     python scripts/train_net.py --data selfplay/round2 --out data/value_net.npz
 
 Reads the features_v2 rows recorded by scripts/selfplay.py, holds out every tenth
-game, trains a one-hidden-layer network with Adam and prints held-out log loss and
+game of the first folder (the one that matters, usually search-agent self-play),
+trains a one-hidden-layer network with Adam and prints held-out log loss and
 accuracy next to the linear score's.
 """
 import argparse
@@ -19,18 +20,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from cpbot.features import NET_WEIGHTS, WEIGHTS  # noqa: E402
 
 
-def load(folders):
-    V, X, y, seed = [], [], [], []
-    for folder in folders:
-        for f in sorted(Path(folder).glob("*.npz")):
+def load(folders, max_files=None):
+    V, X, y, seed, src = [], [], [], [], []
+    for k, folder in enumerate(folders):
+        for f in sorted(Path(folder).glob("*.npz"))[:max_files]:
             z = np.load(f)
             if "V" not in z.files or len(z["y"]) == 0:
                 continue
-            V.append(z["V"].astype(np.float32))
+            V.append(z["V"])
             X.append(z["X"].astype(np.float32))
             y.append(z["y"].astype(np.float32))
             seed.append(np.full(len(z["y"]), int(z["seed"])))
-    return np.concatenate(V), np.concatenate(X), np.concatenate(y), np.concatenate(seed)
+            src.append(np.full(len(z["y"]), k))
+    return (np.concatenate(V), np.concatenate(X), np.concatenate(y), np.concatenate(seed),
+            np.concatenate(src))
 
 
 def logloss(p, y):
@@ -52,18 +55,23 @@ def main():
     ap.add_argument("--l2", type=float, default=1e-4)
     ap.add_argument("--batch", type=int, default=512)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--max-files", type=int, default=None, help="games to read per folder")
     a = ap.parse_args()
     t = time.time()
-    V, X, y, seed = load(a.data)
-    test = seed % 10 == 0
-    mu = V[~test].mean(0)
-    sd = V[~test].std(0) + 1e-3
-    Z = (V - mu) / sd
+    V, X, y, seed, src = load(a.data, a.max_files)
+    test = (seed % 10 == 0) & (src == 0)        # judge on held-out games from the first folder
+    mu = V[~test].astype(np.float32).mean(0)
+    sd = V[~test].astype(np.float32).std(0) + 1e-3
+    Z = np.empty(V.shape, np.float32)
+    for i in range(0, len(V), 50000):
+        Z[i:i + 50000] = (V[i:i + 50000].astype(np.float32) - mu) / sd
+    shape = V.shape
+    del V
     tr, te = np.where(~test)[0], np.where(test)[0]
-    print(f"{len(y)} positions from {len(set(seed.tolist()))} games ({len(te)} held out), {V.shape[1]} features")
+    print(f"{len(y)} positions from {len(set(seed.tolist()))} games ({len(te)} held out), {shape[1]} features")
 
     rng = np.random.default_rng(a.seed)
-    d, h = V.shape[1], a.hidden
+    d, h = shape[1], a.hidden
     P = {"W1": rng.normal(0, np.sqrt(2 / d), (d, h)).astype(np.float32), "b1": np.zeros(h, np.float32),
          "W2": rng.normal(0, np.sqrt(1 / h), h).astype(np.float32), "b2": np.zeros((), np.float32)}
     M = {k: np.zeros_like(v) for k, v in P.items()}

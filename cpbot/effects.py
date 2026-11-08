@@ -175,6 +175,7 @@ class Registry:
                 extra.append(ev[k])
         if event == "defeated":
             extra.extend(ev.get("snapshot", {}).get("gears", []))
+            extra.extend(ev.get("batch_uids", ()))     # defeated together: they see each other
         for u in cands + extra:
             if u in seen:
                 continue

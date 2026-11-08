@@ -51,12 +51,8 @@ def _sixth(g, me, ev):
 # ---- Adam Smasher - Metal Over Meat
 @step("defeat_all_other")
 def _defeat_all_other(g, ctx):
-    steps = []
-    for pl in g.players:
-        for u in list(pl.field):
-            if u != ctx["src"]:
-                steps.extend(g.defeat_steps(u))
-    return steps
+    others = [(u, ctx["src"]) for pl in g.players for u in pl.field if u != ctx["src"]]
+    return g.defeat_batch_steps(others) if others else None
 
 
 play_trigger("adam-smasher-metal-over-meat", S("defeat_all_other"))
@@ -882,18 +878,26 @@ play_trigger("yorinobu-arasaka-steel-dragon", S("yori_dragon"))
 def _count_arasaka_defeats(g, ev):
     snap = ev.get("snapshot", {})
     if snap.get("zone") == "field" and "ARASAKA" in snap.get("tags", []):
-        g.turn_flags["arasaka_defeats"] = g.turn_flags.get("arasaka_defeats", 0) + 1
+        g.turn_flags.setdefault("arasaka_first_batch", ev.get("batch"))
 
 
 @on("defeated", "yorinobu-arasaka-steel-dragon")
 def _yori_draw(g, me, ev):
-    # Only the first ARASAKA Unit defeated in the whole turn counts, even if it was
-    # defeated before Yorinobu entered play (ruling from Henry, 8 Nov 2026).
-    # Yorinobu himself counts: if he is that first ARASAKA Unit, he still draws.
+    # Only the first ARASAKA Unit(s) defeated in the whole turn count, even if they were
+    # defeated before Yorinobu entered play (ruling from Henry, 8 Nov 2026). Units
+    # defeated together are defeated simultaneously, so if two Yorinobu tie in a fight
+    # both owners draw (Henry, card audit). Yorinobu himself counts.
     snap = ev.get("snapshot", {})
-    if (snap.get("zone") == "field" and "ARASAKA" in snap.get("tags", [])
-            and g.turn_flags.get("arasaka_defeats") == 1):
-        if ev["uid"] == me:
-            g.trigger(me, [draw(1)], p=snap["controller"])
-        elif on_field(g, me):
-            g.trigger(me, [draw(1)])
+    if not (snap.get("zone") == "field" and "ARASAKA" in snap.get("tags", [])):
+        return
+    if ev.get("batch") != g.turn_flags.get("arasaka_first_batch"):
+        return
+    key = ("yori_drew", me)
+    if g.turn_flags.get(key):
+        return
+    if ev["uid"] == me:
+        g.turn_flags[key] = True
+        g.trigger(me, [draw(1)], p=snap["controller"])
+    elif on_field(g, me):
+        g.turn_flags[key] = True
+        g.trigger(me, [draw(1)])
