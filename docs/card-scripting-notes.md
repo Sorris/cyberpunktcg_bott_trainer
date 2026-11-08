@@ -34,4 +34,4 @@ can check it. Anything marked **Review** is the most likely to be wrong.
 | Reboot Optics | Used up by the first fight that would defeat a friendly Unit |
 | Saul Bright | Readies the 3 highest-power spent Units automatically |
 | Viktor Vektor - Sit Down and Relax | Takes the first 2 eligible Gears automatically |
-| Yorinobu Arasaka - Steel Dragon | Draws only for the first ARASAKA Unit (any player's) defeated each turn, counting defeats before he entered play that turn (confirmed by Henry) |
+| Yorinobu Arasaka - Steel Dragon | Draws only for the first ARASAKA Unit (any player's) defeated each turn, counting defeats before he entered play that turn. He draws when he is that first Unit himself (confirmed by Henry) |

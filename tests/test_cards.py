@@ -378,3 +378,27 @@ def test_controller_orders_own_pending_effects():
     g.advance()
     assert g.decision.kind == "order_pending" and g.decision.player == b.p
     assert len(g.decision.options) == 2
+
+
+def test_yorinobu_draws_when_he_is_first_arasaka_defeated():
+    b = Board()
+    g = b.g
+    y = b.card(b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    g.defeat_now(y)
+    assert len(g.pending) == 1 and g.pending[0][0] == b.p
+    hand = len(g.players[b.p].hand)
+    g.decision = None
+    g.stack = [("main", ())]
+    g.advance()
+    assert len(g.players[b.p].hand) == hand + 1
+
+
+def test_yorinobu_no_draw_when_defeated_second():
+    b = Board()
+    g = b.g
+    a1 = b.card(b.p, "Field Operator", "field")
+    y = b.card(b.p, "Yorinobu Arasaka - Steel Dragon", "field")
+    g.defeat_now(a1)
+    g.pending.clear()
+    g.defeat_now(y)
+    assert g.pending == []

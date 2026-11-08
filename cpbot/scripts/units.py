@@ -889,7 +889,11 @@ def _count_arasaka_defeats(g, ev):
 def _yori_draw(g, me, ev):
     # Only the first ARASAKA Unit defeated in the whole turn counts, even if it was
     # defeated before Yorinobu entered play (ruling from Henry, 8 Nov 2026).
+    # Yorinobu himself counts: if he is that first ARASAKA Unit, he still draws.
     snap = ev.get("snapshot", {})
-    if (on_field(g, me) and ev["uid"] != me and snap.get("zone") == "field"
-            and "ARASAKA" in snap.get("tags", []) and g.turn_flags.get("arasaka_defeats") == 1):
-        g.trigger(me, [draw(1)])
+    if (snap.get("zone") == "field" and "ARASAKA" in snap.get("tags", [])
+            and g.turn_flags.get("arasaka_defeats") == 1):
+        if ev["uid"] == me:
+            g.trigger(me, [draw(1)], p=snap["controller"])
+        elif on_field(g, me):
+            g.trigger(me, [draw(1)])
