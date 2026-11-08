@@ -1,0 +1,32 @@
+# Dexter DeShawn · Muamar Reyes · V (standard)
+# From Henry, 8 Nov 2026. Evaluation opponent only: never used by the deck search or training.
+
+// Legends (3)
+1 Dexter DeShawn: Off the Grid
+1 Muamar Reyes: El Capitán
+1 V: Streetkid
+
+// Units (16)
+3 6th Street Recruits
+2 Animals Wrecker
+2 Augmented Negotiators
+1 Johnny Silverhand: Never Stop Fighting
+3 Meredith Stout: Stone Cold Corpo
+1 Secondhand Bombus
+1 V: Roamer of the Badlands
+3 Yorinobu Arasaka: Steel Dragon
+
+// Gears (9)
+3 Mantis Blades
+3 Satori: Sword of Saburo
+3 Zetatech Faceplate
+
+// Programs (15)
+1 Afterparty at Lizzie's
+1 All is Lost
+2 Bonnie and Clyde
+3 Carnage at the Colosseum
+2 Detonate
+3 Industrial Assembly
+2 Over the Edge
+1 The Heist
