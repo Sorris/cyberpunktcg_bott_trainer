@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
 from cpbot.features import LearnedValue, NetValue, card_features, features, features_v2  # noqa: E402
+from cpbot.policy import move_features  # noqa: E402
 from cpbot.search import ISMCTSAgent, rollout_move  # noqa: E402
 
 
@@ -45,6 +46,8 @@ def play(job):
     agents = [ISMCTSAgent(iterations=max(iterations, 1), rollout_depth=depth, seed=seed * 2 + i, value_fn=vf)
               for i in (0, 1)]
     X, C, V, Q, turn = [], [], [], [], []
+    # policy records: every option's sparse features and how often the search tried it
+    p_idx, p_val, p_opt, p_grp, p_n = [], [], [], [], []
     fast = iterations == 0                         # cheap playout-policy games, sampled positions
     while not g.over:
         d = g.decision
@@ -70,13 +73,25 @@ def play(job):
             if st and st.get("moves"):
                 q = st["moves"][0][1]           # win chance of the most-visited move
                 q = q if d.player == 0 else 1 - q
+                visits = {m: n for n, _, m in st["moves"]}
+                p_grp.append(len(p_opt))
+                for o in d.options:
+                    p_opt.append(len(p_idx))
+                    for i, v in move_features(g, d, o):
+                        p_idx.append(i)
+                        p_val.append(v)
+                    p_n.append(visits.get(o, 0))
         if rec:
             Q += [q, 1 - q]
         g.step(move)
     y0 = 0.5 if g.winner == "draw" else float(g.winner == 0)
     y = np.array([y0, 1 - y0] * (len(X) // 2))
     np.savez_compressed(path, X=np.array(X), C=np.array(C, dtype=np.int8),
-                        V=np.array(V, dtype=np.float16), y=y, q=np.array(Q, dtype=np.float32), seed=seed)
+                        V=np.array(V, dtype=np.float16), y=y, q=np.array(Q, dtype=np.float32), seed=seed,
+                        p_idx=np.array(p_idx, dtype=np.int16), p_val=np.array(p_val, dtype=np.float16),
+                        p_opt=np.array(p_opt + [len(p_idx)], dtype=np.int32),
+                        p_grp=np.array(p_grp + [len(p_opt)], dtype=np.int32),
+                        p_n=np.array(p_n, dtype=np.float32))
     return 1
 
 

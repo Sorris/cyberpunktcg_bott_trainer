@@ -199,7 +199,67 @@ def smart2_rollout_move(g: Game, rng: random.Random):
     return smart_rollout_move(g, rng)
 
 
-POLICIES = {"random": rollout_move, "smart": smart_rollout_move, "smart2": smart2_rollout_move}
+def _pump(g, p, quick_only):
+    """Rough power a player could add in a fight: 2 if they have a ready Eddie and a
+    card in hand that could do it (Gear or Programs; only Quick Programs on the
+    rival's turn)."""
+    pl = g.players[p]
+    if not any(not g.cards[u].spent for u in pl.eddies):
+        return 0
+    for u in pl.hand:
+        d = g.d(u)
+        if quick_only:
+            if d.type == "program" and d.has("quick"):
+                return 2
+        elif d.type in ("gear", "program"):
+            return 2
+    return 0
+
+
+def smart3_rollout_move(g: Game, rng: random.Random):
+    """smart_rollout_move, but a fight only counts as won if it survives what the
+    rival could add, and Gig attacks into a ready Blocker that would win are rare."""
+    d = g.decision
+    if d.kind != "main":
+        return rollout_move(g, rng)
+    attacks = [o for o in d.options if o[0] == "attack"]
+    if not attacks or rng.random() >= 0.8:
+        return rollout_move(g, rng)
+    p = d.player
+    rival = g.players[1 - p]
+    pump_me, pump_op = _pump(g, p, False), _pump(g, 1 - p, True)
+    blockers = [g.power(u) for u in rival.field if not g.cards[u].spent and g.has_kw(u, "blocker")]
+    weights = []
+    for o in attacks:
+        pa = g.power(o[1])
+        target = o[2]
+        if target[0] == "unit":
+            m = pa - g.power(target[1])
+            w = 3.0 if m > pump_op else 1.0 if m + pump_me > 0 else 0.6 if m + pump_me == 0 else 0.1
+        elif pa <= 0:
+            w = 0.2
+        else:
+            w = 0.4 if any(b >= pa + pump_me for b in blockers) else 1.5
+        weights.append(w)
+    return rng.choices(attacks, weights)[0]
+
+
+def smart4_rollout_move(g: Game, rng: random.Random):
+    """smart3_rollout_move with a lean towards using Eddies over the whole round:
+    in the react step, call a Legend or use a Quick card more often instead of
+    letting ready Eddies go to waste."""
+    d = g.decision
+    if d.kind == "react":
+        uses = [o for o in d.options if o[0] in ("call", "quick", "activate")]
+        if uses and rng.random() < 0.5:
+            return rng.choice(uses)
+        return rollout_move(g, rng)
+    return smart3_rollout_move(g, rng)
+
+
+POLICIES = {"random": rollout_move, "smart": smart_rollout_move, "smart2": smart2_rollout_move,
+            "smart3": smart3_rollout_move,
+            "smart4": smart4_rollout_move}
 
 
 class ISMCTSAgent:
@@ -227,7 +287,12 @@ class ISMCTSAgent:
         # smart_rollout_move, "random" the plain rollout_move. rollout_turns=n plays each rollout to
         # the end of the n-th turn after the current one (so 1 covers the rival's reply),
         # with rollout_depth as a cap on the number of moves.
-        self.policy = POLICIES[policy]
+        if policy in POLICIES:
+            self.policy = POLICIES[policy]
+        else:                                   # a learned policy (cpbot.policy), by file
+            from .policy import Policy
+            pol = Policy(path=policy) if isinstance(policy, str) else policy
+            self.policy = lambda g, rng: pol.sample(g, rng)
         self.rollout_turns = rollout_turns
         self.scale = scale
         self.rng = random.Random(seed)
