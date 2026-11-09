@@ -278,6 +278,7 @@ function cardEl(c, extra = {}) {
   if (c.lag) flags.push("lag");
   if (c.face_up === false) flags.push("face down");
   if (extra.flags) flags.push(...extra.flags);
+  if (c.note) flags.push(c.note);
   if (flags.length) el.classList.add("flagged");
   if (flags.length) el.insertAdjacentHTML("beforeend", `<div class="flags">${flags.map((f) => `<span class="flag">${esc(f)}</span>`).join("")}</div>`);
   if (c.now_power != null && (c.type !== "legend" || extra.onField)) {
