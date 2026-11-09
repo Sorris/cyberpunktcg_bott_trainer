@@ -569,6 +569,13 @@ def _okey(o):
 def _peek_cards(g: Game, d) -> list:
     """Cards named by "card" options that aren't visible on the table (e.g. picked
     from the top of the deck), so the page can show their pictures."""
+    ctx = d.ctx[1] if d.resume == "effect_answer" and len(d.ctx) > 1 and isinstance(d.ctx[1], dict) else {}
+    if ctx.get("_top"):
+        # A search of the top of the deck: show every card looked at, duplicates included
+        # (the choices name each different card once, since copies are interchangeable).
+        taken = set(ctx.get("_taken") or ())
+        return [dict(card_info(g.d(u)), uid=u, note="taken" if u in taken else None)
+                for u in reversed(ctx["_top"])]                # top card first
     out, seen = [], set()
     for o in d.options:
         if isinstance(o, tuple) and len(o) > 1 and o[0] in ("card", "pending") :
