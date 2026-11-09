@@ -83,7 +83,7 @@ print("\n".join(g.log))
 python scripts/play.py            # opens http://127.0.0.1:8765 in your browser
 ```
 
-Pick your deck (the BBG Proactive sample, a random legal deck, or paste a decklist
+Any list saved in `decks/` shows up as a choice for you and for the bot. Pick your deck (the BBG Proactive sample, a random legal deck, or paste a decklist
 in the usual `3 Card Name` format; `//` headings are fine and the sideboard is
 left out), the bot's deck and how long the bot thinks per move. You play as the
 bottom player. Cards you can use are outlined; click a card to read it and see

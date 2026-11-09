@@ -1,0 +1,32 @@
+# Adam Smasher · River Ward · Viktor Vektor (standard)
+
+// Legends (3)
+1 Adam Smasher: Ender of Legends
+1 River Ward: Detective on the Hunt
+1 Viktor Vektor: Sit Down and Relax
+
+// Units (15)
+2 6th Street Recruits
+1 Dexter DeShawn: One Last Chance
+3 Johnny Silverhand: Never Stop Fighting
+1 MaxTac Suppression Team
+2 Meredith Stout: Stone Cold Corpo
+2 Rockn' Rockerboy
+2 Secondhand Bombus
+2 Sketchy Ripper
+
+// Gears (17)
+3 Adrenaline Converter
+1 Arasaka Emergency Radioport
+1 Gorilla Arms
+3 Mandibular Upgrade
+3 Mantis Blades
+3 Satori: Sword of Saburo
+3 Zetatech Faceplate
+
+// Programs (8)
+3 Bootleg Black Sapphire Show
+1 Detonate
+2 Live with the Aftermath
+1 Over the Edge
+1 Safety Override
