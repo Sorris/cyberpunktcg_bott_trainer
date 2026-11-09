@@ -263,12 +263,85 @@ POLICIES = {"random": rollout_move, "smart": smart_rollout_move, "smart2": smart
             "smart4": smart4_rollout_move}
 
 
+# ------------------------------------------------------------- obvious waste
+# Gear that does something on a face-up Legend that can't Go Solo (it never fights,
+# attacks or blocks): ones that trigger when "this Unit or Legend" is spent or
+# readied, and ones with an effect that doesn't depend on the host.
+_LEGEND_GEAR = {"riot-shield", "overwatch-panam-s-gift", "zetatech-berserk"}
+
+
+def _gear_works_on(g, gear_cid, host) -> bool:
+    d = g.db[gear_cid]
+    hd = g.d(host)
+    if hd.type != "legend" or hd.has("go solo") or g.cards[host].zone == "field":
+        return True
+    return "Unit or Legend" in d.text.split(")", 1)[-1] or d.slug in _LEGEND_GEAR
+
+
+def _fingerprint(g, p, skip):
+    pl = [g.players[0], g.players[1]]
+    return (tuple(tuple(x.gigs and sorted(map(tuple, x.gigs))) for x in pl),
+            tuple(tuple(sorted((u, g.power(u), g.cards[u].spent) for u in x.field)) for x in pl),
+            tuple(len(x.hand) for x in pl),
+            tuple(len(x.deck) for x in pl), tuple(len(x.trash) for x in pl),
+            len(g.lasting), len(g.pending),
+            tuple(tuple(g.cards[u].face_up for u in x.legends) for x in pl))
+
+
+def _program_does_nothing(g, opt) -> bool:
+    """Playing this Program now would only move it to the trash (e.g. Detonate with
+    no rival Gear to hit). Checked on a copy, paying with the first options."""
+    d = g.db[opt[1]]
+    if d.type != "program":
+        return False
+    p = g.decision.player
+    c = g.clone()
+    before = _fingerprint(c, p, opt[1])
+    c.step(opt)
+    for _ in range(40):
+        dec = c.decision
+        if c.over or dec is None or (dec.kind == "main" and dec.player == p):
+            break
+        if dec.kind != "pay":
+            return False                          # it asks for a choice: it does something
+        c.step(dec.options[0])
+    after = _fingerprint(c, p, opt[1])
+    b, a = list(before), list(after)
+    b[4] = a[4] = 0                               # trash grows by the card itself
+    b[2] = tuple(n - (1 if q == p else 0) for q, n in enumerate(b[2]))   # and it left the hand
+    return a == b
+
+
+def sensible_options(g):
+    """The decision's options without obviously wasted ones (never empty)."""
+    d = g.decision
+    opts = d.options
+    if d.kind == "equip":
+        gear = g.cards[d.ctx[1]].cid
+        keep = [o for o in opts if _gear_works_on(g, gear, o[1])]
+        return keep or opts
+    if d.kind == "main":
+        keep = []
+        for o in opts:
+            if o[0] == "play":
+                cd = g.db[o[1]]
+                if cd.type == "gear":
+                    hosts = g.equip_targets(d.player)
+                    if hosts and not any(_gear_works_on(g, o[1], h) for h in hosts):
+                        continue
+                elif cd.type == "program" and _program_does_nothing(g, o):
+                    continue
+            keep.append(o)
+        return keep or opts
+    return opts
+
+
 class ISMCTSAgent:
     """Search for `iterations` samples (or `seconds`, if given) per decision."""
 
     def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=20, seed=None,
                  scale=0.35, value_fn="learned", infer_rival=False, policy="smart",
-                 rollout_turns=None, prior=None, prior_k=0.0):
+                 rollout_turns=None, prior=None, prior_k=0.0, prune=True):
         """value_fn(g, p) -> win chance in [0, 1] scores the end of each rollout.
         "learned" (the default) uses the score fitted on self-play games
         (cpbot.features.LearnedValue); "hand" uses the hand-made `value`, which
@@ -295,6 +368,7 @@ class ISMCTSAgent:
             pol = Policy(path=policy) if isinstance(policy, str) else policy
             self.policy = lambda g, rng: pol.sample(g, rng)
         self.rollout_turns = rollout_turns
+        self.prune = prune        # skip obviously wasted plays (sensible_options)
         # prior=<policy weights file>: expand moves in the order the learned policy
         # likes, and with prior_k > 0 add a bias towards them that fades with visits.
         self.prior = None
@@ -314,6 +388,9 @@ class ISMCTSAgent:
             return True
         root_player = d.player
         root = Node()
+        self._root_opts = sensible_options(game) if self.prune else d.options
+        if len(self._root_opts) == 1:
+            return self._root_opts[0]
         deadline = time.time() + self.seconds if self.seconds else None
         it = 0
         while True:
@@ -339,7 +416,12 @@ class ISMCTSAgent:
         # Selection and expansion
         while not g.over:
             dec = g.decision
-            opts = dec.options
+            if node is root:
+                opts = self._root_opts
+            elif dec.kind == "equip" and self.prune:
+                opts = sensible_options(g)
+            else:
+                opts = dec.options
             who = dec.player
             for o in opts:
                 ch = node.children.get(o)

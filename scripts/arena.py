@@ -70,6 +70,8 @@ def make(spec, seed):
                 kw["prior"] = v
             elif k == "k":
                 kw["prior_k"] = float(v)
+            elif k == "x":
+                kw["prune"] = bool(int(v))
             elif k == "t":
                 kw["rollout_turns"] = int(v)
             elif k == "i":

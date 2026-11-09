@@ -169,3 +169,25 @@ def test_learned_value_reads_pattern_weights(tmp_path):
     rng = random.Random(0)
     g = Game(random_deck(rng, db), random_deck(rng, db), seed=0)
     assert 0 <= v(g, 0) <= 1
+
+
+def test_bot_skips_wasted_programs_and_gear():
+    import sys
+    sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+    from test_cards import Board
+    from cpbot.search import sensible_options
+    db = default_db()
+    b = Board(["Viktor Vektor - Sit Down and Relax", "Padre - Man of the Cross", "Wakako Okada - Peace and Harmony"])
+    b.card(b.p, "Viktor Vektor - Sit Down and Relax", "legends", face_up=True)
+    for t in ("Detonate", "Mantis Blades", "Zetatech Faceplate"):
+        b.card(b.p, t, "hand")
+    b.eddies(b.p, 5)
+    g = b.go()
+    plays = lambda: [db[o[1]].title for o in sensible_options(g) if o[0] == "play"]  # noqa: E731
+    assert plays() == ["Zetatech Faceplate"]       # no rival Gear; Blades do nothing on Viktor
+    r = b.card(1 - b.p, "Psycho Squad", "field")
+    b.gear(1 - b.p, "Mantis Blades", r)
+    g.decision = None
+    g.stack = [("main", ())]
+    g.advance()
+    assert "Detonate" in plays()
