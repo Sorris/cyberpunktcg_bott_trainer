@@ -109,12 +109,30 @@ class Policy:
     """Chances for each option, from a linear score over move_features."""
 
     def __init__(self, path=POLICY_WEIGHTS, weights=None):
+        self.net = None
+        if weights is None and str(path).endswith(".npz"):     # a small network
+            import numpy as np
+            z = np.load(path)
+            self.np = np
+            self.net = (z["W1"], z["b1"], z["w2"])
+            return
         if weights is None:
             weights = json.loads(Path(path).read_text())["weights"]
         self.w = list(weights)
 
     def scores(self, g, d):
         ctx = _context(g, d.player)
+        if self.net is not None:
+            W1, b1, w2 = self.net
+            np = self.np
+            out = []
+            for o in d.options:
+                f = move_features(g, d, o, ctx)
+                idx = [i for i, _ in f]
+                val = np.array([v for _, v in f], dtype=np.float32)
+                h = np.maximum(val @ W1[idx] + b1, 0)
+                out.append(float(h @ w2))
+            return out
         w = self.w
         return [sum(w[i] * v for i, v in move_features(g, d, o, ctx)) for o in d.options]
 
