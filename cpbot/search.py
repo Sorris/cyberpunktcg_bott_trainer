@@ -130,7 +130,7 @@ def _infer_rival(d: Game, o: int, rng: random.Random, blind=False):
 
 # ------------------------------------------------------------- tree search
 class Node:
-    __slots__ = ("parent", "move", "player", "children", "n", "w", "avail")
+    __slots__ = ("parent", "move", "player", "children", "n", "w", "avail", "prior")
 
     def __init__(self, parent=None, move=None, player=None):
         self.parent = parent
@@ -140,6 +140,7 @@ class Node:
         self.n = 0
         self.w = 0.0              # summed reward from `player`'s point of view
         self.avail = 0
+        self.prior = 0.0          # the policy's chance for this move, when a prior is used
 
 
 def rollout_move(g: Game, rng: random.Random):
@@ -267,7 +268,7 @@ class ISMCTSAgent:
 
     def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=20, seed=None,
                  scale=0.35, value_fn="learned", infer_rival=False, policy="smart",
-                 rollout_turns=None):
+                 rollout_turns=None, prior=None, prior_k=0.0):
         """value_fn(g, p) -> win chance in [0, 1] scores the end of each rollout.
         "learned" (the default) uses the score fitted on self-play games
         (cpbot.features.LearnedValue); "hand" uses the hand-made `value`, which
@@ -294,6 +295,13 @@ class ISMCTSAgent:
             pol = Policy(path=policy) if isinstance(policy, str) else policy
             self.policy = lambda g, rng: pol.sample(g, rng)
         self.rollout_turns = rollout_turns
+        # prior=<policy weights file>: expand moves in the order the learned policy
+        # likes, and with prior_k > 0 add a bias towards them that fades with visits.
+        self.prior = None
+        if prior is not None:
+            from .policy import Policy
+            self.prior = Policy(path=prior) if isinstance(prior, str) else prior
+        self.prior_k = prior_k if self.prior is not None else 0.0
         self.scale = scale
         self.rng = random.Random(seed)
         self.last_stats = None
@@ -339,17 +347,27 @@ class ISMCTSAgent:
                     ch.avail += 1
             untried = [o for o in opts if o not in node.children]
             if untried:
-                move = rng.choice(untried)
+                pr = None
+                if self.prior is not None and len(opts) > 1:
+                    pr = dict(zip(opts, self.prior.probs(g, dec)))
+                    move = rng.choices(untried, [pr[o] + 1e-3 for o in untried])[0]
+                else:
+                    move = rng.choice(untried)
                 child = Node(node, move, who)
                 child.avail = 1
+                if pr is not None:
+                    child.prior = pr[move]
                 node.children[move] = child
                 g.step(move)
                 node = child
                 break
             best, best_s = None, -1.0
+            k = self.prior_k
             for o in opts:
                 ch = node.children[o]
                 s = ch.w / ch.n + self.c * math.sqrt(math.log(ch.avail) / ch.n)
+                if k:
+                    s += k * ch.prior / (ch.n + 1)        # progressive bias towards the policy's picks
                 if s > best_s:
                     best, best_s = ch, s
             g.step(best.move)

@@ -17,8 +17,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db  # noqa: E402
 from cpbot.agents import EagerRandomAgent  # noqa: E402
-from cpbot.decksearch import (SearchState, breed, deck_from_key, describe, new_state,  # noqa: E402
-                              schedule)
+from cpbot.decksearch import (Entry, SearchState, breed, deck_from_key, deck_key, describe,  # noqa: E402
+                              new_state, schedule)
+from cpbot.deck import random_deck  # noqa: E402
 from cpbot.search import ISMCTSAgent  # noqa: E402
 
 AGENT = {"iterations": 30, "value": None, "vf": None}
@@ -70,6 +71,7 @@ def main():
     ap.add_argument("--generations", type=int, default=30, help="stop after this many generations in total")
     ap.add_argument("--pop", type=int, default=16)
     ap.add_argument("--children", type=int, default=8)
+    ap.add_argument("--immigrants", type=int, default=2, help="new random decks added each generation")
     ap.add_argument("--pairs", type=int, default=3, help="pairs of games per deck per generation")
     ap.add_argument("--iterations", type=int, default=30, help="search budget per move (0 = eager random)")
     ap.add_argument("--value", default=None, help="position score for the bot (.json linear or .npz network)")
@@ -89,6 +91,8 @@ def main():
         while s.generation < a.generations:
             t = time.time()
             kids = breed(s, db, rng, a.children) if s.generation > 0 else []
+            # a few brand-new random decks each generation keep the search exploring
+            kids += [Entry(deck_key(random_deck(rng, db)), s.generation + 1) for _ in range(a.immigrants)]
             entries = s.population + kids
             by_key = {e.key: e for e in entries}
             jobs = schedule(s, entries, rng, a.pairs)

@@ -66,6 +66,10 @@ def make(spec, seed):
                 kw["value_fn"] = LearnedValue(path=v)     # a weights file
             elif k == "p":
                 kw["policy"] = v
+            elif k == "prior":
+                kw["prior"] = v
+            elif k == "k":
+                kw["prior_k"] = float(v)
             elif k == "t":
                 kw["rollout_turns"] = int(v)
             elif k == "i":
