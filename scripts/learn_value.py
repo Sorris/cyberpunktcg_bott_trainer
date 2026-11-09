@@ -87,6 +87,8 @@ def main():
     ap.add_argument("--cards", action="store_true", help="add card-aware features (which cards are in play)")
     ap.add_argument("--patterns", action="store_true",
                     help="add Gig-pattern features (each colour's pattern times its RAM and pay-offs)")
+    ap.add_argument("--q-weight", type=float, default=0.0,
+                    help="weight of the search's win estimate (q, when recorded) in the target")
     ap.add_argument("--l2", type=float, default=1e-3)
     ap.add_argument("--data", nargs="*", default=[], help="folders of selfplay .npz files")
     ap.add_argument("--out", default=str(WEIGHTS))
@@ -101,6 +103,7 @@ def main():
     names = NAMES + (PATTERN_NAMES if a.patterns else []) + (card_names(db) if a.cards else [])
     Xs = [np.array([r[0] for r in rows], dtype=np.float32).reshape(len(rows), len(names))]
     ys = [np.array([r[1] for r in rows])]
+    rs = [ys[0]]                                            # game results, for judging
     hs = [np.array([r[2] for r in rows])]
     seeds = [np.array([r[3] for r in rows], dtype=int)]
     for folder in a.data:
@@ -116,14 +119,20 @@ def main():
             if a.cards:
                 parts.append(z["C"])
             Xs.append(np.hstack(parts) if len(parts) > 1 else parts[0])
-            ys.append(z["y"])
+            yy = z["y"].astype(float)
+            if a.q_weight and "q" in z.files:
+                q = z["q"].astype(float)
+                yy = np.where(np.isnan(q), yy, a.q_weight * np.nan_to_num(q) + (1 - a.q_weight) * yy)
+            ys.append(yy)
+            rs.append(z["y"].astype(float))
             hs.append(np.full(len(z["y"]), np.nan))
             seeds.append(np.full(len(z["y"]), int(z["seed"])))
-    X, y, h, seed = (np.concatenate(v) for v in (Xs, ys, hs, seeds))
+    X, y, h, seed, res = (np.concatenate(v) for v in (Xs, ys, hs, seeds, rs))
     rows = y
     test = seed % 10 == 0                                   # hold out whole games
     w = fit(X[~test].astype(np.float64), y[~test], l2=a.l2)
     p = 1 / (1 + np.exp(-np.clip(X[test] @ w, -30, 30)))
+    y = res                                                 # judge against who actually won
     base = float(np.mean(y[~test]))
     print(f"{len(y)} positions ({a.games} new playout games, {len(a.data)} self-play folders), "
           f"{time.time() - t:.0f}s")
