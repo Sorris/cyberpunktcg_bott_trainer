@@ -1,5 +1,5 @@
 {
- "about": "Logistic position score over cpbot.features plus Gig-pattern features; fitted by scripts/learn_value.py --patterns --q-weight 0.5 on self-play rounds 2-4 (target: half game result, half the search's own estimate). Arena with smart playouts at 0.3 s a move: 54.0% over 500 games vs data/value_weights_v2.json.",
+ "about": "Logistic position score over cpbot.features plus Gig-pattern features; fitted by scripts/learn_value.py --patterns --q-weight 0.5 on self-play rounds 2-4 (target: half game result, half the search's own estimate). Arena with smart playouts at 0.3 s a move: 54.0% over 500 games vs data/value_weights_v2.json. Then legends_up set to legends_down + 0.1 (rival mirrored) so the bot calls Legends; 49.5% over 200 games vs v3 (even).",
  "games": 0,
  "selfplay": [
   "selfplay/round4",
@@ -83,7 +83,7 @@
   0.0922,
   0.26718,
   0.16179,
-  0.21914,
+  0.37049,
   0.27049,
   0.06341,
   0.62295,
@@ -102,7 +102,7 @@
   -0.09156,
   -0.26634,
   -0.16056,
-  -0.21988,
+  -0.39047,
   -0.29047,
   -0.06328,
   -0.62341,
