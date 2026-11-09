@@ -182,6 +182,26 @@ def smart_rollout_move(g: Game, rng: random.Random):
     return rollout_move(g, rng)
 
 
+def smart2_rollout_move(g: Game, rng: random.Random):
+    """smart_rollout_move, plus blocking with a Unit that wins the fight."""
+    d = g.decision
+    if d.kind == "react" and g.attack:
+        blocks = [o for o in d.options if o[0] == "block"]
+        if blocks:
+            pa = g.power(g.attack["atk"])
+            good = [o for o in blocks if g.power(o[1]) > pa]
+            if good and rng.random() < 0.8:
+                return rng.choice(good)
+            if g.attack["target"][0] == "gigs":
+                even = [o for o in blocks if g.power(o[1]) == pa]
+                if even and rng.random() < 0.4:
+                    return rng.choice(even)
+    return smart_rollout_move(g, rng)
+
+
+POLICIES = {"random": rollout_move, "smart": smart_rollout_move, "smart2": smart2_rollout_move}
+
+
 class ISMCTSAgent:
     """Search for `iterations` samples (or `seconds`, if given) per decision."""
 
@@ -207,7 +227,7 @@ class ISMCTSAgent:
         # smart_rollout_move, "random" the plain rollout_move. rollout_turns=n plays each rollout to
         # the end of the n-th turn after the current one (so 1 covers the rival's reply),
         # with rollout_depth as a cap on the number of moves.
-        self.policy = smart_rollout_move if policy == "smart" else rollout_move
+        self.policy = POLICIES[policy]
         self.rollout_turns = rollout_turns
         self.scale = scale
         self.rng = random.Random(seed)
