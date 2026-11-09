@@ -278,6 +278,7 @@ function cardEl(c, extra = {}) {
   if (c.lag) flags.push("lag");
   if (c.face_up === false) flags.push("face down");
   if (extra.flags) flags.push(...extra.flags);
+  if (c.note) flags.push(c.note);
   if (flags.length) el.classList.add("flagged");
   if (flags.length) el.insertAdjacentHTML("beforeend", `<div class="flags">${flags.map((f) => `<span class="flag">${esc(f)}</span>`).join("")}</div>`);
   if (c.now_power != null && (c.type !== "legend" || extra.onField)) {
@@ -556,7 +557,25 @@ function poll() {
 }
 
 // ---------------------------------------------------------------- setup
-function deckSpec(kind, text) { return kind === "text" ? {kind, text} : {kind}; }
+function deckSpec(kind, text) {
+  if (kind.startsWith("file:")) return {kind: "file", file: kind.slice(5)};
+  return kind === "text" ? {kind, text} : {kind};
+}
+// Saved lists in decks/ become choices for both players.
+api("/api/decks").then(({decks}) => {
+  for (const [who, dflt] of [["you", "bbg-proactive.txt"], ["bot", null]]) {
+    const sel = $(who + "Kind");
+    const group = document.createElement("optgroup");
+    group.label = "Saved decks (decks folder)";
+    for (const d of decks) {
+      const o = document.createElement("option");
+      o.value = "file:" + d.file; o.textContent = d.name;
+      group.append(o);
+    }
+    if (decks.length) sel.append(group);
+    if (dflt && decks.some((d) => d.file === dflt)) sel.value = "file:" + dflt;
+  }
+}).catch(() => {});
 for (const who of ["you", "bot"]) {
   const k = $(who + "Kind"), t = $(who + "Text"), msg = $(who + "Msg");
   k.onchange = async () => {

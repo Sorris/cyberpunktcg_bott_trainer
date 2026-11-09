@@ -152,3 +152,24 @@ def test_play_server_saves_replays(tmp_path):
     mod.save_replay(m)
     assert json.loads(m.replay_path.read_text())["choices"]
     assert (tmp_path / "game.html").exists()
+
+
+def test_deck_search_shows_every_copy():
+    """Three Mouths, One Desire looks at 3 cards; two copies of one card must both show
+    (a recorded game from Henry where the top 3 were 2x Peace Offering + Maman Brigitte)."""
+    from pathlib import Path
+    from cpbot.deck import Deck
+    from cpbot.watch import _match_option
+    r = json.loads((Path(__file__).parent / "data" / "three-mouths-duplicate.json").read_text())
+    decks = [Deck(x["legends"], x["main"]) for x in r["decks"]]
+    m = Match(decks[0], decks[1], bot=EagerRandomAgent(0), seed=r["seed"], db=db)
+    for want in r["choices"]:
+        v = m.view()["decision"]
+        if v and v.get("source") and v["source"]["title"].startswith("Three Mouths"):
+            titles = sorted(c["title"] for c in v["peek"])
+            assert titles == ["Maman Brigitte - Spirit of Death", "Peace Offering", "Peace Offering"]
+            return
+        opt = _match_option(m.g.decision.options, want)
+        m.choices.append(opt)
+        m.g.step(opt)
+    raise AssertionError("the game never reached Three Mouths, One Desire")

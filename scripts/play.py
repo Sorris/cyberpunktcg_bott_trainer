@@ -133,8 +133,30 @@ def art_path_cached(card_id):
 
 
 # ------------------------------------------------------------------ games
+DECKS_DIR = ROOT / "decks"
+
+
+def deck_files() -> list[dict]:
+    """The saved lists in decks/, named by their "# Name" line."""
+    out = []
+    for p in sorted(DECKS_DIR.glob("*.txt")):
+        name = p.stem
+        for line in p.read_text(encoding="utf-8").splitlines():
+            if line.startswith("# "):
+                name = line[2:].strip()
+                break
+        out.append({"file": p.name, "name": name})
+    return out
+
+
 def make_deck(spec, rng):
     spec = spec or {"kind": "random"}
+    if spec.get("kind") == "file":
+        name = Path(spec.get("file", "")).name                  # no paths outside decks/
+        path = DECKS_DIR / name
+        if not name.endswith(".txt") or not path.exists():
+            raise ValueError(f"no deck file {name!r} in decks/")
+        return parse_decklist(path.read_text(encoding="utf-8"), db)
     if spec.get("kind") == "sample":
         return parse_decklist(SAMPLE_DECK, db)
     if spec.get("kind") == "text":
@@ -242,6 +264,8 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, PAGE.read_bytes(), "text/html; charset=utf-8")
         elif path == "/api/state":
             self._json(view())
+        elif path == "/api/decks":
+            self._json({"decks": deck_files()})
         elif path == "/api/sample_deck":
             self._json({"text": SAMPLE_DECK})
         elif path.startswith("/art/"):
