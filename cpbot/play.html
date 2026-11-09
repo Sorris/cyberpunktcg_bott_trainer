@@ -556,7 +556,25 @@ function poll() {
 }
 
 // ---------------------------------------------------------------- setup
-function deckSpec(kind, text) { return kind === "text" ? {kind, text} : {kind}; }
+function deckSpec(kind, text) {
+  if (kind.startsWith("file:")) return {kind: "file", file: kind.slice(5)};
+  return kind === "text" ? {kind, text} : {kind};
+}
+// Saved lists in decks/ become choices for both players.
+api("/api/decks").then(({decks}) => {
+  for (const [who, dflt] of [["you", "bbg-proactive.txt"], ["bot", null]]) {
+    const sel = $(who + "Kind");
+    const group = document.createElement("optgroup");
+    group.label = "Saved decks (decks folder)";
+    for (const d of decks) {
+      const o = document.createElement("option");
+      o.value = "file:" + d.file; o.textContent = d.name;
+      group.append(o);
+    }
+    if (decks.length) sel.append(group);
+    if (dflt && decks.some((d) => d.file === dflt)) sel.value = "file:" + dflt;
+  }
+}).catch(() => {});
 for (const who of ["you", "bot"]) {
   const k = $(who + "Kind"), t = $(who + "Text"), msg = $(who + "Msg");
   k.onchange = async () => {
