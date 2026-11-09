@@ -312,6 +312,14 @@ def _program_does_nothing(g, opt) -> bool:
     return a == b
 
 
+def _calling_rest_legend(g, p) -> bool:
+    """Paying for a call while a face-down Legend has a rest ability: resting a face-down
+    Legend to pay may rest the one that gets called, so its ability is lost this turn."""
+    if not any(t[0] == "do_call" for t in g.stack[-2:]):
+        return False
+    return any(not g.cards[u].face_up and g.d(u).has_spend for u in g.players[p].legends)
+
+
 def sensible_options(g):
     """The decision's options without obviously wasted ones (never empty)."""
     d = g.decision
@@ -319,6 +327,9 @@ def sensible_options(g):
     if d.kind == "equip":
         gear = g.cards[d.ctx[1]].cid
         keep = [o for o in opts if _gear_works_on(g, gear, o[1])]
+        return keep or opts
+    if d.kind == "pay" and _calling_rest_legend(g, d.player):
+        keep = [o for o in opts if o[0] != "legend_facedown"]
         return keep or opts
     if d.kind == "main":
         keep = []
@@ -418,7 +429,7 @@ class ISMCTSAgent:
             dec = g.decision
             if node is root:
                 opts = self._root_opts
-            elif dec.kind == "equip" and self.prune:
+            elif dec.kind in ("equip", "pay") and self.prune:
                 opts = sensible_options(g)
             else:
                 opts = dec.options

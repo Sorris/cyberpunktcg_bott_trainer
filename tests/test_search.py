@@ -191,3 +191,21 @@ def test_bot_skips_wasted_programs_and_gear():
     g.stack = [("main", ())]
     g.advance()
     assert "Detonate" in plays()
+
+
+def test_bot_pays_for_a_call_without_resting_a_face_down_legend():
+    """A face-down Legend with a rest ability (Padre, Wakako) should be called ready, so pay
+    with an Eddie instead of resting a face-down Legend."""
+    import sys
+    sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+    from test_cards import Board
+    from cpbot.search import sensible_options
+    b = Board(["Viktor Vektor - Sit Down and Relax", "Padre - Man of the Cross", "Wakako Okada - Peace and Harmony"])
+    for t in ("Viktor Vektor - Sit Down and Relax", "Padre - Man of the Cross", "Wakako Okada - Peace and Harmony"):
+        b.card(b.p, t, "legends", face_up=False)
+    b.eddies(b.p, 2)
+    g = b.go()
+    g.step(("call",))
+    assert g.decision.kind == "pay"
+    assert ("legend_facedown",) in g.decision.options
+    assert [o[0] for o in sensible_options(g)] == ["eddie"]
