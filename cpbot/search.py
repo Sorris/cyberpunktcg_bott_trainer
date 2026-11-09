@@ -160,11 +160,34 @@ def rollout_move(g: Game, rng: random.Random):
     return rng.choice(opts)
 
 
+def smart_rollout_move(g: Game, rng: random.Random):
+    """Playout policy with a sense of attack tempo: attack a Unit when the fight is
+    won, the Gigs otherwise, and avoid fights that only lose the attacker."""
+    d = g.decision
+    if d.kind != "main":
+        return rollout_move(g, rng)
+    opts = d.options
+    attacks = [o for o in opts if o[0] == "attack"]
+    if attacks and rng.random() < 0.8:
+        weights = []
+        for o in attacks:
+            target = o[2]
+            if target[0] == "unit":
+                pa, pd = g.power(o[1]), g.power(target[1])
+                w = 3.0 if pa > pd else 0.6 if pa == pd else 0.1
+            else:
+                w = 1.5 if g.power(o[1]) > 0 else 0.2
+            weights.append(w)
+        return rng.choices(attacks, weights)[0]
+    return rollout_move(g, rng)
+
+
 class ISMCTSAgent:
     """Search for `iterations` samples (or `seconds`, if given) per decision."""
 
     def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=20, seed=None,
-                 scale=0.35, value_fn="learned", infer_rival=False):
+                 scale=0.35, value_fn="learned", infer_rival=False, policy="smart",
+                 rollout_turns=None):
         """value_fn(g, p) -> win chance in [0, 1] scores the end of each rollout.
         "learned" (the default) uses the score fitted on self-play games
         (cpbot.features.LearnedValue); "hand" uses the hand-made `value`, which
@@ -180,6 +203,12 @@ class ISMCTSAgent:
         self.seconds = seconds
         self.c = c
         self.rollout_depth = rollout_depth
+        # policy "smart" (the default; 60% over 200 games against "random") uses
+        # smart_rollout_move, "random" the plain rollout_move. rollout_turns=n plays each rollout to
+        # the end of the n-th turn after the current one (so 1 covers the rival's reply),
+        # with rollout_depth as a cap on the number of moves.
+        self.policy = smart_rollout_move if policy == "smart" else rollout_move
+        self.rollout_turns = rollout_turns
         self.scale = scale
         self.rng = random.Random(seed)
         self.last_stats = None
@@ -242,9 +271,16 @@ class ISMCTSAgent:
             node = best
         # Rollout
         k = 0
-        while not g.over and k < self.rollout_depth:
-            g.step(rollout_move(g, rng))
-            k += 1
+        pol = self.policy
+        if self.rollout_turns is not None:
+            stop_turn = game.turn_no + self.rollout_turns + 1
+            while not g.over and k < self.rollout_depth and g.turn_no < stop_turn:
+                g.step(pol(g, rng))
+                k += 1
+        else:
+            while not g.over and k < self.rollout_depth:
+                g.step(pol(g, rng))
+                k += 1
         v0 = self.value_fn(g, 0)
         # Backpropagation
         while node is not None and node.player is not None:

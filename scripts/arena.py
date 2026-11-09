@@ -64,6 +64,10 @@ def make(spec, seed):
                 kw["value_fn"] = NetValue(path=v)
             elif k == "v":
                 kw["value_fn"] = LearnedValue(path=v)     # a weights file
+            elif k == "p":
+                kw["policy"] = v
+            elif k == "t":
+                kw["rollout_turns"] = int(v)
             elif k == "i":
                 kw["infer_rival"] = "blind" if v == "blind" else bool(int(v))
             else:
