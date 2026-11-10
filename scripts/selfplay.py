@@ -23,7 +23,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
-from cpbot.features import LearnedValue, NetValue, card_features, features, features_v2  # noqa: E402
+from cpbot.features import LearnedValue, NetValue, card_features, features, features_v2, tactic_features  # noqa: E402
 from cpbot.policy import move_features  # noqa: E402
 from cpbot.search import ISMCTSAgent, rollout_move  # noqa: E402
 
@@ -45,7 +45,7 @@ def play(job):
         vf = LearnedValue(path=weights)
     agents = [ISMCTSAgent(iterations=max(iterations, 1), rollout_depth=depth, seed=seed * 2 + i, value_fn=vf)
               for i in (0, 1)]
-    X, C, V, Q, turn = [], [], [], [], []
+    X, C, V, T, Q, turn = [], [], [], [], [], []
     # policy records: every option's sparse features and how often the search tried it
     p_idx, p_val, p_opt, p_grp, p_n = [], [], [], [], []
     fast = iterations == 0                         # cheap playout-policy games, sampled positions
@@ -59,6 +59,8 @@ def play(job):
             C.append(card_features(g, 1))
             V.append(features_v2(g, 0))
             V.append(features_v2(g, 1))
+            T.append(tactic_features(g, 0))
+            T.append(tactic_features(g, 1))
             turn.append(g.turn_no)
         q = float("nan")
         if fast:
@@ -87,7 +89,7 @@ def play(job):
     y0 = 0.5 if g.winner == "draw" else float(g.winner == 0)
     y = np.array([y0, 1 - y0] * (len(X) // 2))
     np.savez_compressed(path, X=np.array(X), C=np.array(C, dtype=np.int8),
-                        V=np.array(V, dtype=np.float16), y=y, q=np.array(Q, dtype=np.float32), seed=seed,
+                        V=np.array(V, dtype=np.float16), T=np.array(T, dtype=np.float16), y=y, q=np.array(Q, dtype=np.float32), seed=seed,
                         p_idx=np.array(p_idx, dtype=np.int16), p_val=np.array(p_val, dtype=np.float16),
                         p_opt=np.array(p_opt + [len(p_idx)], dtype=np.int32),
                         p_grp=np.array(p_grp + [len(p_opt)], dtype=np.int32),

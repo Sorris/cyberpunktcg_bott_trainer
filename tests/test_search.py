@@ -209,3 +209,26 @@ def test_bot_pays_for_a_call_without_resting_a_face_down_legend():
     assert g.decision.kind == "pay"
     assert ("legend_facedown",) in g.decision.options
     assert [o[0] for o in sensible_options(g)] == ["eddie"]
+
+
+def test_tactic_features_see_blockers_and_lethal():
+    import sys
+    sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+    from test_cards import Board
+    from cpbot.features import TACTIC_NAMES, tactic_features
+    b = Board()
+    me, rv = b.p, 1 - b.p
+    b.card(me, "Psycho Squad", "field")                    # power 6: steals 1
+    b.card(me, "Animals Wrecker", "field")                 # power 10: steals 2
+    b.gigs(me, *[[d, 1] for d in (4, 6, 8, 10)])            # 4 Gigs
+    b.gigs(rv, [12, 3], [20, 5], [4, 2])
+    g = b.go()
+    t = dict(zip(TACTIC_NAMES, tactic_features(g, me)))
+    assert t["me:steal_threat"] == 3 and t["me:net_steal"] == 3 and t["me:lethal"] == 1
+    b.card(rv, "Meredith Stout - Stone Cold Corpo", "field")   # power-5 Blocker
+    t = dict(zip(TACTIC_NAMES, tactic_features(g, me)))
+    assert t["me:blockers_faced"] == 1 and t["me:net_steal"] == 1 and t["me:lethal"] == 0
+    assert t["me:outclassed"] == 0                          # both attackers beat a 5
+    b.card(rv, "Placide - Voodoo Sentinel", "field", spent=True)
+    t = dict(zip(TACTIC_NAMES, tactic_features(g, me)))
+    assert t["me:killable"] == 0                            # 10 doesn't beat 10

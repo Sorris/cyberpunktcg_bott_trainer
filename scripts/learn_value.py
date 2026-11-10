@@ -23,17 +23,18 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
-from cpbot.features import NAMES, PATTERN_NAMES, WEIGHTS, card_features, card_names, features, \
-    pattern_features, pattern_features_from_v2  # noqa: E402
+from cpbot.features import NAMES, PATTERN_NAMES, TACTIC_NAMES, WEIGHTS, card_features, card_names, \
+    features, pattern_features, pattern_features_from_v2, tactic_features  # noqa: E402
 from cpbot.search import rollout_move, value  # noqa: E402
 
 
-CARDS = {"on": False, "patterns": False}
+CARDS = {"on": False, "patterns": False, "tactics": False}
 
 
-def _init(cards, patterns=False):
+def _init(cards, patterns=False, tactics=False):
     CARDS["on"] = cards
     CARDS["patterns"] = patterns
+    CARDS["tactics"] = tactics
 
 
 def play(seed, sample=0.15):
@@ -47,6 +48,8 @@ def play(seed, sample=0.15):
             f0, f1 = features(g, 0), features(g, 1)
             if CARDS["patterns"]:
                 f0, f1 = f0 + pattern_features(g, 0), f1 + pattern_features(g, 1)
+            if CARDS["tactics"]:
+                f0, f1 = f0 + tactic_features(g, 0), f1 + tactic_features(g, 1)
             if CARDS["on"]:
                 f0, f1 = f0 + card_features(g, 0), f1 + card_features(g, 1)
             pos.append((f0, f1, value(g, 0)))
@@ -59,10 +62,11 @@ def play(seed, sample=0.15):
     return rows
 
 
-def fit(X, y, l2=1e-3, iters=30):
+def fit(X, y, l2=1e-3, iters=30, off=None):
     w = np.zeros(X.shape[1])
+    off = 0.0 if off is None else off
     for _ in range(iters):
-        z = np.clip(X @ w, -30, 30)
+        z = np.clip(X @ w + off, -30, 30)
         p = 1 / (1 + np.exp(-z))
         grad = X.T @ (p - y) / len(y) + l2 * w
         W = p * (1 - p)
@@ -89,6 +93,10 @@ def main():
                     help="add Gig-pattern features (each colour's pattern times its RAM and pay-offs)")
     ap.add_argument("--q-weight", type=float, default=0.0,
                     help="weight of the search's win estimate (q, when recorded) in the target")
+    ap.add_argument("--tactics", action="store_true",
+                    help="add attack-planning features (steal threat after blockers, lethal, ...)")
+    ap.add_argument("--freeze", help="keep this weights file's weights fixed and fit only the other "
+                    "features (and the bias)")
     ap.add_argument("--l2", type=float, default=1e-3)
     ap.add_argument("--data", nargs="*", default=[], help="folders of selfplay .npz files")
     ap.add_argument("--out", default=str(WEIGHTS))
@@ -96,11 +104,12 @@ def main():
     t = time.time()
     rows = []
     if a.games:
-        with Pool(a.procs, initializer=_init, initargs=(a.cards, a.patterns)) as pool:
+        with Pool(a.procs, initializer=_init, initargs=(a.cards, a.patterns, a.tactics)) as pool:
             chunks = pool.map(play, range(a.seed, a.seed + a.games), chunksize=50)
         rows = [r for c in chunks for r in c]
     db = default_db()
-    names = NAMES + (PATTERN_NAMES if a.patterns else []) + (card_names(db) if a.cards else [])
+    names = (NAMES + (PATTERN_NAMES if a.patterns else []) + (TACTIC_NAMES if a.tactics else [])
+             + (card_names(db) if a.cards else []))
     Xs = [np.array([r[0] for r in rows], dtype=np.float32).reshape(len(rows), len(names))]
     ys = [np.array([r[1] for r in rows])]
     rs = [ys[0]]                                            # game results, for judging
@@ -116,6 +125,10 @@ def main():
                 if "V" not in z.files:
                     continue
                 parts.append(pattern_features_from_v2(z["V"], db))
+            if a.tactics:
+                if "T" not in z.files:
+                    continue
+                parts.append(z["T"].astype(np.float32))
             if a.cards:
                 parts.append(z["C"])
             Xs.append(np.hstack(parts) if len(parts) > 1 else parts[0])
@@ -130,7 +143,19 @@ def main():
     X, y, h, seed, res = (np.concatenate(v) for v in (Xs, ys, hs, seeds, rs))
     rows = y
     test = seed % 10 == 0                                   # hold out whole games
-    w = fit(X[~test].astype(np.float64), y[~test], l2=a.l2)
+    if a.freeze:
+        old = json.loads(Path(a.freeze).read_text())
+        fixed = dict(zip(old["names"], old["weights"]))
+        fixed.pop("bias", None)
+        wf = np.array([fixed.get(n, 0.0) for n in names])
+        free = np.array([n not in fixed for n in names])
+        off = X[:, ~free].astype(np.float64) @ wf[~free]
+        wfree = fit(X[~test][:, free].astype(np.float64), y[~test], l2=a.l2, off=off[~test])
+        w = wf.copy()
+        w[free] = wfree
+        print(f"kept {int((~free).sum())} weights from {a.freeze}, fitted {int(free.sum())}")
+    else:
+        w = fit(X[~test].astype(np.float64), y[~test], l2=a.l2)
     p = 1 / (1 + np.exp(-np.clip(X[test] @ w, -30, 30)))
     y = res                                                 # judge against who actually won
     base = float(np.mean(y[~test]))

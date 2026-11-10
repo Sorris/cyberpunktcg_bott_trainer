@@ -89,7 +89,9 @@ class LearnedValue:
         self.w = list(weights)
         names = data.get("names", [])
         self.pairs = pairs if pairs is not None else bool(names) and names[len(NAMES):len(NAMES) + len(PATTERN_NAMES)] == PATTERN_NAMES
-        self.cards = len(self.w) > len(NAMES) + (len(PATTERN_NAMES) if self.pairs else 0)    # card-aware weights
+        self.tactics = bool(names) and TACTIC_NAMES[0] in names
+        known = len(NAMES) + (len(PATTERN_NAMES) if self.pairs else 0) + (len(TACTIC_NAMES) if self.tactics else 0)
+        self.cards = len(self.w) > known                    # card-aware weights
 
     def __call__(self, g, p) -> float:
         if g.over:
@@ -97,6 +99,8 @@ class LearnedValue:
         x = features(g, p)
         if self.pairs:
             x = x + pattern_features(g, p)
+        if self.tactics:
+            x = x + tactic_features(g, p)
         if self.cards:
             x = x + card_features(g, p)
         z = sum(a * b for a, b in zip(self.w, x))
@@ -319,3 +323,51 @@ def pattern_features_from_v2(V, db):
             pay = sum(V[:, head + k * n:head + (k + 1) * n][:, idx].sum(1) for k in blocks)
             cols += [pat[c] * (f(f"{ram}_{c}") > 0), pat[c] * np.minimum(pay, 3) / 3]
     return np.stack(cols, 1)
+
+
+# ------------------------------------------------------------------ tactics
+# Henry's attack-planning points as numbers the score can weigh: how many Gigs each
+# side threatens to steal on its coming (or current) turn once the other side's ready
+# Blockers soak up its biggest attacks, whether that steal would reach 7 Gigs, how
+# many attackers would lose a fight to the best ready Blocker, and how many of the
+# other side's rested Units it could defeat (Gig control vs defeating Units).
+TACTIC_SIDE = ["steal_threat", "net_steal", "lethal", "blockers_faced", "max_blocker_faced/5",
+               "outclassed", "killable"]
+TACTIC_NAMES = ([f"me:{n}" for n in TACTIC_SIDE] + [f"rival:{n}" for n in TACTIC_SIDE]
+                + ["me:gear_in_hand", "me:programs_in_hand", "me:quick_in_hand"])
+WIN_GIGS = 7
+
+
+def _tactic_side(g, q):
+    cards = g.cards
+    pq, pr = g.players[q], g.players[1 - q]
+    now = g.turn_player == q
+    att = []
+    for u in pq.field:
+        c = cards[u]
+        if now and (c.spent or (c.lag and not g.has_kw(u, "adrenaline") and c.solo_turn != g.turn_no)):
+            continue
+        att.append(g.power(u))
+    blk = [g.power(u) for u in pr.field if not cards[u].spent and g.has_kw(u, "blocker")]
+    steals = sorted((p // 10 + 1 for p in att if p > 0), reverse=True)
+    gross = min(sum(steals), len(pr.gigs))
+    net = min(sum(steals[len(blk):]), len(pr.gigs))
+    best_blk = max(blk, default=0)
+    outclassed = sum(1 for p in att if p <= best_blk) if blk else 0
+    top = max(att, default=0)
+    killable = sum(1 for u in pr.field if cards[u].spent and g.power(u) < top)
+    return [gross, net, float(len(pq.gigs) + net >= WIN_GIGS), len(blk), best_blk / 5.0,
+            outclassed, killable]
+
+
+def tactic_features(g, p) -> list[float]:
+    """Attack-planning numbers for both sides, plus the pump cards in p's own hand."""
+    gear = prog = quick = 0
+    for u in g.players[p].hand:
+        d = g.d(u)
+        if d.type == "gear":
+            gear += 1
+        elif d.type == "program":
+            prog += 1
+            quick += d.has("quick")
+    return _tactic_side(g, p) + _tactic_side(g, 1 - p) + [gear, prog, quick]
