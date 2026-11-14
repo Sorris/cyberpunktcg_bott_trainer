@@ -1,12 +1,11 @@
 {
- "about": "Logistic position score over cpbot.features plus Gig-pattern features; fitted by scripts/learn_value.py --patterns --q-weight 0.5 on self-play rounds 2-4 (target: half game result, half the search's own estimate). Arena with smart playouts at 0.3 s a move: 54.0% over 500 games vs data/value_weights_v2.json. Then legends_up set to legends_down + 0.1 (rival mirrored) so the bot calls Legends; 49.5% over 200 games vs v3 (even).",
+ "about": "Linear position score: the v4 weights (data/value_weights_v4.json) kept fixed, plus attack-planning features (cpbot.features.TACTIC_NAMES) and the bias fitted by scripts/learn_value.py --patterns --tactics --q-weight 0.5 --freeze on self-play rounds 8pc and 8cloud. Held-out accuracy 74.6% vs 73.6%; arena at 0.3 s a move 51.7% over 600 games vs v4.",
  "games": 0,
  "selfplay": [
-  "selfplay/round4",
-  "selfplay/round3",
-  "selfplay/round2"
+  "selfplay/round8pc",
+  "selfplay/round8cloud"
  ],
- "positions": 2488320,
+ "positions": 397470,
  "names": [
   "bias",
   "my_turn",
@@ -64,10 +63,27 @@
   "rival:min_gigs*blue",
   "rival:min_gigs*payoffs",
   "rival:different_values*yellow",
-  "rival:different_values*payoffs"
+  "rival:different_values*payoffs",
+  "me:steal_threat",
+  "me:net_steal",
+  "me:lethal",
+  "me:blockers_faced",
+  "me:max_blocker_faced/5",
+  "me:outclassed",
+  "me:killable",
+  "rival:steal_threat",
+  "rival:net_steal",
+  "rival:lethal",
+  "rival:blockers_faced",
+  "rival:max_blocker_faced/5",
+  "rival:outclassed",
+  "rival:killable",
+  "me:gear_in_hand",
+  "me:programs_in_hand",
+  "me:quick_in_hand"
  ],
  "weights": [
-  -0.00019,
+  -0.17908,
   0.20346,
   0.00401,
   0.29455,
@@ -123,6 +139,23 @@
   0.0259,
   -0.04151,
   -0.00611,
-  -0.00999
+  -0.00999,
+  -0.00521,
+  0.06118,
+  0.27824,
+  -0.00757,
+  0.07952,
+  -0.0316,
+  0.15564,
+  0.05704,
+  -0.06596,
+  -0.21977,
+  0.00669,
+  -0.08929,
+  0.02659,
+  -0.12729,
+  0.1864,
+  0.10077,
+  -0.03101
  ]
 }
