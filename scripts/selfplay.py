@@ -23,7 +23,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from cpbot import Game, default_db, random_deck  # noqa: E402
-from cpbot.features import LearnedValue, NetValue, card_features, features, features_v2, tactic_features  # noqa: E402
+from cpbot.features import card_features, features, features_v2, load_value, tactic_features  # noqa: E402
 from cpbot.policy import move_features  # noqa: E402
 from cpbot.search import ISMCTSAgent, rollout_move  # noqa: E402
 
@@ -39,10 +39,8 @@ def play(job):
     g = Game(decks[0], decks[1], seed=seed, db=db)
     if not weights:
         vf = "learned"
-    elif str(weights).endswith(".npz"):
-        vf = NetValue(path=weights)
     else:
-        vf = LearnedValue(path=weights)
+        vf = load_value(weights)
     agents = [ISMCTSAgent(iterations=max(iterations, 1), rollout_depth=depth, seed=seed * 2 + i, value_fn=vf)
               for i in (0, 1)]
     X, C, V, T, Q, turn = [], [], [], [], [], []

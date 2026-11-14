@@ -371,3 +371,38 @@ def tactic_features(g, p) -> list[float]:
             prog += 1
             quick += d.has("quick")
     return _tactic_side(g, p) + _tactic_side(g, 1 - p) + [gear, prog, quick]
+
+
+# ------------------------------------------------------------------ small network
+class SmallNetValue:
+    """Win chance from a small network over the linear score's inputs (features,
+    pattern_features and tactic_features): one hidden layer plus a linear skip,
+    fitted by scripts/train_small_net.py. It can weigh combinations such as
+    "lethal on my turn" that a linear score adds up separately."""
+
+    def __init__(self, path):
+        import numpy as np
+        z = np.load(path)
+        self.np = np
+        self.W1, self.b1, self.W2, self.w = (z[k].astype(np.float64) for k in ("W1", "b1", "W2", "w"))
+        self.mu, self.sd = z["mu"].astype(np.float64), z["sd"].astype(np.float64)
+
+    def __call__(self, g, p) -> float:
+        if g.over:
+            return 1.0 if g.winner == p else 0.5 if g.winner == "draw" else 0.0
+        np = self.np
+        x = (np.array(features(g, p) + pattern_features(g, p) + tactic_features(g, p)) - self.mu) / self.sd
+        h = x @ self.W1 + self.b1
+        z = float(np.maximum(h, 0.0) @ self.W2 + x @ self.w)
+        z = max(-30.0, min(30.0, z))
+        return 1.0 / (1.0 + math.exp(-z))
+
+
+def load_value(path):
+    """A score from a file: .json is the linear LearnedValue; .npz is SmallNetValue
+    when it holds a skip layer (w), else the larger NetValue."""
+    path = str(path)
+    if not path.endswith(".npz"):
+        return LearnedValue(path=path)
+    import numpy as np
+    return SmallNetValue(path) if "w" in np.load(path).files else NetValue(path=path)

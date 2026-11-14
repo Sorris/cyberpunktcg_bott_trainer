@@ -30,8 +30,8 @@ def _value_fn():
     if not v:
         return "learned"
     if AGENT["vf"] is None:
-        from cpbot.features import LearnedValue, NetValue
-        AGENT["vf"] = NetValue(path=v) if v.endswith(".npz") else LearnedValue(path=v)
+        from cpbot.features import load_value
+        AGENT["vf"] = load_value(v)
     return AGENT["vf"]
 
 

@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from cpbot import Game, default_db, random_deck  # noqa: E402
 from cpbot.decklist import parse_file, report  # noqa: E402
 from cpbot.agents import EagerRandomAgent, RandomAgent  # noqa: E402
-from cpbot.features import LearnedValue, NetValue  # noqa: E402
+from cpbot.features import NetValue, load_value  # noqa: E402
 from cpbot.search import ISMCTSAgent  # noqa: E402
 
 
@@ -60,10 +60,8 @@ def make(spec, seed):
                 kw["value_fn"] = v
             elif k == "v" and v == "net":
                 kw["value_fn"] = NetValue()
-            elif k == "v" and v.endswith(".npz"):
-                kw["value_fn"] = NetValue(path=v)
             elif k == "v":
-                kw["value_fn"] = LearnedValue(path=v)     # a weights file
+                kw["value_fn"] = load_value(v)            # a weights file (.json or .npz)
             elif k == "p":
                 kw["policy"] = v
             elif k == "prior":
