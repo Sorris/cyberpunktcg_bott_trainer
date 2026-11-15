@@ -233,3 +233,18 @@ def test_tactic_features_see_blockers_and_lethal():
     b.card(rv, "Placide - Voodoo Sentinel", "field", spent=True)
     t = dict(zip(TACTIC_NAMES, tactic_features(g, me)))
     assert t["me:killable"] == 0                            # 10 doesn't beat 10
+
+
+def test_parallel_agent_returns_a_legal_move():
+    from cpbot.parallel import ParallelISMCTSAgent, close_pools
+    g = _midgame(3, steps=40)
+    ag = ParallelISMCTSAgent(workers=2, iterations=20, seed=0)
+    try:
+        for _ in range(3):
+            if g.over:
+                break
+            m = ag.act(g)
+            assert m in g.decision.options
+            g.step(m)
+    finally:
+        close_pools()

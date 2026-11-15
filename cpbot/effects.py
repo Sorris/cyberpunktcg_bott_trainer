@@ -140,6 +140,9 @@ def S(name, **params):
 
 
 # ------------------------------------------------------------ the registry
+_TRIGGER_INDEX = [-1, {}]     # [len(TRIGGERS) when built, event -> slugs with a trigger]
+
+
 class Registry:
     """What the engine calls. Separate object so tests can swap it."""
 
@@ -167,6 +170,13 @@ class Registry:
     def on_event(self, g, event, ev):
         for fn in GLOBAL.get(event, ()):
             fn(g, ev)
+        if len(TRIGGERS) != _TRIGGER_INDEX[0]:            # (re)build event -> slugs index
+            idx = defaultdict(set)
+            for (e, slug) in list(TRIGGERS):
+                idx[e].add(slug)
+            _TRIGGER_INDEX[:] = [len(TRIGGERS), idx]
+        if event not in _TRIGGER_INDEX[1]:
+            return                                        # no card reacts to this event
         seen = set()
         cands = self.active_cards(g)
         extra = []
@@ -191,9 +201,24 @@ class Registry:
         if not slugs:
             return ()
         out = []
-        db, cards = g.db, g.cards
-        for u in self.active_cards(g):
-            s = db[cards[u].cid].slug
+        dbc, cards = g.db.cards, g.cards
+        act = g.__dict__.get("_active")
+        if act is None:                       # walk the active cards without building a list
+            act = []
+            for pl in g.players:
+                for u in pl.field:
+                    act.append(u)
+                    gs = cards[u].gears
+                    if gs:
+                        act.extend(gs)
+                for u in pl.legends:
+                    c = cards[u]
+                    if c.face_up:
+                        act.append(u)
+                    if c.gears:
+                        act.extend(c.gears)
+        for u in act:
+            s = dbc[cards[u].cid].slug
             if s in slugs:
                 for fn in STATICS[(kind, s)]:
                     out.append((u, fn))

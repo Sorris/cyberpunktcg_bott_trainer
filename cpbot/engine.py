@@ -861,13 +861,24 @@ class Game:
         if self.can_call(tp) and self.can_pay(tp, self.call_cost(tp)):
             opts.append(("call",))
         seen = set()
+        avail = len(self.ready_eddies(tp)) + len(self.pay_sources(tp))
+        has_hosts = None
         for u in pl.hand:
             c = self.d(u)
             if c.idx in seen:
                 continue
             seen.add(c.idx)
-            if self.can_play(tp, u):
-                opts.append(("play", c.idx))
+            # can_play, with what's available to pay worked out once
+            if c.type == LEGEND:
+                continue
+            if c.type == GEAR:
+                if has_hosts is None:
+                    has_hosts = bool(self.equip_targets(tp))
+                if not has_hosts:
+                    continue
+            if self.flag("cant_play", tp, u) or self.play_cost(tp, u) > avail:
+                continue
+            opts.append(("play", c.idx))
         for u in pl.legends:
             c = self.cards[u]
             dd = self.d(u)

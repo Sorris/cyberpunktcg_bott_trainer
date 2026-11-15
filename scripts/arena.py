@@ -29,7 +29,7 @@ from cpbot.search import ISMCTSAgent  # noqa: E402
 
 def make(spec, seed):
     """random | eager | ismcts[:iterations[:rollout_depth]][:key=value,...]
-    ismcts keys: it (iterations), d (rollout depth), s (seconds per move, overrides it),
+    ismcts keys: it (iterations), d (rollout depth), r (subtree reuse 0/1), s (seconds per move, overrides it),
     v (learned, the default, hand, net, or a weights .json/.npz file),
     i (1 = guess the rival's decklist from what it has seen instead of knowing it), c (exploration)."""
     name, *args = spec.split(":")
@@ -70,6 +70,8 @@ def make(spec, seed):
                 kw["prior_k"] = float(v)
             elif k == "x":
                 kw["prune"] = bool(int(v))
+            elif k == "r":
+                kw["reuse"] = bool(int(v))
             elif k == "t":
                 kw["rollout_turns"] = int(v)
             elif k == "i":

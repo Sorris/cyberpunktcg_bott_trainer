@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import sys
 import threading
@@ -30,7 +31,10 @@ sys.path.insert(0, str(ROOT))
 from cpbot import default_db, random_deck  # noqa: E402
 from cpbot.agents import EagerRandomAgent  # noqa: E402
 from cpbot.play import IMAGES_FILE, SAMPLE_DECK, Match, deck_summary, parse_decklist  # noqa: E402
+from cpbot.parallel import ParallelISMCTSAgent  # noqa: E402
 from cpbot.search import ISMCTSAgent  # noqa: E402
+
+CORES = max(1, (os.cpu_count() or 2) - 1)
 
 PAGE = ROOT / "cpbot" / "play.html"
 ART_DIR = ROOT / ".card_art"
@@ -44,6 +48,12 @@ BOTS = {
     "quick": ("Bot (0.5 s a move)", lambda seed: ISMCTSAgent(seconds=0.5, seed=seed, infer_rival=True)),
     "normal": ("Bot (2 s a move)", lambda seed: ISMCTSAgent(seconds=2.0, seed=seed, infer_rival=True)),
     "strong": ("Bot (5 s a move)", lambda seed: ISMCTSAgent(seconds=5.0, seed=seed, infer_rival=True)),
+    # The same search on every core but one at once (cpbot.parallel): many times the
+    # look-ahead in the same wait.
+    "normal_mc": (f"Bot (2 s a move, {CORES} cores)",
+                  lambda seed: ParallelISMCTSAgent(workers=CORES, seconds=2.0, seed=seed, infer_rival=True)),
+    "strong_mc": (f"Bot (5 s a move, {CORES} cores)",
+                  lambda seed: ParallelISMCTSAgent(workers=CORES, seconds=5.0, seed=seed, infer_rival=True)),
 }
 
 db = default_db()
