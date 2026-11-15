@@ -29,7 +29,7 @@ from cpbot.search import ISMCTSAgent  # noqa: E402
 
 def make(spec, seed):
     """random | eager | ismcts[:iterations[:rollout_depth]][:key=value,...]
-    ismcts keys: it (iterations), d (rollout depth), r (subtree reuse 0/1), s (seconds per move, overrides it),
+    ismcts keys: it (iterations), d (rollout depth), r (subtree reuse 0/1), w (worker processes, with --procs 1), s (seconds per move, overrides it),
     v (learned, the default, hand, net, or a weights .json/.npz file),
     i (1 = guess the rival's decklist from what it has seen instead of knowing it), c (exploration)."""
     name, *args = spec.split(":")
@@ -72,12 +72,17 @@ def make(spec, seed):
                 kw["prune"] = bool(int(v))
             elif k == "r":
                 kw["reuse"] = bool(int(v))
+            elif k == "w":
+                kw["workers"] = int(v)
             elif k == "t":
                 kw["rollout_turns"] = int(v)
             elif k == "i":
                 kw["infer_rival"] = "blind" if v == "blind" else bool(int(v))
             else:
                 raise ValueError(tok)
+        if "workers" in kw:                               # think on several cores (run with --procs 1)
+            from cpbot.parallel import ParallelISMCTSAgent
+            return ParallelISMCTSAgent(seed=seed, **kw)
         return ISMCTSAgent(seed=seed, **kw)
     raise ValueError(spec)
 
@@ -125,8 +130,11 @@ def main():
         decks.append(dl.deck)
     jobs = [(a.a, a.b, a.seed + i, *decks) for i in range(a.pairs)]
     t = time.time()
-    with Pool(a.procs) as pool:
-        res = [x for pair in pool.map(play_pair, jobs) for x in pair]
+    if a.procs == 1:                       # in this process (lets a w= agent start its own workers)
+        res = [x for job in jobs for x in play_pair(job)]
+    else:
+        with Pool(a.procs) as pool:
+            res = [x for pair in pool.map(play_pair, jobs) for x in pair]
     n = len(res)
     p = sum(res) / n
     half = 1.96 * math.sqrt(max(p * (1 - p), 1e-9) / n)
