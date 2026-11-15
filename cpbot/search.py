@@ -424,7 +424,8 @@ class ISMCTSAgent:
             self._kept = (id(game), len(game.history) + 1, (root_player, d.kind, best.move), best)
         self.last_stats = {"iterations": it, "kind": d.kind,
                            "moves": sorted(((ch.n, round(ch.w / max(ch.n, 1), 3), m)
-                                            for m, ch in root.children.items()), reverse=True)}
+                                            for m, ch in root.children.items()),
+                                           key=lambda t: (t[0], t[1]), reverse=True)}
         return best.move
 
     def _reused_root(self, game, root_player):
@@ -433,9 +434,12 @@ class ISMCTSAgent:
             gid, n, last, node = kept
             if (gid == id(game) and len(game.history) == n and game.history[-1] == last
                     and node.player == root_player and node.children):
-                node.parent = None
-                node.move = node.player = None
-                return node
+                legal = set(game.decision.options)    # drop moves from other sampled decisions
+                node.children = {m: ch for m, ch in node.children.items() if m in legal}
+                if node.children:
+                    node.parent = None
+                    node.move = node.player = None
+                    return node
         return Node()
 
     def _iterate(self, game, root, root_player):

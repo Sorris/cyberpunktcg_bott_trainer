@@ -87,7 +87,8 @@ class ParallelISMCTSAgent:
             return self.rng.choice(opts)
         n, s, best = max(cands, key=lambda t: (t[0], t[1]))
         self.last_stats = {"iterations": its, "kind": d.kind,
-                           "moves": sorted(((n, round(s / max(n, 1), 3), m) for n, s, m in cands), reverse=True)}
+                           "moves": sorted(((n, round(s / max(n, 1), 3), m) for n, s, m in cands),
+                                          key=lambda t: (t[0], t[1]), reverse=True)}
         return best
 
 
