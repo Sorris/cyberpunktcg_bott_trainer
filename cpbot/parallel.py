@@ -28,20 +28,28 @@ def _init(kw):
 
 
 def _search(job):
-    blob, seed = job
+    blob, seed, subset = job
     g = pickle.loads(blob)
     ag = _W["agent"]
     ag.rng = random.Random(seed)
     ag._kept = None
+    ag.root_subset = subset
     ag.act(g)
     st = ag.last_stats or {"moves": [], "iterations": 0}
     return st["iterations"], [(m, n, w) for n, w, m in st["moves"]]
 
 
 class ParallelISMCTSAgent:
-    """Like ISMCTSAgent(seconds=...), searching on `workers` processes at once."""
+    """Like ISMCTSAgent(seconds=...), searching on `workers` processes at once.
 
-    def __init__(self, workers=None, seed=None, **kw):
+    split=False: every worker searches the whole position and their counts are
+    added up (Henry's PC: only 51% against one core, as 13 shallow searches don't
+    make a deep one). split=True: the moves are shared out, so each worker spends
+    its whole time on one or a few moves and sees deeper; the move whose search
+    found the best average result is played."""
+
+    def __init__(self, workers=None, seed=None, split=False, **kw):
+        self.split = split
         self.workers = workers or max(1, (mp.cpu_count() or 2) - 1)
         self.kw = dict(kw, reuse=False)
         self.rng = random.Random(seed)
@@ -72,7 +80,14 @@ class ParallelISMCTSAgent:
         g.observer = None
         g.logging = False
         blob = pickle.dumps(g)
-        jobs = [(blob, self.rng.randrange(1 << 30)) for _ in range(self.workers)]
+        if self.split:
+            groups = [[] for _ in range(min(self.workers, len(opts)))]
+            for i, o in enumerate(opts):
+                groups[i % len(groups)].append(o)
+            subsets = [groups[i % len(groups)] for i in range(self.workers)]   # spare workers double up
+        else:
+            subsets = [None] * self.workers
+        jobs = [(blob, self.rng.randrange(1 << 30), sub) for sub in subsets]
         total = {}
         its = 0
         for it, moves in self._pool().map(_search, jobs):
@@ -85,7 +100,10 @@ class ParallelISMCTSAgent:
         cands = [(n, s, m) for m, (n, s) in total.items() if m in legal]
         if not cands:
             return self.rng.choice(opts)
-        n, s, best = max(cands, key=lambda t: (t[0], t[1]))
+        if self.split:
+            n, s, best = max(cands, key=lambda t: (t[1] / max(t[0], 1), t[0]))
+        else:
+            n, s, best = max(cands, key=lambda t: (t[0], t[1]))
         self.last_stats = {"iterations": its, "kind": d.kind,
                            "moves": sorted(((n, round(s / max(n, 1), 3), m) for n, s, m in cands),
                                           key=lambda t: (t[0], t[1]), reverse=True)}

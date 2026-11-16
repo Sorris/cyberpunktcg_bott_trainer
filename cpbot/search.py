@@ -405,7 +405,10 @@ class ISMCTSAgent:
         root_player = d.player
         root = self._reused_root(game, root_player)
         self._root_opts = sensible_options(game) if self.prune else d.options
-        if len(self._root_opts) == 1:
+        subset = getattr(self, "root_subset", None)     # set by cpbot.parallel (split mode)
+        if subset is not None:
+            self._root_opts = [o for o in self._root_opts if o in subset] or self._root_opts
+        elif len(self._root_opts) == 1:
             return self._root_opts[0]
         deadline = time.time() + self.seconds if self.seconds else None
         it = 0
