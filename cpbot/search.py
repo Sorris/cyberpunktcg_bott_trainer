@@ -350,7 +350,7 @@ def sensible_options(g):
 class ISMCTSAgent:
     """Search for `iterations` samples (or `seconds`, if given) per decision."""
 
-    def __init__(self, iterations=300, seconds=None, c=0.7, rollout_depth=20, seed=None,
+    def __init__(self, iterations=300, seconds=None, c=0.5, rollout_depth=10, seed=None,
                  scale=0.35, value_fn="learned", infer_rival=False, policy="smart",
                  rollout_turns=None, prior=None, prior_k=0.0, prune=True, reuse=True):
         """value_fn(g, p) -> win chance in [0, 1] scores the end of each rollout.

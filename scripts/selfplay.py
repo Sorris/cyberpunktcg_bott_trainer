@@ -100,7 +100,7 @@ def main():
     ap.add_argument("--games", type=int, default=400)
     ap.add_argument("--seed", type=int, default=500000)
     ap.add_argument("--iterations", type=int, default=60)
-    ap.add_argument("--depth", type=int, default=20)
+    ap.add_argument("--depth", type=int, default=10)
     ap.add_argument("--weights", default=None, help="position score to search with (default: data/value_weights.json)")
     ap.add_argument("--explore", type=float, default=0.03)
     ap.add_argument("--procs", type=int, default=4)

@@ -38,7 +38,7 @@ def _value_fn():
 def _agent(seed):
     if AGENT["iterations"] == 0:
         return EagerRandomAgent(seed)
-    return ISMCTSAgent(iterations=AGENT["iterations"], rollout_depth=20, seed=seed, value_fn=_value_fn())
+    return ISMCTSAgent(iterations=AGENT["iterations"], rollout_depth=10, c=0.5, seed=seed, value_fn=_value_fn())
 
 
 def _init(iterations, value=None):
